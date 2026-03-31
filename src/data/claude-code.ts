@@ -5,7 +5,7 @@ import type { Book } from '../types'
 // =============================================
 
 const queryLoopSvg = `
-<svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;width:100%">
+<svg viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;width:100%">
   <style>
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
     .s1{animation:fadeIn .5s ease .3s both}
@@ -20,32 +20,32 @@ const queryLoopSvg = `
     <text x="70" y="35" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white">用户输入</text>
   </g>
   <g class="s2">
-    <line x1="130" y1="30" x2="170" y2="30" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="130" y1="30" x2="170" y2="30" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowQ)"/>
     <rect x="170" y="10" width="140" height="40" rx="8" fill="#0ea5e9"/>
     <text x="240" y="35" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white">System Prompt</text>
   </g>
   <g class="s3">
-    <line x1="310" y1="30" x2="350" y2="30" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="310" y1="30" x2="350" y2="30" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowQ)"/>
     <rect x="350" y="10" width="140" height="40" rx="8" fill="#f59e0b"/>
     <text x="420" y="35" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white">API 流式调用</text>
   </g>
   <g class="s4">
-    <line x1="420" y1="50" x2="420" y2="90" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="420" y1="50" x2="420" y2="90" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowQ)"/>
     <rect x="350" y="90" width="140" height="40" rx="8" fill="#ef4444"/>
     <text x="420" y="115" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white">Tool 提取</text>
   </g>
   <g class="s5">
-    <line x1="350" y1="110" x2="170" y2="110" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="350" y1="110" x2="170" y2="110" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowQ)"/>
     <rect x="30" y="90" width="140" height="40" rx="8" fill="#10b981"/>
     <text x="100" y="115" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white">工具执行</text>
   </g>
   <g class="s6">
     <line x1="100" y1="130" x2="100" y2="170" stroke="#94a3b8" stroke-width="2"/>
     <line x1="100" y1="170" x2="420" y2="170" stroke="#94a3b8" stroke-width="2"/>
-    <line x1="420" y1="170" x2="420" y2="50" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrow)"/>
+    <line x1="420" y1="170" x2="420" y2="50" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrowQ)"/>
     <text x="260" y="190" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#94a3b8">结果回传，循环直到 Stop</text>
   </g>
-  <defs><marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker></defs>
+  <defs><marker id="arrowQ" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker></defs>
 </svg>`
 
 const toolOrchestrationSvg = `
@@ -118,7 +118,7 @@ const permissionLayersSvg = `
 </svg>`
 
 const agentSwarmSvg = `
-<svg viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;width:100%">
+<svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;width:100%">
   <style>
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
     .s1{animation:fadeIn .5s ease .2s both}
@@ -153,6 +153,145 @@ const agentSwarmSvg = `
   </g>
 </svg>`
 
+const stateStoreSvg = `
+<svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;width:100%">
+  <style>
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .s1{animation:fadeIn .5s ease .2s both}
+    .s2{animation:fadeIn .5s ease .7s both}
+    .s3{animation:fadeIn .5s ease 1.2s both}
+    .s4{animation:fadeIn .5s ease 1.7s both}
+  </style>
+  <g class="s1">
+    <rect x="160" y="10" width="160" height="45" rx="10" fill="#6366f1"/>
+    <text x="240" y="38" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white">AppStateStore</text>
+    <text x="240" y="70" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">100+ fields</text>
+  </g>
+  <g class="s2">
+    <line x1="180" y1="55" x2="60" y2="105" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="240" y1="80" x2="240" y2="105" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="300" y1="55" x2="420" y2="105" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect x="10" y="105" width="100" height="35" rx="6" fill="#0ea5e9"/>
+    <text x="60" y="127" text-anchor="middle" font-family="monospace" font-size="10" fill="white">useAppState</text>
+    <rect x="190" y="105" width="100" height="35" rx="6" fill="#10b981"/>
+    <text x="240" y="127" text-anchor="middle" font-family="monospace" font-size="10" fill="white">useCanUseTool</text>
+    <rect x="370" y="105" width="100" height="35" rx="6" fill="#f59e0b"/>
+    <text x="420" y="127" text-anchor="middle" font-family="monospace" font-size="10" fill="white">useKeybindings</text>
+  </g>
+  <g class="s3">
+    <line x1="60" y1="140" x2="60" y2="165" stroke="#94a3b8" stroke-width="1"/>
+    <line x1="240" y1="140" x2="240" y2="165" stroke="#94a3b8" stroke-width="1"/>
+    <line x1="420" y1="140" x2="420" y2="165" stroke="#94a3b8" stroke-width="1"/>
+    <rect x="10" y="165" width="100" height="30" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="60" y="184" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">REPL Screen</text>
+    <rect x="190" y="165" width="100" height="30" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="240" y="184" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">Permission UI</text>
+    <rect x="370" y="165" width="100" height="30" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="420" y="184" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">Input Box</text>
+  </g>
+  <g class="s4">
+    <text x="240" y="212" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">Store → Hooks → Components (单向数据流)</text>
+  </g>
+</svg>`
+
+const compactStrategySvg = `
+<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;width:100%">
+  <style>
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .s1{animation:fadeIn .4s ease .2s both}
+    .s2{animation:fadeIn .4s ease .7s both}
+    .s3{animation:fadeIn .4s ease 1.2s both}
+    .s4{animation:fadeIn .4s ease 1.7s both}
+  </style>
+  <g class="s1">
+    <rect x="10" y="10" width="90" height="55" rx="6" fill="#6366f1"/>
+    <text x="55" y="32" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">Compact</text>
+    <text x="55" y="50" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#c7d2fe">LLM 摘要</text>
+  </g>
+  <g class="s2">
+    <rect x="115" y="10" width="110" height="55" rx="6" fill="#0ea5e9"/>
+    <text x="170" y="32" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">Microcompact</text>
+    <text x="170" y="50" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#bae6fd">工具结果精简</text>
+  </g>
+  <g class="s3">
+    <rect x="240" y="10" width="90" height="55" rx="6" fill="#f59e0b"/>
+    <text x="285" y="32" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">Snip</text>
+    <text x="285" y="50" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#fef3c7">重要性裁剪</text>
+  </g>
+  <g class="s4">
+    <rect x="345" y="10" width="100" height="55" rx="6" fill="#ef4444"/>
+    <text x="395" y="32" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">Tombstone</text>
+    <text x="395" y="50" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#fecaca">墓碑占位</text>
+  </g>
+  <text x="10" y="95" font-family="sans-serif" font-size="11" fill="#94a3b8">场景匹配：</text>
+  <text x="10" y="115" font-family="sans-serif" font-size="10" fill="#c7d2fe">● 常规对话超限 → Compact (保留决策摘要)</text>
+  <text x="10" y="135" font-family="sans-serif" font-size="10" fill="#bae6fd">● 工具密集型 → Microcompact (精简工具输出)</text>
+  <text x="10" y="155" font-family="sans-serif" font-size="10" fill="#fef3c7">● 部分冗余 → Snip (选择性删除低价值消息)</text>
+  <text x="10" y="175" font-family="sans-serif" font-size="10" fill="#fecaca">● 所有策略 → Tombstone (保留位置标记因果链)</text>
+</svg>`
+
+const mcpArchSvg = `
+<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;width:100%">
+  <style>
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .s1{animation:fadeIn .5s ease .2s both}
+    .s2{animation:fadeIn .5s ease .7s both}
+    .s3{animation:fadeIn .5s ease 1.2s both}
+    .s4{animation:fadeIn .5s ease 1.7s both}
+  </style>
+  <g class="s1">
+    <rect x="170" y="10" width="140" height="40" rx="8" fill="#6366f1"/>
+    <text x="240" y="35" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white">Claude Code</text>
+    <text x="240" y="65" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">MCP Client</text>
+  </g>
+  <g class="s2">
+    <line x1="180" y1="50" x2="70" y2="100" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <line x1="240" y1="70" x2="240" y2="100" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <line x1="300" y1="50" x2="410" y2="100" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3"/>
+  </g>
+  <g class="s3">
+    <rect x="10" y="100" width="120" height="40" rx="8" fill="#10b981"/>
+    <text x="70" y="118" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">GitHub MCP</text>
+    <text x="70" y="133" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#bbf7d0">issues, PRs</text>
+    <rect x="180" y="100" width="120" height="40" rx="8" fill="#0ea5e9"/>
+    <text x="240" y="118" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">DB MCP</text>
+    <text x="240" y="133" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#bae6fd">query, schema</text>
+    <rect x="350" y="100" width="120" height="40" rx="8" fill="#f59e0b"/>
+    <text x="410" y="118" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">Custom MCP</text>
+    <text x="410" y="133" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#fef3c7">your tools</text>
+  </g>
+  <g class="s4">
+    <text x="240" y="170" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">标准协议 — 写一次 Server，所有 AI 工具都能用</text>
+    <text x="240" y="188" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#475569">listTools() → 自动发现 | listResources() → 预取缓存</text>
+  </g>
+</svg>`
+
+const extensionLayersSvg = `
+<svg viewBox="0 0 460 180" xmlns="http://www.w3.org/2000/svg" style="max-width:460px;width:100%">
+  <style>
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .s1{animation:fadeIn .4s ease .2s both}
+    .s2{animation:fadeIn .4s ease .7s both}
+    .s3{animation:fadeIn .4s ease 1.2s both}
+  </style>
+  <g class="s1">
+    <rect x="10" y="10" width="440" height="40" rx="8" fill="#6366f1"/>
+    <text x="130" y="35" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white">Plugin (代码层)</text>
+    <text x="350" y="35" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#c7d2fe">新工具 + 新命令 + Hooks</text>
+  </g>
+  <g class="s2">
+    <rect x="10" y="60" width="440" height="40" rx="8" fill="#0ea5e9"/>
+    <text x="130" y="85" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white">Skill (Prompt 层)</text>
+    <text x="350" y="85" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#bae6fd">可复用工作流模板</text>
+  </g>
+  <g class="s3">
+    <rect x="10" y="110" width="440" height="40" rx="8" fill="#10b981"/>
+    <text x="130" y="135" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white">MCP (协议层)</text>
+    <text x="350" y="135" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#bbf7d0">标准化外部工具集成</text>
+  </g>
+  <text x="230" y="170" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">重 → 轻 | 定制化 → 标准化</text>
+</svg>`
+
 // =============================================
 // Book Definition
 // =============================================
@@ -185,7 +324,7 @@ export const claudeCodeBook: Book = {
               type: 'code',
               title: '启动序列 — 每一毫秒都在算计',
               description:
-                '看看 `main.tsx` 最开头的代码。注意：**在任何 import 之前**，就已经开始了 I/O 操作。',
+                '看 `main.tsx` 最开头的代码。注意：**在任何 import 之前**就开始了 I/O 操作。',
               language: 'typescript',
               code: `// main.tsx — 文件最顶部
 profileCheckpoint('main_tsx_entry')
@@ -201,10 +340,10 @@ import { render } from 'ink'
             },
             {
               type: 'think-first',
-              question: '为什么要在 import 之前就开始读取配置和 Keychain？这违反了常规的模块加载顺序，这样做的好处是什么？',
+              question: '为什么要在 import 之前就开始读取配置和 Keychain？这违反了常规的模块加载顺序，好处是什么？',
               hints: '想想 import 语句会做什么——它会加载并执行整个模块树。',
               reveal:
-                'import 会递归加载整个依赖树，这可能需要几百毫秒。如果等 import 完成后再开始 I/O，这些 I/O 时间就是纯浪费。\n\n通过在 import 前启动 I/O，配置读取和 Keychain 预取可以与模块加载**并行进行**。当 import 完成时，I/O 可能已经结束了，实现零等待。\n\n这是一种 **"赛跑"优化** — 让 CPU 密集（模块解析）和 I/O 密集（磁盘/网络读取）同时进行。',
+                'import 会递归加载整个依赖树，这可能需要几百毫秒。如果等 import 完成后再开始 I/O，这些 I/O 时间就是纯浪费。\n\n通过在 import 前启动 I/O，配置读取和 Keychain 预取可以与模块加载**并行进行**。当 import 完成时，I/O 可能已经结束了。\n\n这是一种 **"赛跑"优化** — 让 CPU 密集（模块解析）和 I/O 密集（磁盘/网络读取）同时进行。',
             },
             {
               type: 'quiz',
@@ -217,7 +356,20 @@ import { render } from 'ink'
               ],
               correctIndex: 2,
               explanation:
-                'Claude Code 的启动优化核心是并行化：在模块加载（CPU 密集）的同时进行配置读取和 Keychain 预取（I/O 密集），最大化利用等待时间。',
+                '核心是并行化：在模块加载（CPU 密集）的同时进行配置读取和 Keychain 预取（I/O 密集），最大化利用等待时间。',
+            },
+            {
+              type: 'task',
+              title: '阅读源码：启动入口',
+              instruction:
+                '打开 Claude Code 源码，找到启动入口并追踪启动链路。\n\n**关键文件**：\n- `src/main.tsx` — CLI 入口，Commander.js + Ink 渲染\n- `src/entrypoints/` — 初始化入口\n- `src/bootstrap/` — 全局状态 + 启动逻辑',
+              checklist: [
+                '找到 profileCheckpoint 的所有调用点',
+                '找到 startMdmRawRead 和 startKeychainPrefetch 的定义',
+                '追踪 Commander.js 是如何注册子命令的',
+                '找到 Ink render() 的调用位置',
+              ],
+              tip: '用 grep 搜索 `profileCheckpoint` 可以快速找到所有性能打点。',
             },
           ],
         },
@@ -284,6 +436,76 @@ const configSources = [
             },
           ],
         },
+        {
+          id: 'config-pipeline',
+          title: '多源配置管道',
+          cards: [
+            {
+              type: 'explain',
+              title: '上章回顾',
+              content: '前面学了启动时的并行预取和懒加载优化。现在深入看配置系统 — 它决定了 Claude Code 的所有行为参数。',
+            },
+            {
+              type: 'code',
+              title: 'Zod Schema — 配置的守门人',
+              description: '所有配置在加载后都会经过 Zod Schema 校验，确保类型安全。',
+              language: 'typescript',
+              code: `import { z } from 'zod'
+
+const settingsSchema = z.object({
+  // 权限模式
+  defaultMode: z.enum([
+    'default', 'plan', 'acceptEdits',
+    'auto', 'bypassPermissions'
+  ]).default('default'),
+  // 模型选择
+  model: z.string().default('claude-sonnet-4-6'),
+  // 自定义快捷键
+  keybindings: z.record(z.string()).optional(),
+  // MCP 服务器配置
+  mcpServers: z.array(mcpServerSchema).optional(),
+})
+
+// 加载 + 校验 + 合并
+function loadSettings(): Settings {
+  const raw = readSettingsFiles()    // 读取多个文件
+  const merged = mergeByPriority(raw) // 按优先级合并
+  return settingsSchema.parse(merged) // Zod 校验
+  // 校验失败会抛出详细错误信息
+}`,
+            },
+            {
+              type: 'fill-blank',
+              title: '配置的安全分阶段加载',
+              description: 'Claude Code 把配置分为"安全"和"不安全"两类，分阶段加载。',
+              language: 'typescript',
+              template: `// 启动时的配置加载顺序
+async function initConfig() {
+  // 阶段 1: 在信任建立之前
+  enableConfigs()
+  ___BLANK___()    // 只应用安全的环境变量
+  setupGracefulShutdown()
+
+  // 阶段 2: 信任建立之后
+  ___BLANK___()    // 应用所有环境变量
+  await detectCurrentRepository()
+}`,
+              blanks: ['applySafeConfigEnvironmentVariables', 'applyConfigEnvironmentVariables'],
+              hints: ['只应用不涉及敏感操作的配置', '所有配置，包括可能影响安全的'],
+            },
+            {
+              type: 'task',
+              title: '阅读源码：配置系统',
+              instruction:
+                '找到 Claude Code 的配置 Schema 和加载逻辑。\n\n**关键文件**：\n- `src/schemas/` — Zod Schema 定义\n- `src/bootstrap/` — 配置加载启动逻辑\n- `src/utils/config.ts` 或类似文件 — 配置合并逻辑',
+              checklist: [
+                '找到 settingsSchema 的完整定义',
+                '理解 Safe vs Unsafe 配置的区分逻辑',
+                '追踪 enableConfigs() 的完整实现',
+              ],
+            },
+          ],
+        },
       ],
     },
 
@@ -300,35 +522,37 @@ const configSources = [
           cards: [
             {
               type: 'explain',
+              title: '上章回顾',
+              content: '第一章学了 Claude Code 的启动优化：并行预取、懒加载、Dead Code Elimination、多源配置。现在进入核心 — Query Engine，它是 Claude Code 的"大脑"。',
+            },
+            {
+              type: 'explain',
               title: '不是所有消息都发给 API',
               content:
                 'Claude Code 内部有 7 种消息类型：\n\n- **UserMessage** — 用户输入\n- **AssistantMessage** — Claude 的回复\n- **AttachmentMessage** — 文件附件\n- **ProgressMessage** — 工具执行进度\n- **TombstoneMessage** — 已被压缩删除的消息\n- **ToolUseSummaryMessage** — 工具调用摘要\n\n发给 API 前，需要 `normalizeMessagesForAPI()` 剥离内部字段。',
               analogy: '就像公司内部用工号称呼员工，但对外名片上只印名字和职位。内部标识不能泄露给外部。',
             },
             {
-              type: 'code',
-              title: 'normalizeMessagesForAPI()',
-              description: '这个函数负责把内部消息格式转换成 API 能接受的格式。注意它做了哪些清理。',
+              type: 'fill-blank',
+              title: 'normalizeMessagesForAPI 实现',
+              description: '补全消息规范化的关键步骤。',
               language: 'typescript',
-              code: `function normalizeMessagesForAPI(
+              template: `function normalizeMessagesForAPI(
   messages: Message[]
 ): APIMessage[] {
   return messages
-    // 过滤掉内部消息类型
     .filter(m =>
-      m.type !== 'progress' &&
-      m.type !== 'tombstone'
+      m.type !== '___BLANK___' &&
+      m.type !== '___BLANK___'
     )
-    // 剥离内部字段
     .map(m => ({
       role: m.role,
       content: m.content,
-      // 不传: m.internalId, m.timestamp,
-      //       m.tokenCount, m.metadata
     }))
-    // 去除签名重复
-    .map(stripSignatureBlocks)
+    .map(___BLANK___)
 }`,
+              blanks: ['progress', 'tombstone', 'stripSignatureBlocks'],
+              hints: ['进度消息不需要发给 API', '已被压缩删除的消息', '去除重复签名的函数'],
             },
             {
               type: 'quiz',
@@ -342,6 +566,17 @@ const configSources = [
               correctIndex: 2,
               explanation:
                 'Tombstone（墓碑）是数据库中常见的软删除模式。在上下文压缩时，被移除的消息不是直接删除，而是替换为 Tombstone，保留其位置信息，以便维护消息顺序和因果关系。',
+            },
+            {
+              type: 'task',
+              title: '阅读源码：消息类型',
+              instruction:
+                '找到所有消息类型的定义和规范化逻辑。\n\n**关键文件**：\n- `src/query.ts` — 消息规范化\n- `src/types/` — 消息类型定义',
+              checklist: [
+                '找到所有 Message 类型的 union type 定义',
+                '找到 normalizeMessagesForAPI 的实现',
+                '找到 stripSignatureBlocks 的实现逻辑',
+              ],
             },
           ],
         },
@@ -359,7 +594,7 @@ const configSources = [
               type: 'explain',
               title: 'AsyncGenerator — 流式处理的核心',
               content:
-                'Claude Code 使用 `AsyncGenerator` 模式处理流式响应：\n\n1. API 返回的是一个**流**，不是一个完整的响应\n2. 每收到一个 chunk，就 yield 给上层\n3. 上层可以**实时渲染**，不需要等全部完成\n4. 天然支持**背压**（backpressure）— 如果消费者慢了，生产者自动暂停',
+                'Claude Code 使用 `AsyncGenerator` 模式处理流式响应：\n\n1. API 返回的是一个**流**，不是一个完整的响应\n2. 每收到一个 chunk，就 yield 给上层\n3. 上层可以**实时渲染**，不需要等全部完成\n4. 天然支持**背压**（backpressure）— 消费者慢了，生产者自动暂停',
               analogy: '就像自助餐的传送带：厨房不断放上新菜（produce），你按自己速度取（consume）。你取慢了，传送带自然就慢下来。',
             },
             {
@@ -378,7 +613,6 @@ const configSources = [
 
   for (const partition of partitions) {
     if (partition.type === 'readonly') {
-      // 并行执行，但有序 yield
       const results = await Promise.all(
         partition.tools.map(t => executeTool(t, context))
       )
@@ -386,7 +620,6 @@ const configSources = [
         yield { type: 'tool_result', ...result }
       }
     } else {
-      // 写操作：串行执行
       const result = await executeTool(
         partition.tool, context
       )
@@ -397,10 +630,87 @@ const configSources = [
             },
             {
               type: 'think-first',
-              question: 'Query Engine 需要在"快速估算 Token 数"和"精确计算 Token 数"之间做权衡。你会怎么设计这个策略？',
-              hints: '精确计算需要调用 tokenizer，很慢。但如果估算不准，可能浪费 token 或触发不必要的 compact。',
+              question: 'Query Engine 需要在"快速估算 Token 数"和"精确计算 Token 数"之间做权衡。你会怎么设计？',
+              hints: '精确计算需要调用 tokenizer，很慢。但估算不准可能浪费 token 或触发不必要的 compact。',
               reveal:
-                'Claude Code 的策略：\n\n1. **对已有消息**使用缓存的精确 token 数（计算一次，缓存结果）\n2. **对新内容**使用快速估算（字符数 / 4 的近似值）\n3. **在 compact 决策前**做一次精确计算（因为 compact 代价高，值得花时间算准）\n4. **设置安全余量**（预留 10-15% buffer，宁可提前 compact 也不要超限报错）\n\n核心思路：**在成本低的地方估算，在决策关键点精确计算**。',
+                'Claude Code 的策略：\n\n1. **对已有消息**使用缓存的精确 token 数（计算一次，缓存结果）\n2. **对新内容**使用快速估算（字符数 / 4 的近似值）\n3. **在 compact 决策前**做一次精确计算（compact 代价高，值得花时间算准）\n4. **设置安全余量**（预留 10-15% buffer）\n\n核心思路：**在成本低的地方估算，在决策关键点精确计算**。',
+            },
+          ],
+        },
+        {
+          id: 'system-prompt-assembly',
+          title: 'System Prompt 构建',
+          cards: [
+            {
+              type: 'explain',
+              title: 'System Prompt 不是一个静态字符串',
+              content:
+                'Claude Code 的 System Prompt 是**动态组装**的，由多个来源拼接而成：\n\n1. **基础 Prompt** — Claude Code 的核心行为规范\n2. **CLAUDE.md** — 项目级的自定义指令\n3. **Memory** — 持久化的用户记忆\n4. **用户上下文** — 模型信息、可用工具列表\n5. **权限上下文** — 当前权限模式和规则\n\n顺序和优先级决定了 Claude 在冲突时听谁的。',
+            },
+            {
+              type: 'code',
+              title: 'fetchSystemPromptParts()',
+              description: '看看 System Prompt 的各部分是如何收集和组装的。',
+              language: 'typescript',
+              code: `async function fetchSystemPromptParts(
+  config: QueryEngineConfig
+): Promise<string> {
+  const parts: string[] = []
+
+  // 1. 基础行为规范（不可覆盖）
+  parts.push(BASE_SYSTEM_PROMPT)
+
+  // 2. CLAUDE.md（项目级指令）
+  const claudeMd = await readClaudeMd(config.cwd)
+  if (claudeMd) {
+    parts.push(\`# User Instructions\\n\${claudeMd}\`)
+  }
+
+  // 3. 持久化记忆
+  const memories = await loadMemories(config.cwd)
+  if (memories.length > 0) {
+    parts.push(\`# Memory\\n\${memories.join('\\n')}\`)
+  }
+
+  // 4. 可用工具列表
+  parts.push(formatToolDescriptions(config.tools))
+
+  // 5. 权限上下文
+  parts.push(formatPermissionContext(config))
+
+  return parts.join('\\n\\n')
+}`,
+            },
+            {
+              type: 'fill-blank',
+              title: 'System Prompt 优先级',
+              description: '当 CLAUDE.md 和 Memory 的指令冲突时，Claude Code 如何处理？',
+              language: 'typescript',
+              template: `// System Prompt 中的优先级标记
+const BASE_SYSTEM_PROMPT = \`
+You are Claude Code...
+
+IMPORTANT: ___BLANK___ instructions
+OVERRIDE any default behavior.
+
+User memories provide ___BLANK___
+but instructions in CLAUDE.md take ___BLANK___.
+\``,
+              blanks: ['User', 'context', 'precedence'],
+              hints: ['CLAUDE.md 中的指令属于谁？', '记忆提供什么类型的信息？', '哪个优先？'],
+            },
+            {
+              type: 'task',
+              title: '阅读源码：System Prompt',
+              instruction:
+                '找到 System Prompt 的完整构建逻辑。\n\n**关键文件**：\n- `src/context.ts` — 上下文收集\n- `src/query.ts` 中搜索 `system` 相关函数',
+              checklist: [
+                '找到 BASE_SYSTEM_PROMPT 的完整文本',
+                '理解 CLAUDE.md 的读取和注入位置',
+                '找到 Memory 注入的逻辑',
+                '追踪工具描述是如何格式化的',
+              ],
+              tip: '搜索 `fetchSystemPromptParts` 或 `createSystemMessage` 作为起点。',
             },
           ],
         },
@@ -419,9 +729,14 @@ const configSources = [
           title: 'Tool 接口设计',
           cards: [
             {
+              type: 'explain',
+              title: '上章回顾',
+              content: '第二章学了 Query Engine 的核心循环：消息类型体系、System Prompt 动态组装、流式 API 交互。现在看 Claude 最重要的能力来源 — 工具系统。',
+            },
+            {
               type: 'code',
               title: 'Tool 类型定义 — 每个字段都有讲究',
-              description: '这是 Claude Code 中最核心的类型之一。注意每个方法的作用。',
+              description: '这是 Claude Code 中最核心的类型之一。',
               language: 'typescript',
               code: `type Tool = {
   name: string
@@ -447,7 +762,7 @@ const configSources = [
               question: '`isConcurrencySafe` 为什么要接收 `input` 参数？如果只返回 boolean（不看 input），会有什么问题？',
               hints: '想想 FileReadTool 和 BashTool 的区别。再想想：读同一个文件两次 vs 读不同文件。',
               reveal:
-                '同一个工具，不同的输入可能有完全不同的并发语义：\n\n- **FileReadTool**: 读不同文件 → 安全并行；读同一文件的不同部分 → 也安全\n- **BashTool**: `ls` → 只读，可并行；`rm -rf` → 绝对不行\n- **FileEditTool**: 编辑不同文件 → 可以并行；编辑同一文件 → 必须串行\n\n如果不看 input，就只能把整个工具标记为"不安全"，导致所有 FileRead 调用都串行化，性能白白浪费。',
+                '同一个工具，不同的输入可能有完全不同的并发语义：\n\n- **FileReadTool**: 读不同文件 → 安全并行；读同一文件 → 也安全\n- **BashTool**: `ls` → 只读，可并行；`rm -rf` → 绝对不行\n- **FileEditTool**: 编辑不同文件 → 可以并行；编辑同一文件 → 必须串行\n\n如果不看 input，就只能把整个工具标记为"不安全"，所有 FileRead 调用都串行化，性能白白浪费。',
             },
             {
               type: 'quiz',
@@ -460,7 +775,7 @@ const configSources = [
               ],
               correctIndex: 1,
               explanation:
-                'Zod 的核心价值是 **类型推导**：从 schema 定义自动推导出 TypeScript 类型，实现"写一次，两处生效"。JSON Schema 只能做运行时校验，类型还得手写一遍，两边容易不一致。',
+                'Zod 的核心价值是 **类型推导**：从 schema 定义自动推导出 TypeScript 类型，实现"写一次，两处生效"。JSON Schema 只能做运行时校验，类型还得手写一遍。',
             },
           ],
         },
@@ -500,12 +815,6 @@ const configSources = [
 }`,
             },
             {
-              type: 'explain',
-              title: 'MCP 工具的动态注入',
-              content:
-                'Claude Code 的工具不是固定的。除了内置工具，还有 **MCP 工具**（Model Context Protocol）：\n\n1. 启动时连接所有配置的 MCP Server\n2. 从每个 Server 获取它提供的工具列表\n3. 将这些工具动态注入到工具注册表中\n4. Claude 可以像使用内置工具一样使用它们\n\n这意味着你可以通过 MCP 给 Claude Code **无限扩展能力**。',
-            },
-            {
               type: 'quiz',
               question: '为什么嵌入式搜索工具和 GlobTool/GrepTool 是互斥的？',
               options: [
@@ -516,7 +825,42 @@ const configSources = [
               ],
               correctIndex: 1,
               explanation:
-                '嵌入式搜索工具（如 IDE 内置的语义搜索）已经包含了文件模式匹配和内容搜索能力。如果同时暴露 GlobTool 和 GrepTool，Claude 可能会困惑该用哪个，或者浪费 token 调用重复工具。互斥确保工具集干净、无歧义。',
+                '嵌入式搜索工具已包含文件匹配和内容搜索能力。同时暴露两套工具会让 Claude 困惑该用哪个，或浪费 token 调用重复工具。互斥确保工具集干净、无歧义。',
+            },
+            {
+              type: 'fill-blank',
+              title: '实现一个自定义 Tool',
+              description: '补全一个简单的 CountLinesTool 实现。',
+              language: 'typescript',
+              template: `const CountLinesTool: Tool = {
+  name: '___BLANK___',
+  isEnabled: () => true,
+  inputSchema: z.object({
+    file_path: z.string().describe('File path to count'),
+  }),
+  ___BLANK___(input) {
+    return true // 读取操作，总是并发安全
+  },
+  async execute(input, context) {
+    const content = await readFile(input.file_path, 'utf-8')
+    const lines = content.split('\\n').___BLANK___
+    return { content: \`\${lines} lines\` }
+  },
+}`,
+              blanks: ['count_lines', 'isConcurrencySafe', 'length'],
+              hints: ['工具名用 snake_case', '并发安全判断方法', '数组计数属性'],
+            },
+            {
+              type: 'task',
+              title: '阅读源码：工具注册',
+              instruction:
+                '找到工具注册表和一个具体工具的实现。\n\n**关键文件**：\n- `src/tools.ts` — 工具注册表\n- `src/Tool.ts` — Tool 类型定义\n- `src/tools/` — 各工具实现目录',
+              checklist: [
+                '找到 getAllBaseTools() 的完整实现',
+                '列出所有被 feature flag 控制的工具',
+                '找到 MCP 工具动态注入的位置',
+                '读一个简单工具（如 GlobTool）的完整实现',
+              ],
             },
           ],
         },
@@ -528,22 +872,21 @@ const configSources = [
               type: 'explain',
               title: 'BashTool — 160KB 的最复杂工具',
               content:
-                'BashTool 是 Claude Code 中最大也最复杂的工具（160KB），因为它要解决一个根本矛盾：\n\n**让 AI 执行 shell 命令，同时确保安全。**\n\n它的安全机制包括：\n- AST 解析命令结构（不是正则匹配！）\n- 命令分类（只读/写入/破坏性）\n- 文件路径权限校验\n- 沙箱模式限制\n- 后台任务管理\n- 超时控制',
+                'BashTool 是 Claude Code 中最大也最复杂的工具（160KB），因为它要解决一个根本矛盾：\n\n**让 AI 执行 shell 命令，同时确保安全。**\n\n安全机制包括：\n- AST 解析命令结构（不是正则！）\n- 命令分类（只读/写入/破坏性）\n- 文件路径权限校验\n- 沙箱模式限制\n- 后台任务管理\n- 超时控制',
             },
             {
               type: 'think-first',
               question: '为什么用 AST 解析 Bash 命令而不是正则匹配？正则不是更简单吗？',
               hints: '想想这个命令：`echo "rm -rf /" | cat` — 正则会怎么处理？',
               reveal:
-                '正则匹配无法理解命令的**语法结构**：\n\n- `echo "rm -rf /"` — 这只是输出一个字符串，完全安全\n- `rm -rf /` — 这是真正的删除操作\n- `cat file | rm -rf /` — 管道后面才是危险的\n- `$(rm -rf /)` — 命令替换中隐藏的危险\n- `` `rm -rf /` `` — 反引号中的命令\n\n正则无法区分这些场景，因为它看不到"引号内"、"管道"、"子命令"等语法结构。AST 解析能理解命令的**语义**，而不只是**文本模式**。',
+                '正则匹配无法理解命令的**语法结构**：\n\n- `echo "rm -rf /"` — 只是输出一个字符串，完全安全\n- `rm -rf /` — 真正的删除操作\n- `$(rm -rf /)` — 命令替换中隐藏的危险\n\n正则无法区分这些场景。AST 解析能理解**语义**，而不只是**文本模式**。',
             },
             {
               type: 'code',
               title: '命令安全分类示例',
-              description: 'BashTool 会把命令分成不同的安全级别。',
+              description: 'BashTool 把命令分成不同的安全级别。',
               language: 'typescript',
-              code: `// 简化版的命令分类逻辑
-type CommandCategory =
+              code: `type CommandCategory =
   | 'readonly'     // ls, cat, git status
   | 'write'        // echo > file, mkdir
   | 'destructive'  // rm -rf, git reset --hard
@@ -551,23 +894,18 @@ type CommandCategory =
   | 'background'   // 带 & 的命令
 
 function classifyCommand(ast: BashAST): CommandCategory {
-  // 1. 解析命令名
   const cmd = ast.command.name
 
-  // 2. 检查是否在只读白名单
   if (READONLY_COMMANDS.has(cmd)) return 'readonly'
-
-  // 3. 检查破坏性模式
   if (cmd === 'rm' && ast.flags.includes('-rf'))
     return 'destructive'
 
-  // 4. 检查管道 — 每段都要分类
+  // 管道：每段都要分类，取最严格的
   if (ast.pipe) {
     return worstCategory(
       ast.pipe.map(classifyCommand)
     )
   }
-
   return 'write' // 默认保守
 }`,
             },
@@ -582,7 +920,20 @@ function classifyCommand(ast: BashAST): CommandCategory {
               ],
               correctIndex: 2,
               explanation:
-                '管道中的每一段都独立分类，然后取**最严格**的结果（worst category）。`cat`=readonly, `sort`=readonly, `wc`=readonly → 整体=readonly。如果中间有 `rm`，就会升级为 destructive。',
+                '管道中的每段独立分类，取**最严格**的结果。`cat`=readonly, `sort`=readonly, `wc`=readonly → 整体=readonly。如果中间有 `rm`，就会升级为 destructive。',
+            },
+            {
+              type: 'task',
+              title: '阅读源码：BashTool 安全层',
+              instruction:
+                '深入 BashTool 的安全实现。\n\n**关键文件**：\n- `src/tools/BashTool/BashTool.tsx` — 主实现 (160KB)\n- `src/utils/permissions/bashPermissions.ts` — Bash 权限 (98KB)\n- `src/utils/permissions/bashSecurity.ts` — 安全检查 (102KB)\n- `bash/ast.ts` 或类似文件 — AST 解析',
+              checklist: [
+                '找到 AST 解析器的入口',
+                '找到 READONLY_COMMANDS 的白名单',
+                '找到沙箱模式的实现逻辑',
+                '追踪一个命令从输入到执行的完整安全检查链路',
+              ],
+              tip: '搜索 `classifyCommand` 或 `CommandCategory` 作为起点。',
             },
           ],
         },
@@ -601,6 +952,11 @@ function classifyCommand(ast: BashAST): CommandCategory {
           title: '分区策略',
           cards: [
             {
+              type: 'explain',
+              title: '上章回顾',
+              content: '第三章学了 Tool 接口设计（特别是 isConcurrencySafe 为什么接收 input）、工具注册的特性门控、以及 BashTool 的 AST 安全解析。现在看多个工具如何被高效调度。',
+            },
+            {
               type: 'diagram',
               title: '工具编排分区图',
               description: '连续只读工具并行执行，写操作独占，自动分区',
@@ -610,26 +966,24 @@ function classifyCommand(ast: BashAST): CommandCategory {
               type: 'explain',
               title: '为什么要分区而不是全部串行？',
               content:
-                'Claude 经常一次返回多个工具调用。比如要了解一个 bug：\n\n1. `GrepTool("error message")` — 搜索错误\n2. `FileReadTool("src/api.ts")` — 读源码\n3. `FileReadTool("tests/api.test.ts")` — 读测试\n4. `BashTool("git log -5")` — 看提交历史\n\n这 4 个操作都是只读的，**完全可以并行**。串行执行需要 4 秒，并行只需要 1 秒。\n\n但如果中间有个 `FileEditTool`，就必须在它前后分区。',
+                'Claude 经常一次返回多个工具调用。比如要了解一个 bug：\n\n1. `GrepTool("error message")` — 搜索错误\n2. `FileReadTool("src/api.ts")` — 读源码\n3. `FileReadTool("tests/api.test.ts")` — 读测试\n4. `BashTool("git log -5")` — 看提交历史\n\n这 4 个都是只读的，**完全可以并行**。串行 4 秒，并行 1 秒。',
             },
             {
               type: 'code',
               title: 'StreamingToolExecutor — 核心调度器',
-              description: '看看实际的执行逻辑是如何处理分区和并发的。',
+              description: '看看实际的执行逻辑。',
               language: 'typescript',
               code: `class StreamingToolExecutor {
-  // 并发上限
   static readonly MAX_CONCURRENCY = 10
 
   async *execute(
     tools: ToolUseBlock[]
   ): AsyncGenerator<ToolResult> {
-    // 1. 分区
     const partitions = this.partition(tools)
 
     for (const partition of partitions) {
       if (partition.every(t => t.isConcurrencySafe)) {
-        // 2. 只读分区：并行执行
+        // 只读分区：并行执行
         const promises = partition.map(t =>
           this.executeSingle(t)
         )
@@ -637,7 +991,7 @@ function classifyCommand(ast: BashAST): CommandCategory {
         const results = await Promise.all(promises)
         for (const r of results) yield r
       } else {
-        // 3. 写操作：逐个执行
+        // 写操作：逐个执行
         for (const tool of partition) {
           yield await this.executeSingle(tool)
         }
@@ -651,7 +1005,7 @@ function classifyCommand(ast: BashAST): CommandCategory {
               question: '为什么并行执行的结果要**按原始顺序** yield，而不是谁先完成谁先返回？',
               hints: '想想 Claude 看到的工具结果顺序。如果乱序了会怎样？',
               reveal:
-                'Claude 的 API 要求工具结果的顺序与工具调用顺序一致。如果 Claude 请求了 [tool_1, tool_2, tool_3]，结果必须是 [result_1, result_2, result_3]。\n\n乱序会导致：\n1. API 可能直接报错\n2. Claude 可能混淆哪个结果对应哪个调用\n3. 上下文中的因果关系被打乱\n\n所以用 `Promise.all`（保序）而不是 `Promise.race`（先完成先返回）。**并行执行但有序输出**是关键。',
+                'Claude 的 API 要求工具结果的顺序与工具调用顺序一致。乱序会导致：\n1. API 可能直接报错\n2. Claude 可能混淆哪个结果对应哪个调用\n\n所以用 `Promise.all`（保序）而不是 `Promise.race`（先完成先返回）。**并行执行但有序输出**是关键。',
             },
           ],
         },
@@ -663,7 +1017,7 @@ function classifyCommand(ast: BashAST): CommandCategory {
               type: 'explain',
               title: 'Bash 错误时中止兄弟进程',
               content:
-                '想象 Claude 同时调用了 3 个工具：\n\n1. `BashTool("npm install")` — 安装依赖\n2. `FileReadTool("package.json")` — 读配置\n3. `GrepTool("TODO")` — 搜索待办\n\n如果 `npm install` 失败了（比如网络断了），继续执行 2 和 3 有意义吗？\n\n**有意义！** 读文件和搜索与安装依赖无关。\n\n但如果场景是：\n1. `BashTool("cd /nonexistent && ls")` — 进入目录\n2. `FileReadTool("/nonexistent/file.ts")` — 读该目录的文件\n\n第 1 个失败了，第 2 个肯定也会失败。这时 **中止兄弟** 可以节省时间。',
+                '如果 Claude 同时调用了 3 个工具，其中 `BashTool` 失败了：\n\n场景 A: `npm install` 失败 + `FileReadTool("package.json")` → 继续！读文件和安装无关\n\n场景 B: `cd /nonexistent && ls` 失败 + `FileReadTool("/nonexistent/file.ts")` → 中止！环境状态有问题\n\nClaude Code 的策略：**只有 BashTool 失败才触发兄弟中止**。因为 Bash 失败通常意味着环境状态异常。',
             },
             {
               type: 'quiz',
@@ -676,21 +1030,62 @@ function classifyCommand(ast: BashAST): CommandCategory {
               ],
               correctIndex: 1,
               explanation:
-                'Claude Code 的设计是只有 **BashTool 错误**才触发兄弟中止。因为 Bash 命令的失败通常意味着环境状态有问题（目录不存在、权限不足等），其他依赖同一环境的操作大概率也会失败。而 FileRead 失败通常只是文件不存在，不影响其他操作。',
+                '只有 **BashTool 错误**才触发兄弟中止。Bash 命令的失败通常意味着环境状态问题（目录不存在、权限不足等），其他操作大概率也会失败。而 FileRead 失败只是文件不存在，不影响其他操作。',
             },
             {
               type: 'task',
               title: '设计练习：工具编排场景分析',
               instruction:
-                '给定以下工具调用序列，画出分区方案和执行时序：\n\n```\n[GrepTool, FileReadTool, FileEditTool, FileReadTool, BashTool("npm test"), FileReadTool]\n```\n\n思考：\n1. 怎么分区？\n2. 哪些可以并行？\n3. 如果 BashTool 失败了，最后的 FileReadTool 会被中止吗？',
+                '给定以下工具调用序列，画出分区方案和执行时序：\n\n```\n[GrepTool, FileReadTool, FileEditTool, FileReadTool, BashTool("npm test"), FileReadTool]\n```\n\n思考：\n1. 怎么分区？\n2. 哪些可以并行？\n3. BashTool 失败后最后的 FileReadTool 会被中止吗？',
               checklist: [
-                '识别出 3 个分区',
+                '识别出至少 3 个分区',
                 '第一分区 [Grep, FileRead] 并行',
                 'FileEdit 独占一个分区',
-                '第三分区 [FileRead, Bash, FileRead] 中 Bash 导致串行化',
-                '分析 Bash 失败对后续 FileRead 的影响',
+                '分析 BashTool 对后续 FileRead 的影响',
               ],
-              tip: '注意：BashTool("npm test") 不是只读的，它可能修改 node_modules 中的缓存文件。',
+              tip: 'BashTool("npm test") 可能修改 node_modules 缓存，不一定是只读的。',
+            },
+          ],
+        },
+        {
+          id: 'orchestration-design-tradeoffs',
+          title: '设计权衡分析',
+          cards: [
+            {
+              type: 'think-first',
+              question: '为什么 Claude Code 不使用读写锁（Read-Write Lock）来管理工具并发，而是用简单的分区策略？',
+              hints: '读写锁允许多读单写。但想想 Agent 场景的特殊性 — 工具调用的顺序对 LLM 来说有意义吗？',
+              reveal:
+                '关键差异在于 **LLM 需要有序的结果**：\n\n读写锁解决的是"多线程安全访问共享资源"的问题，结果不需要有序。\n\n但在 Agent 场景中：\n1. Claude 期望按调用顺序收到结果\n2. 工具调用之间可能有**隐式依赖**（Claude 的推理中暗含了顺序）\n3. 锁的粒度难以确定（按文件？按目录？按命令？）\n\n分区策略更简单、更可预测：**同类并行，异类串行**。在 Agent 场景下，可预测性比极致性能更重要。',
+            },
+            {
+              type: 'fill-blank',
+              title: '并发上限的考量',
+              description: '为什么并发上限是 10 而不是更多？',
+              language: 'typescript',
+              template: `class StreamingToolExecutor {
+  // 为什么是 10？
+  static readonly MAX_CONCURRENCY = ___BLANK___
+
+  // 原因：
+  // 1. 文件系统的 ___BLANK___ 有限
+  // 2. 每个工具执行占用 ___BLANK___
+  // 3. 超过 10 个并行工具调用在实践中极少见
+}`,
+              blanks: ['10', 'I/O 带宽', '内存和 CPU'],
+              hints: ['一个整数', '磁盘读写的瓶颈', '进程资源'],
+            },
+            {
+              type: 'task',
+              title: '阅读源码：工具编排',
+              instruction:
+                '找到工具编排的核心实现。\n\n**关键文件**：\n- `src/services/tools/toolOrchestration.ts` — 分区逻辑\n- `src/services/tools/StreamingToolExecutor.ts` — 流式执行器\n- `src/services/tools/toolExecution.ts` — 单工具执行',
+              checklist: [
+                '找到分区算法的实现',
+                '找到 MAX_CONCURRENCY 的定义',
+                '找到兄弟中止的触发条件',
+                '追踪工具结果如何保序',
+              ],
             },
           ],
         },
@@ -710,9 +1105,14 @@ function classifyCommand(ast: BashAST): CommandCategory {
           cards: [
             {
               type: 'explain',
+              title: '上章回顾',
+              content: '第四章学了工具编排：分区策略（只读并行、写操作独占）、有序输出、兄弟中止。现在看 Claude Code 最重要的非功能性需求 — 安全。',
+            },
+            {
+              type: 'explain',
               title: '六种权限模式',
               content:
-                'Claude Code 提供 6 种权限模式，从严到松：\n\n- **default** — 每次工具调用都询问用户\n- **plan** — 只在"危险"操作前询问\n- **acceptEdits** — 自动接受文件编辑，其他仍询问\n- **auto** — ML 分类器自动审批（最智能）\n- **bypassPermissions** — 跳过所有检查（危险！）\n- **dontAsk** — 拒绝工具调用且不再询问\n\n大多数用户使用 `default` 或 `auto`。',
+                'Claude Code 提供 6 种权限模式，从严到松：\n\n- **default** — 每次工具调用都询问用户\n- **plan** — 只在"危险"操作前询问\n- **acceptEdits** — 自动接受文件编辑，其他仍询问\n- **auto** — ML 分类器自动审批（最智能）\n- **bypassPermissions** — 跳过所有检查（危险！）\n- **dontAsk** — 拒绝工具调用且不再询问',
             },
             {
               type: 'code',
@@ -721,13 +1121,9 @@ function classifyCommand(ast: BashAST): CommandCategory {
               language: 'typescript',
               code: `type PermissionResult =
   | { behavior: 'allow' }
-  // 直接通过，无需用户确认
   | { behavior: 'deny'; reason: string }
-  // 直接拒绝，不调用工具
   | { behavior: 'ask'; prompt: string }
-  // 需要用户确认，显示 prompt
 
-// 使用方式
 const result = await canUseTool(tool, input)
 
 switch (result.behavior) {
@@ -737,15 +1133,14 @@ switch (result.behavior) {
     return { error: result.reason }
   case 'ask':
     const approved = await promptUser(result.prompt)
-    if (approved) {
+    if (approved)
       return await tool.execute(input, context)
-    }
     return { error: 'User denied' }
 }`,
             },
             {
               type: 'quiz',
-              question: '权限规则有多个来源（user, project, local, CLI, session），如果它们冲突了怎么办？',
+              question: '权限规则有多个来源，如果冲突了怎么办？',
               options: [
                 '第一个匹配的规则生效',
                 '最后一个匹配的规则生效',
@@ -754,7 +1149,23 @@ switch (result.behavior) {
               ],
               correctIndex: 2,
               explanation:
-                '权限规则按来源特异性排序：session（当前会话）> CLI（命令行参数）> local（本地设置）> project（项目设置）> user（全局设置）。越接近当前操作上下文的规则优先级越高。这允许用户在项目级设置宽松规则，但在特定会话中临时收紧。',
+                '权限规则按来源特异性排序。越接近当前操作上下文的规则优先级越高。允许在项目级设置宽松规则，但在特定会话中临时收紧。',
+            },
+            {
+              type: 'fill-blank',
+              title: '权限模式映射',
+              description: '不同模式下，FileEditTool 的默认权限行为。',
+              language: 'typescript',
+              template: `// FileEditTool 在各模式下的行为
+const editPermissions: Record<PermissionMode, Behavior> = {
+  default:     '___BLANK___',  // 每次都问
+  plan:        '___BLANK___',  // 编辑是"危险"操作
+  acceptEdits: '___BLANK___',  // 专门自动接受编辑
+  auto:        'allow',        // ML 判断
+  bypassPermissions: 'allow',
+}`,
+              blanks: ['ask', 'ask', 'allow'],
+              hints: ['default 模式下所有操作都问', 'plan 模式下编辑需要确认', '这个模式的名字已经说明了'],
             },
           ],
         },
@@ -772,22 +1183,38 @@ switch (result.behavior) {
               type: 'explain',
               title: '为什么需要四层而不是一层？',
               content:
-                '安全设计的核心原则是**纵深防御**（Defense in Depth）：\n\n- **Layer 1 (AST)** — 理解命令结构，不被字符串欺骗\n- **Layer 2 (分类)** — 区分只读/写入/破坏性\n- **Layer 3 (路径)** — 确保不超出允许的文件范围\n- **Layer 4 (ML)** — 捕获前三层遗漏的模式\n\n任何一层都不是完美的。但四层叠加后，绕过所有防线的概率极低。',
-              analogy: '就像银行的安全：门禁卡 + 密码 + 指纹 + 监控。破解一道容易，同时破解四道几乎不可能。',
+                '安全设计的核心原则是**纵深防御**（Defense in Depth）：\n\n- **Layer 1 (AST)** — 理解命令结构，不被字符串欺骗\n- **Layer 2 (分类)** — 区分只读/写入/破坏性\n- **Layer 3 (路径)** — 确保不超出允许的文件范围\n- **Layer 4 (ML)** — 捕获前三层遗漏的模式\n\n任何一层都不完美。四层叠加后，绕过所有防线的概率极低。',
+              analogy: '就像银行：门禁卡 + 密码 + 指纹 + 监控。破解一道容易，同时破解四道几乎不可能。',
             },
             {
+              type: 'task',
+              title: '阅读源码：权限系统',
+              instruction:
+                '追踪一个 Bash 命令的完整权限检查链路。\n\n**关键文件**：\n- `src/types/permissions.ts` — 类型定义\n- `src/utils/permissions/permissions.ts` — 核心逻辑\n- `src/utils/permissions/bashPermissions.ts` — Bash 专用 (98KB)\n- `src/utils/permissions/bashSecurity.ts` — 安全检查 (102KB)',
+              checklist: [
+                '找到 PermissionMode 的完整枚举',
+                '追踪 canUseTool 的调用链',
+                '找到四层安全检查的代码位置',
+                '找到 READONLY_COMMANDS 白名单',
+              ],
+            },
+          ],
+        },
+        {
+          id: 'yolo-classifier',
+          title: 'YOLO 分类器 — ML 自动审批',
+          cards: [
+            {
               type: 'code',
-              title: 'YOLO 分类器 — ML 自动审批',
-              description: '"auto" 模式使用 ML 分类器自动判断工具调用是否安全。看看它考虑了哪些特征。',
+              title: 'YOLO 分类器核心逻辑',
+              description: '"auto" 模式使用 ML 分类器自动判断工具调用是否安全。',
               language: 'typescript',
-              code: `// yoloClassifier.ts — 简化版
-function classifyForAutoApproval(
+              code: `function classifyForAutoApproval(
   tool: Tool,
   input: unknown,
   context: PermissionContext
 ): 'allow' | 'ask' {
 
-  // 特征提取
   const features = {
     toolName: tool.name,
     isReadOnly: tool.isConcurrencySafe?.(input),
@@ -805,16 +1232,58 @@ function classifyForAutoApproval(
     return 'allow'
   }
 
-  // 任何不确定的情况都要问用户
+  // 任何不确定都要问用户
   return 'ask'
 }`,
             },
             {
               type: 'think-first',
-              question: 'YOLO 分类器的 false positive（误判为安全）和 false negative（误判为危险）哪个代价更大？这如何影响分类器的设计？',
+              question: 'YOLO 分类器的 false positive（误判为安全）和 false negative（误判为危险）哪个代价更大？这如何影响设计？',
               hints: 'false positive = 本该拦截的危险操作被放行。false negative = 本来安全的操作多问了用户一次。',
               reveal:
-                '**False Positive 代价远大于 False Negative。**\n\n- False Positive（漏放）：可能导致文件被删、数据丢失、安全漏洞 → **不可逆的损害**\n- False Negative（误拦）：用户多点一次"允许"按钮 → **轻微的体验损失**\n\n因此分类器的设计原则是：**宁可多问，绝不漏放**。\n\n体现在代码中：只有**所有特征都安全**时才 allow，任何不确定就 ask。这是典型的"高召回率优先"设计。在安全领域，这叫做"fail-safe"原则。',
+                '**False Positive 代价远大于 False Negative。**\n\n- 漏放：可能导致文件被删、数据丢失 → **不可逆的损害**\n- 误拦：用户多点一次"允许" → **轻微的体验损失**\n\n因此设计原则：**宁可多问，绝不漏放**。只有所有特征都安全时才 allow，任何不确定就 ask。这是"fail-safe"原则。',
+            },
+            {
+              type: 'quiz',
+              question: 'YOLO 分类器中 `userTrustLevel` 这个特征可能包含什么？',
+              options: [
+                '用户的 GitHub star 数量',
+                '用户的付费等级',
+                '用户过去批准/拒绝操作的模式和历史',
+                '用户的 IP 地址信誉',
+              ],
+              correctIndex: 2,
+              explanation:
+                '信任等级基于用户的**历史行为模式** — 如果用户过去总是批准某类操作，分类器可以更自信地自动放行。如果用户经常拒绝某类操作，分类器应该倾向于询问。这是一种个性化的安全策略。',
+            },
+            {
+              type: 'fill-blank',
+              title: 'useCanUseTool Hook',
+              description: '这个 40KB 的 Hook 是权限系统的 React 层入口。',
+              language: 'typescript',
+              template: `function useCanUseTool(): CanUseToolFn {
+  const permissionMode = useAppState(s => s.___BLANK___)
+  const rules = useAppState(s => s.toolPermissionContext)
+  const cwd = useAppState(s => s.cwd)
+
+  return useCallback(
+    async (tool, input) => {
+      if (!tool.canUseInMode?.(permissionMode))
+        return { behavior: '___BLANK___', reason: '...' }
+
+      const rule = findMatchingRule(rules, tool, input)
+      if (rule) return rule.result
+
+      if (permissionMode === '___BLANK___')
+        return yoloClassify(tool, input, cwd)
+
+      return { behavior: 'ask', prompt: '...' }
+    },
+    [permissionMode, rules, cwd]
+  )
+}`,
+              blanks: ['permissionMode', 'deny', 'auto'],
+              hints: ['权限模式在哪个 state 字段', '不可用时返回什么行为', '哪个模式使用 ML 分类器'],
             },
           ],
         },
@@ -834,14 +1303,19 @@ function classifyForAutoApproval(
           cards: [
             {
               type: 'explain',
-              title: '为什么 CLI 工具需要状态管理？',
-              content:
-                'Claude Code 不是一个简单的命令行工具。它是一个**有状态的交互式应用**：\n\n- 100+ 个状态字段（消息历史、模型、权限、配置...）\n- 多个组件需要读取和更新同一状态\n- 状态变化需要触发 UI 重新渲染\n- 子 Agent 需要隔离的状态\n\n这和一个复杂的 Web 应用的状态管理需求完全一致。',
+              title: '上章回顾',
+              content: '第五章学了权限系统：六种模式、四层 Bash 安全防线、YOLO ML 分类器、useCanUseTool Hook。现在看驱动这一切的底层 — 状态管理。',
+            },
+            {
+              type: 'diagram',
+              title: '状态管理架构',
+              description: 'Store → Hooks → Components 的单向数据流',
+              svg: stateStoreSvg,
             },
             {
               type: 'code',
-              title: 'AppStateStore — Zustand 风格的状态管理',
-              description: '不依赖第三方状态库，自己实现了一个轻量级的 Store。',
+              title: 'AppStateStore — 自实现的轻量 Store',
+              description: '不依赖第三方库，20 行代码搞定状态管理。',
               language: 'typescript',
               code: `type AppStateStore = {
   getState(): AppState
@@ -849,7 +1323,6 @@ function classifyForAutoApproval(
   subscribe(listener: (state: AppState) => void): () => void
 }
 
-// 创建 Store
 function createAppStateStore(initial: AppState): AppStateStore {
   let state = initial
   const listeners = new Set<(s: AppState) => void>()
@@ -862,7 +1335,7 @@ function createAppStateStore(initial: AppState): AppStateStore {
     },
     subscribe: (listener) => {
       listeners.add(listener)
-      return () => listeners.delete(listener) // 返回取消函数
+      return () => listeners.delete(listener)
     },
   }
 }`,
@@ -870,13 +1343,13 @@ function createAppStateStore(initial: AppState): AppStateStore {
             {
               type: 'think-first',
               question: '为什么 Claude Code 自己实现 Store 而不用 Redux 或 Zustand？',
-              hints: '想想 CLI 应用和 Web 应用的区别。以及启动性能的要求。',
+              hints: '想想 CLI 应用和 Web 应用的区别，以及启动性能的要求。',
               reveal:
-                '几个原因：\n\n1. **启动性能** — 每个依赖都增加加载时间。自己实现只有 20 行代码，而 Redux/Zustand 是额外的包\n2. **简单性** — CLI 不需要 Redux 的 middleware、devtools 等复杂功能\n3. **定制化** — 可以精确控制更新策略，比如批量更新、优先级更新\n4. **Ink 兼容** — Ink 的 React 版本可能和第三方库不兼容\n\n核心思路：**不为假设需求引入复杂性**。20 行代码能解决的问题，不需要引入整个状态管理框架。',
+                '1. **启动性能** — 每个依赖增加加载时间。自己实现只有 20 行\n2. **简单性** — CLI 不需要 middleware、devtools 等\n3. **定制化** — 可以精确控制更新策略\n4. **Ink 兼容** — Ink 的 React 版本可能和第三方库不兼容\n\n**不为假设需求引入复杂性**。20 行能解决的问题，不需要整个框架。',
             },
             {
               type: 'quiz',
-              question: 'setState 使用函数式更新 `(prev) => newState` 而不是直接赋值 `setState(newState)`，这是为什么？',
+              question: 'setState 使用函数式更新 `(prev) => newState` 而不是直接赋值，这是为什么？',
               options: [
                 '纯粹是代码风格偏好',
                 '防止并发更新导致的状态丢失',
@@ -885,7 +1358,7 @@ function createAppStateStore(initial: AppState): AppStateStore {
               ],
               correctIndex: 1,
               explanation:
-                '函数式更新确保你总是基于**最新状态**进行修改。如果两个地方同时调用 setState，直接赋值可能互相覆盖（后者覆盖前者的修改）。函数式更新串行化了状态变化，每次更新都看到前一次更新的结果。这在异步工具执行中尤其重要。',
+                '函数式更新确保总是基于**最新状态**修改。两个地方同时 setState，直接赋值可能互相覆盖。函数式更新串行化了状态变化。这在异步工具执行中尤其重要。',
             },
           ],
         },
@@ -897,57 +1370,90 @@ function createAppStateStore(initial: AppState): AppStateStore {
               type: 'explain',
               title: '70+ 自定义 Hooks — 业务逻辑的归宿',
               content:
-                'Claude Code 有超过 70 个自定义 Hook，最大的 `useCanUseTool` 有 40KB。\n\n设计原则：\n- **组件只做渲染** — 组件中不包含业务逻辑\n- **Hook 封装逻辑** — 所有复杂逻辑都在 Hook 中\n- **Hook 组合 Hook** — 复杂 Hook 由简单 Hook 组合而成\n\n这让代码高度可测试：Hook 可以独立测试，不需要渲染组件。',
+                'Claude Code 有超过 70 个自定义 Hook，最大的 `useCanUseTool` 有 40KB。\n\n设计原则：\n- **组件只做渲染** — 不包含业务逻辑\n- **Hook 封装逻辑** — 所有复杂逻辑在 Hook 中\n- **Hook 组合 Hook** — 复杂 Hook 由简单 Hook 组合\n\n高度可测试：Hook 可以独立测试，不需要渲染组件。',
+            },
+            {
+              type: 'fill-blank',
+              title: 'useCallback 的依赖数组',
+              description: '理解 useCallback 在 Claude Code 中的关键作用。',
+              language: 'typescript',
+              template: `function useCanUseTool(): CanUseToolFn {
+  const mode = useAppState(s => s.permissionMode)
+  const rules = useAppState(s => s.toolPermissionContext)
+  const cwd = useAppState(s => s.cwd)
+
+  // 只在这三个值变化时才重建函数
+  return useCallback(
+    async (tool, input) => { /* ... */ },
+    [___BLANK___, ___BLANK___, ___BLANK___]
+  )
+}
+// 好处：避免不必要的 ___BLANK___`,
+              blanks: ['mode', 'rules', 'cwd', '函数重建和下游组件重渲染'],
+              hints: ['第一个状态变量', '第二个状态变量', '第三个状态变量', 'useCallback 优化了什么？'],
+            },
+            {
+              type: 'task',
+              title: '阅读源码：状态与 Hooks',
+              instruction:
+                '探索状态管理和 Hook 层。\n\n**关键文件**：\n- `src/state/AppState.tsx` — React 状态 Provider\n- `src/state/AppStateStore.ts` — Store 定义\n- `src/bootstrap/state.ts` — 全局状态\n- `src/hooks/useCanUseTool.tsx` — 最复杂的 Hook (40KB)',
+              checklist: [
+                '数一下 AppState 有多少个字段',
+                '找到 AppStoreContext 的 Provider 组件',
+                '找到 useAppState 的实现（selector 模式）',
+                '找到 VoiceProvider 和 MailboxProvider 的条件加载逻辑',
+              ],
+            },
+          ],
+        },
+        {
+          id: 'ink-terminal-ui',
+          title: 'Ink 终端 UI',
+          cards: [
+            {
+              type: 'explain',
+              title: 'React 组件，但渲染到终端',
+              content:
+                'Ink 让你用 React 语法编写终端 UI。但和 Web React 有关键区别：\n\n| | Web React | Ink |\n|---|---|---|\n| 渲染目标 | DOM | Terminal (stdout) |\n| 布局 | CSS/Flexbox | Yoga (Flexbox 子集) |\n| 事件 | 鼠标/键盘 | 只有键盘 |\n| 动画 | requestAnimationFrame | setInterval |\n| 组件数 | 无限制 | 终端行数限制 |\n\nClaude Code 有 ~140 个 Ink 组件，实现了完整的交互式终端 UI。',
             },
             {
               type: 'code',
-              title: 'useCanUseTool — 最复杂的 Hook',
-              description: '40KB 的权限检查 Hook。看看它如何组合多个状态源。',
+              title: '流式内容的增量渲染',
+              description: 'Claude 的回复是流式的，每收到一个 token 就要更新 UI。',
               language: 'typescript',
-              code: `function useCanUseTool(): CanUseToolFn {
-  // 从 Store 获取权限模式
-  const permissionMode = useAppState(s => s.permissionMode)
-  // 获取权限规则
-  const rules = useAppState(s => s.toolPermissionContext)
-  // 获取当前工作目录
-  const cwd = useAppState(s => s.cwd)
+              code: `// 简化版的流式渲染组件
+function StreamingResponse({ stream }: Props) {
+  const [content, setContent] = useState('')
 
-  // 返回一个闭包，捕获了所有需要的状态
-  return useCallback(
-    async (tool: Tool, input: unknown) => {
-      // 1. 检查工具是否在当前模式下可用
-      if (!tool.canUseInMode?.(permissionMode)) {
-        return { behavior: 'deny' as const, reason: '...' }
+  useEffect(() => {
+    const reader = stream.getReader()
+    async function read() {
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        // 每个 chunk 增量追加
+        setContent(prev => prev + value)
       }
+    }
+    read()
+  }, [stream])
 
-      // 2. 检查已保存的规则
-      const rule = findMatchingRule(rules, tool, input)
-      if (rule) return rule.result
-
-      // 3. 运行安全分类器
-      if (permissionMode === 'auto') {
-        return yoloClassify(tool, input, cwd)
-      }
-
-      // 4. 默认：询问用户
-      return { behavior: 'ask' as const, prompt: '...' }
-    },
-    [permissionMode, rules, cwd]
-  )
+  // Ink 的 <Text> 相当于 Web 的 <span>
+  return <Text>{content}</Text>
 }`,
             },
             {
               type: 'quiz',
-              question: 'useCallback 的依赖数组 [permissionMode, rules, cwd] 的作用是什么？',
+              question: 'Ink 使用 Yoga 布局引擎，它和 CSS Flexbox 的最大区别是什么？',
               options: [
-                '这三个值变化时重新渲染组件',
-                '只在这三个值变化时重新创建 canUseTool 函数，避免不必要的重建',
-                '缓存这三个值以提高性能',
-                '确保这三个值不被垃圾回收',
+                'Yoga 不支持 Grid',
+                'Yoga 是 Flexbox 的子集 — 只支持一维布局基本属性，不支持 float、position:absolute 等',
+                'Yoga 更快',
+                'Yoga 用 JavaScript 实现，Flexbox 用 C++ 实现',
               ],
               correctIndex: 1,
               explanation:
-                'useCallback 的依赖数组告诉 React：只有当这些值变化时，才需要创建新的函数。如果权限模式没变、规则没变、工作目录没变，就继续用之前的函数。这避免了每次渲染都创建新函数导致下游组件不必要的重渲染。',
+                'Yoga 是 Facebook 开发的跨平台 Flexbox 实现，但只支持 Flexbox 的子集。终端 UI 不需要 float、absolute positioning、z-index 等复杂布局。简化后的布局引擎更快、更可预测。',
             },
           ],
         },
@@ -967,10 +1473,15 @@ function createAppStateStore(initial: AppState): AppStateStore {
           cards: [
             {
               type: 'explain',
+              title: '上章回顾',
+              content: '第六章学了状态管理：Zustand-like Store、70+ 自定义 Hooks、Ink 终端 UI。现在看一个关键的运行时挑战 — 上下文窗口会被用完。',
+            },
+            {
+              type: 'explain',
               title: '上下文窗口的残酷现实',
               content:
-                'Claude 的上下文窗口虽然很大（100K-1M tokens），但在实际使用中会被快速消耗：\n\n- System Prompt: ~5K tokens\n- 每轮对话: ~500-2K tokens\n- 每次工具调用: ~200-1K tokens\n- 工具结果: ~500-5K tokens（文件内容可能很大）\n\n一个 30 分钟的编码会话，轻松消耗 50K+ tokens。\n\n**不压缩 = 对话被截断 = 丢失上下文 = 错误的回答**',
-              analogy: '就像你的桌子。工作一天后堆满了文件、笔记、咖啡杯。如果不整理，就没地方放新东西了。但整理时要小心，别把重要的文件扔了。',
+                'Claude 的上下文窗口虽大（100K-1M tokens），但消耗极快：\n\n- System Prompt: ~5K tokens\n- 每轮对话: ~500-2K tokens\n- 每次工具调用: ~200-1K tokens\n- 工具结果: ~500-5K tokens\n\n30 分钟编码会话，轻松消耗 50K+ tokens。\n\n**不压缩 = 对话被截断 = 丢失上下文 = 错误的回答**',
+              analogy: '就像你的桌子。工作一天后堆满文件。不整理就没地方放新东西。但整理时别把重要文件扔了。',
             },
             {
               type: 'quiz',
@@ -983,7 +1494,7 @@ function createAppStateStore(initial: AppState): AppStateStore {
               ],
               correctIndex: 1,
               explanation:
-                '技术上压缩很容易（删消息就行），难的是**价值判断**：哪些信息对后续对话仍然重要？工具执行的因果链不能断，关键决策的上下文不能丢，但冗余的中间结果可以删。这是信息价值的评估问题。',
+                '技术上压缩很容易（删消息就行），难的是**价值判断**：哪些信息对后续对话仍然重要？工具执行的因果链不能断，关键决策的上下文不能丢。',
             },
           ],
         },
@@ -992,44 +1503,80 @@ function createAppStateStore(initial: AppState): AppStateStore {
           title: '四种压缩策略',
           cards: [
             {
-              type: 'explain',
-              title: '不同场景，不同策略',
-              content:
-                'Claude Code 有四种压缩策略：\n\n**1. Compact（标准压缩）**\n用 LLM 对历史对话生成摘要，替换原始消息。\n\n**2. Microcompact（微压缩）**\n针对工具密集型会话的激进压缩。工具调用的细节被大幅精简。\n\n**3. Snip（选择性裁剪）**\n基于重要性评分，选择性保留/删除消息。\n\n**4. Tombstone（墓碑标记）**\n不真删消息，而是替换为占位符，保留位置信息。',
+              type: 'diagram',
+              title: '四种压缩策略对比',
+              description: '不同场景匹配不同的压缩方式',
+              svg: compactStrategySvg,
             },
             {
               type: 'think-first',
               question: '在压缩时，如何保留工具执行的因果链？比如 Claude 先 grep 找到文件 → 读文件 → 编辑文件。如果删掉了 grep 的结果，Claude 还能理解为什么要编辑那个文件吗？',
-              hints: '想想"决策点"和"执行细节"的区别。Claude 需要知道做了什么决策，但不一定需要每次 grep 返回的完整内容。',
+              hints: '想想"决策点"和"执行细节"的区别。',
               reveal:
-                'Claude Code 的压缩策略是：**保留决策，删除细节**。\n\n- 保留：Claude 的推理过程（"我搜索了 X，发现了 Y，因此决定编辑 Z"）\n- 删除：工具的原始输出（grep 返回的 200 行匹配结果）\n- 替换为：ToolUseSummary（"调用了 GrepTool，在 3 个文件中找到匹配"）\n\n这样 Claude 知道它做过什么决策、基于什么信息，但不需要占用 token 存储完整的中间结果。\n\nTombstone 在这里起到关键作用 — 它标记了"这里曾经有一个工具调用"，保持消息序列的完整性。',
+                '策略：**保留决策，删除细节**。\n\n- 保留：Claude 的推理（"我搜索了 X，发现了 Y，因此决定编辑 Z"）\n- 删除：工具的原始输出（grep 返回的 200 行匹配结果）\n- 替换为：ToolUseSummary（"调用了 GrepTool，在 3 个文件中找到匹配"）\n\nTombstone 标记"这里曾有一个工具调用"，保持消息序列完整性。',
             },
             {
-              type: 'code',
+              type: 'fill-blank',
               title: 'Auto-compact 触发逻辑',
-              description: '不需要用户手动 /compact，系统会在适当时机自动触发。',
+              description: '补全自动触发压缩的条件。',
               language: 'typescript',
-              code: `function shouldAutoCompact(
+              template: `function shouldAutoCompact(
   messages: Message[],
   model: string
 ): boolean {
   const tokenCount = tokenCountWithEstimation(messages, model)
   const maxTokens = getModelContextWindow(model)
+  const threshold = maxTokens * ___BLANK___  // 安全余量
 
-  // 预留 15% 安全余量
-  const threshold = maxTokens * 0.85
+  if (tokenCount > threshold) return true
 
-  if (tokenCount > threshold) {
-    return true
-  }
-
-  // 工具密集型会话：更早触发
-  const toolCallRatio = countToolCalls(messages) / messages.length
-  if (toolCallRatio > 0.6 && tokenCount > threshold * 0.7) {
-    return true // 工具调用多 = token 消耗快
+  // 工具密集型：更早触发
+  const toolRatio = countToolCalls(messages) / messages.length
+  if (toolRatio > ___BLANK___ && tokenCount > threshold * 0.7) {
+    return true // 工具多 = token 增长快
   }
 
   return false
+}`,
+              blanks: ['0.85', '0.6'],
+              hints: ['预留 15% 安全余量', '工具调用占比超过多少时提前触发？'],
+            },
+          ],
+        },
+        {
+          id: 'compact-implementation',
+          title: '压缩实现细节',
+          cards: [
+            {
+              type: 'code',
+              title: 'Compact vs Microcompact',
+              description: '两种主要压缩策略的区别在于精简程度。',
+              language: 'typescript',
+              code: `// Compact: 用 LLM 生成对话摘要
+async function compact(messages: Message[]): Message[] {
+  const summary = await llm.summarize(messages, {
+    preserve: ['decisions', 'file_paths', 'errors'],
+    discard: ['tool_raw_output', 'intermediate_steps'],
+  })
+  return [
+    { type: 'compact_summary', content: summary },
+    ...messages.slice(-3), // 保留最近 3 条原始消息
+  ]
+}
+
+// Microcompact: 不用 LLM，直接精简
+function microcompact(messages: Message[]): Message[] {
+  return messages.map(m => {
+    if (m.type === 'tool_result') {
+      // 工具结果只保留前 200 字符
+      return { ...m, content: truncate(m.content, 200) }
+    }
+    if (m.type === 'assistant' && m.toolUse) {
+      // 助手消息中的工具调用保留，推理保留
+      return m
+    }
+    return m
+  })
 }`,
             },
             {
@@ -1037,13 +1584,26 @@ function createAppStateStore(initial: AppState): AppStateStore {
               question: '为什么工具密集型会话要更早触发 compact（70% 阈值而非 85%）？',
               options: [
                 '工具调用的 token 更贵',
-                '工具调用产生大量输出，token 增长速度更快，可能在两次检查之间就超限',
+                '工具调用产生大量输出，token 增长速度快，可能在两次检查之间就超限',
                 '工具调用的结果质量更低',
                 '纯粹是性能考虑',
               ],
               correctIndex: 1,
               explanation:
-                '工具调用（尤其是 FileRead、Bash）可能一次性产生几千个 token 的输出。如果等到 85% 才 compact，下一次工具调用可能直接撑爆上下文。提前到 70% 触发，留出足够的缓冲空间应对突发的大量 token 输入。',
+                '工具调用（尤其是 FileRead、Bash）可能一次性产生几千个 token。如果等到 85% 才 compact，下一次工具调用可能直接撑爆上下文。提前到 70% 留出缓冲。',
+            },
+            {
+              type: 'task',
+              title: '阅读源码：上下文压缩',
+              instruction:
+                '找到压缩系统的完整实现。\n\n**关键文件**：\n- `src/services/compact/` — 压缩服务目录\n- 搜索 `shouldAutoCompact` 或 `compact` 函数',
+              checklist: [
+                '找到四种压缩策略的实现',
+                '找到自动触发的阈值配置',
+                '找到 Tombstone 消息的创建逻辑',
+                '找到 /compact 命令的入口',
+              ],
+              tip: '在 `src/commands/` 中搜索 compact 可以找到命令入口，然后追踪到服务层。',
             },
           ],
         },
@@ -1062,6 +1622,11 @@ function createAppStateStore(initial: AppState): AppStateStore {
           title: 'Coordinator 模式',
           cards: [
             {
+              type: 'explain',
+              title: '上章回顾',
+              content: '第七章学了上下文压缩：四种策略（Compact/Microcompact/Snip/Tombstone）、自动触发机制、保留决策删除细节的原则。现在进入最高级的话题 — 多 Agent。',
+            },
+            {
               type: 'diagram',
               title: 'Agent Swarm 架构',
               description: 'Coordinator 编排多个 Worker，通过共享任务列表和消息协调',
@@ -1071,15 +1636,14 @@ function createAppStateStore(initial: AppState): AppStateStore {
               type: 'explain',
               title: '为什么需要多 Agent？',
               content:
-                '单个 Agent 的局限：\n\n1. **上下文窗口有限** — 大型任务的信息量可能超过一个 Agent 的窗口\n2. **串行执行** — 一个 Agent 一次只能做一件事\n3. **专业化** — 不同任务需要不同的工具集和提示\n\nAgent Swarm 的解决方案：\n- **Coordinator** 负责规划和调度\n- **Worker** 负责执行具体任务\n- 每个 Worker 有独立的上下文窗口和 token 预算\n- Workers 可以**并行**工作',
+                '单个 Agent 的局限：\n\n1. **上下文窗口有限** — 大型任务的信息量可能超过一个 Agent 的窗口\n2. **串行执行** — 一个 Agent 一次只能做一件事\n3. **专业化** — 不同任务需要不同的工具集和提示\n\nAgent Swarm：\n- **Coordinator** 负责规划和调度\n- **Worker** 负责执行具体任务\n- 每个 Worker 有独立的上下文和 token 预算\n- Workers 可以**并行**工作',
             },
             {
               type: 'code',
               title: 'Worker 的工具集裁剪',
-              description: 'Worker 不能使用所有工具。这是安全和效率的考虑。',
+              description: 'Worker 不能使用所有工具。',
               language: 'typescript',
-              code: `// Worker 只能使用这些工具
-const ASYNC_AGENT_ALLOWED_TOOLS = [
+              code: `const ASYNC_AGENT_ALLOWED_TOOLS = [
   AgentTool,       // 可以继续派生子 Agent
   TaskOutputTool,  // 查看任务状态
   BashTool,        // Shell 执行
@@ -1096,10 +1660,10 @@ const ASYNC_AGENT_ALLOWED_TOOLS = [
             },
             {
               type: 'think-first',
-              question: 'Worker 不被允许使用 TeamCreateTool（创建团队）。如果允许了会怎样？',
+              question: 'Worker 不能使用 TeamCreateTool。如果允许了会怎样？',
               hints: '想想递归和资源消耗。',
               reveal:
-                '如果 Worker 能创建团队，就可能出现：\n\nCoordinator → 创建 Worker A → Worker A 创建新团队 → 新团队的 Worker 再创建团队 → ...\n\n这会导致：\n1. **无限递归** — Agent 树无限深\n2. **资源爆炸** — 每个 Agent 消耗 token（= 钱）\n3. **协调混乱** — 谁向谁报告？谁有权停止谁？\n\n限制 Worker 不能创建团队，确保了 Agent 树的**有限深度**和**清晰的层级结构**。这是一个经典的"最小权限原则"应用。',
+                '如果 Worker 能创建团队：\nCoordinator → Worker A → 新团队 → 新 Worker → 又创建团队 → ...\n\n导致：\n1. **无限递归** — Agent 树无限深\n2. **资源爆炸** — 每个 Agent 消耗 token（= 钱）\n3. **协调混乱** — 谁向谁报告？\n\n限制 Worker 不能创建团队确保了 **有限深度**和**清晰层级**。经典的"最小权限原则"。',
             },
           ],
         },
@@ -1111,30 +1675,23 @@ const ASYNC_AGENT_ALLOWED_TOOLS = [
               type: 'explain',
               title: '三种协调机制',
               content:
-                'Claude Code 的 Agent 间有三种协调方式：\n\n**1. SendMessage — 点对点消息**\n直接给某个 Agent 发消息。适合一对一的请求-响应。\n\n**2. TaskCreate/Update — 共享任务列表**\n所有 Agent 都能看到任务列表，自主认领未分配的任务。这是**黑板模式**（Blackboard Pattern）。\n\n**3. Worktree 隔离**\n每个 Worker 在独立的 git worktree 中工作。修改不会互相冲突。完成后合并回主分支。',
+                '**1. SendMessage — 点对点消息**\n直接给某个 Agent 发消息。请求-响应。\n\n**2. TaskCreate/Update — 共享任务列表**\n所有 Agent 都能看到，自主认领任务。**黑板模式**（Blackboard Pattern）。\n\n**3. Worktree 隔离**\n每个 Worker 在独立的 git worktree 中工作。修改不冲突。完成后合并。',
             },
             {
               type: 'code',
-              title: 'Agent 隔离：Token 预算',
-              description: '每个 Worker 有独立的 token 预算，防止一个 Worker 消耗过多资源。',
+              title: 'Agent 隔离配置',
+              description: '每个 Worker 有独立的 token 预算、turn 限制和权限模式。',
               language: 'typescript',
-              code: `// 创建 Worker 时的配置
-const workerConfig: QueryEngineConfig = {
-  // 独立的 token 预算
-  maxBudgetUsd: parentBudget * 0.2, // 最多用父 Agent 20% 的预算
-  // 独立的 turn 限制
+              code: `const workerConfig: QueryEngineConfig = {
+  maxBudgetUsd: parentBudget * 0.2,  // 最多 20% 预算
   maxTurns: 50,
-  // 裁剪后的工具集
-  tools: ASYNC_AGENT_ALLOWED_TOOLS,
-  // 继承权限模式（但可以更严格）
+  tools: ASYNC_AGENT_ALLOWED_TOOLS,   // 裁剪后的工具
   permissionMode: Math.min(
     parentMode,
-    'plan' // Worker 最宽松只能到 plan 模式
+    'plan'  // Worker 最宽松只能到 plan
   ),
-  // 独立的消息历史
-  initialMessages: [],
-  // 独立的工作目录（可能是 worktree）
-  cwd: worktreePath ?? parentCwd,
+  initialMessages: [],                // 独立消息历史
+  cwd: worktreePath ?? parentCwd,     // 可能隔离的工作目录
 }`,
             },
             {
@@ -1148,21 +1705,69 @@ const workerConfig: QueryEngineConfig = {
               ],
               correctIndex: 1,
               explanation:
-                '黑板模式让任务列表作为共享的"黑板"。Worker 完成当前任务后，主动查看黑板上还有什么未认领的任务，自己认领并开始工作。这比 Coordinator 逐一分配更高效，也更灵活——Worker 可以根据自己的能力选择最合适的任务。',
+                '任务列表作为共享"黑板"。Worker 完成任务后主动查看黑板上的未认领任务，自己认领。比 Coordinator 逐一分配更高效、更灵活。',
+            },
+            {
+              type: 'fill-blank',
+              title: 'Worker 权限继承',
+              description: 'Worker 的权限模式不能超过父 Agent。',
+              language: 'typescript',
+              template: `// Worker 权限 = min(父权限, 上限)
+const workerPermission = Math.min(
+  parentMode,         // 不能比父 Agent 更宽松
+  '___BLANK___'       // Worker 的权限上限
+)
+
+// 权限严格度排序:
+// ___BLANK___ < plan < acceptEdits < auto < bypass
+`,
+              blanks: ['plan', 'default'],
+              hints: ['Worker 最宽松到什么级别？', '最严格的权限模式'],
+            },
+          ],
+        },
+        {
+          id: 'agent-bridge',
+          title: 'IDE 桥接',
+          cards: [
+            {
+              type: 'explain',
+              title: 'Bridge — IDE 双向通信',
+              content:
+                'Claude Code 不只在终端运行，还能集成到 VS Code 和 JetBrains。\n\nBridge 系统实现双向通信：\n- **IDE → CLI**: 用户在 IDE 中的输入转发给 Claude Code\n- **CLI → IDE**: 工具调用结果、权限请求转发给 IDE\n- **JWT 认证**: Bridge 连接使用 JWT 确保安全\n- **权限代理**: 权限请求不在终端显示，而是在 IDE 中弹出',
+            },
+            {
+              type: 'code',
+              title: 'Bridge 消息协议',
+              description: 'IDE 和 CLI 之间的通信基于消息。',
+              language: 'typescript',
+              code: `// Bridge 消息类型
+type BridgeMessage =
+  | { type: 'user_input'; content: string }
+  | { type: 'tool_call'; tool: string; input: unknown }
+  | { type: 'permission_request'; prompt: string; id: string }
+  | { type: 'permission_response'; id: string; approved: boolean }
+  | { type: 'tool_result'; content: string }
+  | { type: 'assistant_response'; content: string }
+
+// JWT 认证
+async function authenticateBridge(token: string): Promise<boolean> {
+  const payload = verifyJWT(token, BRIDGE_SECRET)
+  return payload?.scope === 'bridge'
+    && payload.exp > Date.now() / 1000
+}`,
             },
             {
               type: 'task',
-              title: '设计练习：多 Agent 协作方案',
+              title: '阅读源码：多 Agent 与 Bridge',
               instruction:
-                '设计一个 3-Agent 协作方案来完成以下任务：\n\n> "给现有的 UserService 添加邮箱验证功能，包含后端 API、数据库迁移、和单元测试"\n\n需要规划：\n1. Coordinator 如何分解任务\n2. 3 个 Worker 各自负责什么\n3. Worker 间的依赖关系（谁先谁后）\n4. 如何用 Worktree 避免冲突',
+                '探索多 Agent 协调和 IDE 桥接的实现。\n\n**关键文件**：\n- `src/coordinator/coordinatorMode.ts` — Coordinator 设置\n- `src/tools/AgentTool/AgentTool.tsx` — 子 Agent 生成 (233KB)\n- `src/tools/SendMessageTool/` — Agent 间消息\n- `src/bridge/bridgeMain.ts` — Bridge 主循环\n- `src/bridge/jwtUtils.ts` — JWT 认证',
               checklist: [
-                '定义 Coordinator 的任务分解（3-5 个子任务）',
-                '分配 Worker 角色（如：DB Worker, API Worker, Test Worker）',
-                '标识任务依赖（DB 迁移必须先于 API 实现）',
-                '设计 Worktree 策略（共用还是各自隔离）',
-                '考虑失败场景（如果 DB 迁移失败了怎么办）',
+                '找到 CLAUDE_CODE_COORDINATOR_MODE 的检查逻辑',
+                '找到 ASYNC_AGENT_ALLOWED_TOOLS 的完整列表',
+                '追踪 Worker 创建的完整流程',
+                '找到 Bridge JWT 认证的实现',
               ],
-              tip: 'DB Worker 和 Test Worker 可以并行工作 — Test Worker 可以先写测试（TDD），DB Worker 同时做迁移。',
             },
           ],
         },
@@ -1177,44 +1782,45 @@ const workerConfig: QueryEngineConfig = {
       title: '第九章：扩展系统 — Plugin / Skill / MCP',
       lessons: [
         {
-          id: 'plugin-system',
-          title: 'Plugin 与 Skill 系统',
+          id: 'extension-overview',
+          title: '三层扩展架构',
           cards: [
             {
               type: 'explain',
+              title: '上章回顾',
+              content: '第八章学了多 Agent 协调：Coordinator/Worker 模式、工具集裁剪、三种协调机制（消息/任务/Worktree）、IDE 桥接。现在看如何扩展 Claude Code 的能力。',
+            },
+            {
+              type: 'diagram',
               title: '三层扩展架构',
-              content:
-                'Claude Code 的扩展能力分三层：\n\n**Plugin（插件）** — 最重的扩展\n- 可以注册新的工具和命令\n- 有完整的 Manifest\n- 版本化管理\n- 三种来源：Bundled / Marketplace / User\n\n**Skill（技能）** — 轻量级的 Prompt 工作流\n- 本质是预定义的 prompt + 配置\n- 存放在 `.claude/skills/` 目录\n- 可以通过 `SkillTool` 调用\n- 支持 `context: fork`（在子 Agent 中执行）\n\n**MCP（模型上下文协议）** — 标准化的外部工具\n- 连接外部 MCP Server\n- 动态发现工具和资源\n- 跨 AI 平台通用',
+              description: '从重到轻：Plugin（代码层）→ Skill（Prompt 层）→ MCP（协议层）',
+              svg: extensionLayersSvg,
             },
             {
               type: 'code',
               title: 'Plugin Manifest — 插件的身份证',
-              description: '每个 Plugin 都有一个 Manifest，声明它提供什么能力。',
+              description: '每个 Plugin 声明它提供什么能力。',
               language: 'typescript',
               code: `type PluginManifest = {
-  name: string           // 插件名称
-  version: string        // 语义化版本
-  description: string    // 描述
-  // 插件可以注册新命令
-  commands?: Command[]
-  // 插件可以注册新技能
-  skills?: PromptCommand[]
-  // 插件可以注册 Hook
-  hooks?: HooksSettings
-  // 兼容性要求
+  name: string
+  version: string
+  description: string
+  commands?: Command[]       // 新命令
+  skills?: PromptCommand[]   // 新技能
+  hooks?: HooksSettings      // 新 Hook
   minClaudeCodeVersion?: string
 }
 
-// 加载插件时的错误恢复
+// 加载时优雅降级
 async function loadPlugin(path: string) {
   try {
     const manifest = await import(path)
     validateManifest(manifest)
     return manifest
   } catch (error) {
-    // 插件加载失败不应该崩溃整个应用！
+    // 插件失败不崩溃整个应用！
     logError(\`Plugin load failed: \${path}\`, error)
-    return null  // 优雅降级
+    return null
   }
 }`,
             },
@@ -1229,60 +1835,106 @@ async function loadPlugin(path: string) {
               ],
               correctIndex: 1,
               explanation:
-                'Skill 是**纯 Prompt 层**的扩展，它定义一个工作流模板，Claude 按照模板执行。Plugin 是**代码层**的扩展，可以注册全新的工具（Tool）和命令（Command），提供 Skill 无法实现的能力（如新的文件格式支持、新的 API 集成）。',
+                'Skill 是**纯 Prompt 层**扩展，定义工作流模板。Plugin 是**代码层**扩展，可以注册全新的工具和命令，提供 Skill 无法实现的能力。',
             },
           ],
         },
         {
           id: 'mcp-integration',
-          title: 'MCP 集成 — 标准化的工具发现',
+          title: 'MCP 集成',
           cards: [
+            {
+              type: 'diagram',
+              title: 'MCP 架构',
+              description: 'Claude Code 作为 MCP Client，连接多个 MCP Server',
+              svg: mcpArchSvg,
+            },
             {
               type: 'explain',
               title: 'MCP 解决了什么问题？',
               content:
-                '在 MCP 之前，每个 AI 工具都有自己的集成方式：\n- Claude Code 用 Tool 接口\n- ChatGPT 用 Function Calling\n- Cursor 用自己的 API\n\n同一个"搜索 GitHub Issues"的能力，要为每个平台写一遍。\n\n**MCP（Model Context Protocol）** 定义了统一的标准：\n- 任何 MCP Server 可以被任何 MCP Client 使用\n- 工具发现是自动的（Server 声明能力，Client 查询）\n- 资源缓存由 Client 统一管理\n\n写一次 MCP Server → 所有 AI 工具都能用。',
-              analogy: 'USB 出现前，每种设备都有自己的接口。USB 统一了标准后，一根线连一切。MCP 就是 AI 工具的 "USB 标准"。',
-            },
-            {
-              type: 'code',
-              title: 'MCP Server 连接管理',
-              description: 'Claude Code 在启动时连接所有配置的 MCP Server，并缓存资源。',
-              language: 'typescript',
-              code: `type MCPServerConnection = {
-  name: string
-  tools: Tool[]         // Server 提供的工具
-  resources: Resource[] // Server 提供的资源
-  sampling?: SamplingMode
-}
-
-// 启动时：连接所有 MCP Server
-async function initMCPServers(
-  config: MCPConfig
-): Promise<MCPServerConnection[]> {
-  const connections = await Promise.all(
-    config.servers.map(async server => {
-      const client = await connect(server.url)
-
-      // 发现 Server 提供的工具
-      const tools = await client.listTools()
-      // 预取所有资源（缓存到内存）
-      const resources = await client.listResources()
-
-      return { name: server.name, tools, resources }
-    })
-  )
-
-  // 过滤掉连接失败的 Server
-  return connections.filter(Boolean)
-}`,
+                'MCP 之前，每个 AI 工具都有自己的集成方式。同一个"搜索 GitHub Issues"的能力，要为每个平台写一遍。\n\n**MCP（Model Context Protocol）** 定义了统一标准：\n- 任何 MCP Server 可以被任何 MCP Client 使用\n- 工具发现是自动的\n- 资源缓存由 Client 统一管理\n\n写一次 MCP Server → 所有 AI 工具都能用。',
+              analogy: 'USB 出现前，每种设备都有自己的接口。USB 统一标准后，一根线连一切。MCP 就是 AI 工具的"USB 标准"。',
             },
             {
               type: 'think-first',
               question: 'MCP 工具和内置工具对 Claude 来说有区别吗？Claude 怎么知道某个工具是内置的还是来自 MCP？',
               hints: '想想 Claude 看到的是什么 — 工具名、描述、输入 schema。',
               reveal:
-                '对 Claude 来说，**完全没有区别**。\n\n内置工具和 MCP 工具在传给 API 时，都是同样的格式：\n```json\n{ "name": "tool_name", "description": "...", "input_schema": {...} }\n```\n\nClaude 不知道也不需要知道工具的来源。这是 MCP 设计的精妙之处 — **对 LLM 透明**。\n\n区别只在 Claude Code 的内部：\n- 内置工具直接调用 TypeScript 函数\n- MCP 工具通过 MCP 协议远程调用 Server\n\n但这个区别对 Claude 完全不可见。',
+                '对 Claude 来说，**完全没有区别**。\n\n内置工具和 MCP 工具传给 API 时格式相同：\n```json\n{ "name": "tool_name", "description": "...", "input_schema": {...} }\n```\n\nClaude 不知道也不需要知道工具来源。这是 MCP 设计的精妙之处 — **对 LLM 透明**。\n\n区别只在 Claude Code 内部：内置工具调用 TypeScript 函数，MCP 工具通过协议远程调用 Server。',
+            },
+            {
+              type: 'fill-blank',
+              title: 'MCP Server 连接流程',
+              description: '启动时连接所有 MCP Server 并缓存资源。',
+              language: 'typescript',
+              template: `async function initMCPServers(
+  config: MCPConfig
+): Promise<MCPServerConnection[]> {
+  const connections = await Promise.all(
+    config.servers.map(async server => {
+      const client = await connect(server.url)
+      // 发现 Server 提供的 ___BLANK___
+      const tools = await client.___BLANK___()
+      // 预取所有 ___BLANK___
+      const resources = await client.listResources()
+      return { name: server.name, tools, resources }
+    })
+  )
+  return connections.filter(Boolean)
+}`,
+              blanks: ['工具', 'listTools', '资源'],
+              hints: ['Server 暴露什么能力？', 'MCP 标准的工具发现方法', 'Server 还提供什么？'],
+            },
+          ],
+        },
+        {
+          id: 'skill-system',
+          title: 'Skill 系统深入',
+          cards: [
+            {
+              type: 'explain',
+              title: 'Skill = 可复用的 Prompt 工作流',
+              content:
+                'Skill 是最轻量的扩展方式：\n\n- 存放在 `.claude/skills/` 目录\n- 本质是 Markdown 文件 + 元数据\n- 通过 `SkillTool` 调用\n- 支持 `context: fork`（在子 Agent 中执行）\n- Token 预算隔离\n\n适合场景：代码审查模板、测试策略、重构指南等**可复用的工作流**。',
+            },
+            {
+              type: 'code',
+              title: 'Skill 的 fork 执行模式',
+              description: '当 Skill 标记为 fork 时，它在独立的子 Agent 中执行，不污染主会话。',
+              language: 'typescript',
+              code: `// Skill 执行
+async function executeSkill(
+  skill: SkillDefinition,
+  context: ToolUseContext
+) {
+  if (skill.context === 'fork') {
+    // Fork 模式：创建子 Agent 执行
+    const agent = await spawnAgent({
+      systemPrompt: skill.content,
+      tools: skill.allowedTools ?? DEFAULT_TOOLS,
+      maxBudgetUsd: 0.5,  // Token 预算隔离
+      maxTurns: 20,
+    })
+    return await agent.run()
+  }
+
+  // 默认：注入到当前会话
+  return { prompt: skill.content }
+}`,
+            },
+            {
+              type: 'task',
+              title: '阅读源码：扩展系统',
+              instruction:
+                '探索插件、技能和 MCP 的实现。\n\n**关键文件**：\n- `src/plugins/` — 插件系统\n- `src/skills/` — 技能系统\n- `src/services/mcp/client.ts` — MCP 客户端\n- `src/services/mcp/config.ts` — MCP 配置加载',
+              checklist: [
+                '找到 Plugin Manifest 的 Zod schema',
+                '找到 Skills 目录扫描和加载逻辑',
+                '找到 MCP Server 连接的完整流程',
+                '找到 MCP 工具注入到工具注册表的位置',
+              ],
+              tip: '搜索 `loadPlugin` 和 `loadSkillsDir` 作为入口。',
             },
           ],
         },
@@ -1302,92 +1954,142 @@ async function initMCPServers(
           cards: [
             {
               type: 'explain',
+              title: '上章回顾',
+              content: '第九章学了三层扩展架构：Plugin（代码层）、Skill（Prompt 层）、MCP（协议层）。最后一章看可观测性，然后做一个综合项目。',
+            },
+            {
+              type: 'explain',
               title: '可观测性的三个支柱',
               content:
-                'Claude Code 使用 OpenTelemetry 实现可观测性，覆盖三个维度：\n\n**1. Traces（追踪）**\n跟踪一个请求从用户输入到最终响应的完整链路。每个工具调用是一个 Span。\n\n**2. Metrics（指标）**\nToken 用量、API 延迟、工具执行时间等数值指标。用于监控和告警。\n\n**3. Events（事件）**\n用户操作、错误、功能使用等离散事件。用于分析用户行为和排查问题。',
+                'Claude Code 使用 OpenTelemetry 覆盖三个维度：\n\n**1. Traces（追踪）**\n跟踪请求从用户输入到最终响应的完整链路。每个工具调用是一个 Span。\n\n**2. Metrics（指标）**\nToken 用量、API 延迟、工具执行时间。用于监控和告警。\n\n**3. Events（事件）**\n用户操作、错误、功能使用。用于行为分析和排查。',
             },
             {
               type: 'code',
               title: 'Feature Flags — 运行时 vs 编译时',
-              description: 'Claude Code 同时使用两种 Feature Flag 机制，它们互补。',
+              description: '两种机制互补。',
               language: 'typescript',
               code: `// ===== 编译时：Bun feature() =====
-// 条件为 false 时，代码从打包产物中完全消失
 import { feature } from 'bun:bundle'
 if (feature('EXPERIMENTAL_VOICE')) {
-  // 这段代码在没有 VOICE 功能的构建中不存在
-  enableVoiceInput()
+  enableVoiceInput()  // 不启用时代码不存在
 }
 
 // ===== 运行时：GrowthBook =====
-// 可以远程动态开关，不需要重新发布
 import { isFeatureEnabled } from './services/analytics'
 if (isFeatureEnabled('new_compact_strategy')) {
-  // 可以做 A/B 测试：50% 用户用新策略
-  useNewCompactStrategy()
+  useNewCompactStrategy()  // 可以做 A/B 测试
 } else {
   useLegacyCompactStrategy()
 }
 
-// 两者互补：
-// - 编译时：消除不需要的大块代码（减小体积）
-// - 运行时：精细控制功能开关（灵活发布）`,
+// 互补：
+// 编译时：消除大块代码（减小体积）
+// 运行时：精细控制开关（灵活发布）`,
             },
             {
               type: 'quiz',
-              question: '为什么 OpenTelemetry 要懒加载（~400KB），而不是直接内置？',
+              question: '为什么 OpenTelemetry 要懒加载（~400KB）？',
               options: [
                 'OpenTelemetry 有 bug，不稳定',
                 '不是所有用户都需要可观测性，懒加载避免影响启动速度',
-                'OpenTelemetry 需要网络连接才能工作',
+                'OpenTelemetry 需要网络连接',
                 '版权问题',
               ],
               correctIndex: 1,
               explanation:
-                '大部分用户日常使用不需要 OpenTelemetry（它主要用于 Anthropic 内部监控和企业用户）。400KB 的依赖在启动时加载会显著增加冷启动时间。懒加载确保不需要的用户零代价，需要的用户第一次使用时才付出加载成本。',
+                '大部分用户不需要 OpenTelemetry（主要用于内部监控和企业用户）。400KB 在启动时加载显著增加冷启动时间。懒加载确保不需要的用户零代价。',
+            },
+            {
+              type: 'fill-blank',
+              title: '成本追踪',
+              description: 'Claude Code 实时追踪 Token 消耗和 USD 成本。',
+              language: 'typescript',
+              template: `class CostTracker {
+  private totalInputTokens = 0
+  private totalOutputTokens = 0
+
+  trackUsage(response: APIResponse) {
+    this.totalInputTokens += response.usage.___BLANK___
+    this.totalOutputTokens += response.usage.___BLANK___
+  }
+
+  get totalCostUSD(): number {
+    return (
+      this.totalInputTokens * ___BLANK___ +
+      this.totalOutputTokens * OUTPUT_COST_PER_TOKEN
+    )
+  }
+}`,
+              blanks: ['input_tokens', 'output_tokens', 'INPUT_COST_PER_TOKEN'],
+              hints: ['API 返回的输入 token 数字段', 'API 返回的输出 token 数字段', '输入的单价常量'],
             },
           ],
         },
         {
           id: 'capstone-project',
-          title: '综合项目：设计一个 Mini Agent CLI',
+          title: '综合项目：设计 Mini Agent CLI',
           cards: [
             {
               type: 'explain',
               title: '你已经学了整个架构，现在来造一个！',
               content:
-                '基于前 9 章学到的知识，设计一个简化版的 Agent CLI。\n\n**核心需求：**\n1. 流式 LLM 交互（AsyncGenerator 模式）\n2. 3 个工具：ReadFile、WriteFile、RunCommand\n3. 工具编排：只读并行、写操作串行\n4. 基础权限：ask / allow / deny\n5. 简单的 Token 计数和超限保护\n\n**不需要实现：**\n- Ink UI（用简单的 console 即可）\n- MCP 集成\n- 多 Agent\n- 上下文压缩\n\n目标是理解核心循环，而不是复制完整系统。',
+                '基于前 9 章知识，设计一个简化版 Agent CLI。\n\n**核心需求：**\n1. 流式 LLM 交互（AsyncGenerator）\n2. 3 个工具：ReadFile、WriteFile、RunCommand\n3. 工具编排：只读并行、写操作串行\n4. 基础权限：ask / allow / deny\n5. 简单 Token 计数和超限保护\n\n**不需要：**\n- Ink UI（用简单的 console）\n- MCP 集成\n- 多 Agent\n- 上下文压缩',
             },
             {
               type: 'task',
               title: '架构蓝图设计',
               instruction:
-                '在纸上（或文档中）设计你的 Mini Agent CLI 架构。包含以下模块的接口定义和交互关系：\n\n1. **Tool Interface** — 定义 Tool 类型（参考 Ch3）\n2. **QueryEngine** — LLM 交互循环（参考 Ch2）\n3. **ToolOrchestrator** — 工具调度（参考 Ch4）\n4. **PermissionChecker** — 权限检查（参考 Ch5）\n5. **TokenCounter** — Token 计数（参考 Ch7）',
+                '设计你的 Mini Agent CLI 架构。定义以下模块的接口和交互关系：\n\n1. **Tool Interface** — 参考 Ch3\n2. **QueryEngine** — 参考 Ch2\n3. **ToolOrchestrator** — 参考 Ch4\n4. **PermissionChecker** — 参考 Ch5\n5. **TokenCounter** — 参考 Ch7',
               checklist: [
                 '定义 Tool 接口（name, inputSchema, isConcurrencySafe, execute）',
-                '设计 QueryEngine 的主循环（input → API → tool calls → results → loop）',
-                '实现 ToolOrchestrator 的分区逻辑',
-                '实现 PermissionChecker 的 allow/deny/ask 三种结果',
-                '实现 TokenCounter 的阈值告警',
+                '设计 QueryEngine 主循环（input → API → tools → results → loop）',
+                '实现 ToolOrchestrator 分区逻辑',
+                '实现 PermissionChecker 的 allow/deny/ask',
+                '实现 TokenCounter 阈值告警',
                 '画出模块间的依赖关系图',
               ],
-              tip: '先定义接口，再实现。TypeScript 的类型系统会帮你验证模块间的连接是否正确。',
+              tip: '先定义接口，再实现。TypeScript 的类型系统帮你验证模块间连接是否正确。',
             },
             {
               type: 'ai-prompt',
               title: '让 AI 帮你搭建脚手架',
-              scenario: '你已经设计好了架构蓝图，现在让 AI 帮你生成初始代码框架。',
+              scenario: '架构设计好了，让 AI 生成初始代码框架。',
               prompt:
-                '基于以下架构设计，用 TypeScript 生成一个 Mini Agent CLI 的代码框架：\n\n1. Tool 接口：{ name, inputSchema (Zod), isConcurrencySafe(input), execute(input, context) }\n2. 三个工具实现：ReadFileTool, WriteFileTool, RunCommandTool\n3. ToolOrchestrator：分区策略（连续只读并行，写操作串行）\n4. QueryEngine：主循环（使用 AsyncGenerator，支持流式工具执行）\n5. PermissionChecker：简单的 allow/deny/ask 逻辑\n\n要求：只生成类型定义和函数签名，具体实现留空（用 TODO 注释标记）。使用 Zod v4 做输入校验。',
+                '基于以下设计，用 TypeScript 生成 Mini Agent CLI 的代码框架：\n\n1. Tool 接口：{ name, inputSchema (Zod), isConcurrencySafe(input), execute(input, context) }\n2. 三个工具：ReadFileTool, WriteFileTool, RunCommandTool\n3. ToolOrchestrator：分区策略（连续只读并行，写操作串行）\n4. QueryEngine：主循环（AsyncGenerator，流式工具执行）\n5. PermissionChecker：简单 allow/deny/ask\n\n要求：只要类型定义和函数签名，实现留空（TODO 注释）。使用 Zod v4。',
               explanation:
-                '这个提示词明确了：技术栈（TypeScript + Zod v4）、架构模式（接口定义）、具体需求（5 个模块）、输出要求（只要框架不要实现）。这样 AI 生成的代码是可控的、可审查的。',
+                '提示词明确了技术栈、架构模式、具体需求、输出要求。AI 生成的代码是可控的、可审查的脚手架。',
             },
             {
               type: 'think-first',
               question: '回顾整个课程：Claude Code 架构中最让你印象深刻的设计决策是什么？如果让你重新设计，你会改什么？',
-              hints: '没有标准答案。想想：并行预取、AST 安全检查、Agent Swarm、MCP 标准化、YOLO 分类器……',
+              hints: '没有标准答案。想想并行预取、AST 安全检查、Agent Swarm、MCP 标准化、YOLO 分类器……',
               reveal:
-                '一些值得反思的点：\n\n**最精妙的设计**：\n- isConcurrencySafe(input) — 基于输入而非工具类型判断并发安全\n- Tombstone 消息 — 软删除保留因果链\n- 编译时 + 运行时 Feature Flag 互补\n\n**可能的改进方向**：\n- main.tsx 803KB 太大，可以拆分模块\n- 权限系统的 6 种模式对用户可能太复杂\n- MCP 资源全量预取在 Server 很多时可能拖慢启动\n\n**核心启示**：\n生产级 AI Agent 系统的复杂性不在 LLM 调用本身，而在于围绕它构建的**安全、性能、可扩展性**基础设施。',
+                '一些值得反思的点：\n\n**最精妙的设计**：\n- `isConcurrencySafe(input)` — 基于输入判断并发安全\n- Tombstone 消息 — 软删除保留因果链\n- 编译时 + 运行时 Feature Flag 互补\n\n**可能的改进**：\n- main.tsx 803KB 太大，可以拆分\n- 6 种权限模式对用户可能太复杂\n- MCP 资源全量预取在 Server 很多时可能拖慢启动\n\n**核心启示**：\n生产级 AI Agent 的复杂性不在 LLM 调用本身，而在于围绕它构建的**安全、性能、可扩展性**基础设施。',
+            },
+          ],
+        },
+        {
+          id: 'course-summary',
+          title: '课程总结与进阶方向',
+          cards: [
+            {
+              type: 'explain',
+              title: '十章核心要点回顾',
+              content:
+                '**Ch1 启动优化**: 并行预取、懒加载、Dead Code Elimination\n**Ch2 Query Engine**: 消息类型、System Prompt 组装、流式交互\n**Ch3 工具系统**: Tool 接口、Zod schema、BashTool AST 安全\n**Ch4 工具编排**: 分区策略、并行/串行、有序输出\n**Ch5 权限系统**: 六种模式、四层防线、YOLO 分类器\n**Ch6 状态管理**: 自实现 Store、70+ Hooks、Ink 终端 UI\n**Ch7 上下文压缩**: 四种策略、自动触发、保留决策删除细节\n**Ch8 多 Agent**: Coordinator/Worker、黑板模式、隔离机制\n**Ch9 扩展系统**: Plugin/Skill/MCP 三层架构\n**Ch10 可观测性**: OpenTelemetry、Feature Flags、成本追踪',
+            },
+            {
+              type: 'task',
+              title: '进阶学习路线',
+              instruction:
+                '完成本课程后的进阶方向：\n\n**方向 1: 源码贡献**\n找到 Claude Code 的一个小 bug 或改进点，提交 PR。\n\n**方向 2: 构建自己的 Agent**\n用学到的架构模式，构建一个面向特定领域的 Agent CLI。\n\n**方向 3: MCP 生态**\n为你的常用工具/服务创建 MCP Server，扩展 Claude Code 能力。',
+              checklist: [
+                '选择一个进阶方向',
+                '制定 2 周的学习计划',
+                '完成 Mini Agent CLI 综合项目',
+                '分享你的学习成果',
+              ],
+              tip: '最好的学习方式是造东西。选一个你真正会用到的场景来实践。',
             },
           ],
         },
