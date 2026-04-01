@@ -266,6 +266,119 @@ const mcpArchSvg = `
   </g>
 </svg>`
 
+const cacheRetryFlowSvg = `
+<svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;width:100%">
+  <style>
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .s1{animation:fadeIn .4s ease .2s both}
+    .s2{animation:fadeIn .4s ease .6s both}
+    .s3{animation:fadeIn .4s ease 1s both}
+    .s4{animation:fadeIn .4s ease 1.4s both}
+    .s5{animation:fadeIn .4s ease 1.8s both}
+  </style>
+  <g class="s1">
+    <rect x="10" y="10" width="110" height="40" rx="8" fill="#6366f1"/>
+    <text x="65" y="35" text-anchor="middle" font-family="sans-serif" font-size="12" fill="white">API 调用</text>
+  </g>
+  <g class="s2">
+    <line x1="120" y1="30" x2="155" y2="30" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowR)"/>
+    <rect x="155" y="10" width="100" height="40" rx="8" fill="#ef4444"/>
+    <text x="205" y="28" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">529 容量</text>
+    <text x="205" y="42" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#fecaca">过载</text>
+  </g>
+  <g class="s3">
+    <line x1="255" y1="30" x2="290" y2="30" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowR)"/>
+    <rect x="290" y="5" width="110" height="50" rx="8" fill="#f59e0b"/>
+    <text x="345" y="25" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">指数退避</text>
+    <text x="345" y="42" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#fef3c7">1s→2s→4s→8s</text>
+  </g>
+  <g class="s4">
+    <line x1="345" y1="55" x2="345" y2="85" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowR)"/>
+    <rect x="280" y="85" width="130" height="40" rx="8" fill="#ef4444"/>
+    <text x="345" y="110" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">连续 3 次 529</text>
+  </g>
+  <g class="s5">
+    <line x1="345" y1="125" x2="345" y2="155" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowR)"/>
+    <rect x="270" y="155" width="150" height="40" rx="8" fill="#10b981"/>
+    <text x="345" y="180" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">Fallback Model</text>
+  </g>
+  <rect x="10" y="70" width="200" height="80" rx="6" fill="none" stroke="#475569" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="110" y="90" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">前台 vs 后台</text>
+  <text x="20" y="110" font-family="sans-serif" font-size="9" fill="#6366f1">● 前台 (REPL): 重试 529</text>
+  <text x="20" y="130" font-family="sans-serif" font-size="9" fill="#94a3b8">● 后台 (摘要): 不重试 529</text>
+  <defs><marker id="arrowR" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>`
+
+const memorySideQuerySvg = `
+<svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;width:100%">
+  <style>
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .s1{animation:fadeIn .5s ease .2s both}
+    .s2{animation:fadeIn .5s ease .7s both}
+    .s3{animation:fadeIn .5s ease 1.2s both}
+    .s4{animation:fadeIn .5s ease 1.7s both}
+    .s5{animation:fadeIn .5s ease 2.2s both}
+  </style>
+  <g class="s1">
+    <rect x="10" y="10" width="120" height="35" rx="6" fill="#6366f1"/>
+    <text x="70" y="32" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">用户提问</text>
+  </g>
+  <g class="s2">
+    <line x1="130" y1="27" x2="165" y2="27" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowM)"/>
+    <rect x="165" y="5" width="140" height="45" rx="6" fill="#0ea5e9"/>
+    <text x="235" y="24" text-anchor="middle" font-family="sans-serif" font-size="10" fill="white">Side Query</text>
+    <text x="235" y="40" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#bae6fd">(Sonnet 快速筛选)</text>
+  </g>
+  <g class="s3">
+    <line x1="235" y1="50" x2="235" y2="75" stroke="#94a3b8" stroke-width="1.5"/>
+    <rect x="155" y="75" width="160" height="80" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="235" y="95" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#f59e0b">MEMORY.md (索引)</text>
+    <text x="235" y="115" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#94a3b8">user_role.md</text>
+    <text x="235" y="130" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#94a3b8">feedback_*.md</text>
+    <text x="235" y="145" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#94a3b8">project_*.md</text>
+  </g>
+  <g class="s4">
+    <line x1="315" y1="115" x2="355" y2="115" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrowM)"/>
+    <rect x="355" y="95" width="130" height="40" rx="6" fill="#10b981"/>
+    <text x="420" y="112" text-anchor="middle" font-family="sans-serif" font-size="10" fill="white">≤5 条相关记忆</text>
+    <text x="420" y="127" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#bbf7d0">注入 System Prompt</text>
+  </g>
+  <g class="s5">
+    <text x="250" y="190" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">全量 MEMORY.md ≤ 200 行 | 每条记忆有 frontmatter 描述</text>
+    <text x="250" y="208" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#94a3b8">筛选依据: description 字段 + 当前问题的语义匹配</text>
+  </g>
+  <defs><marker id="arrowM" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>`
+
+const memoizeTTLSvg = `
+<svg viewBox="0 0 480 180" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;width:100%">
+  <style>
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .s1{animation:fadeIn .4s ease .2s both}
+    .s2{animation:fadeIn .4s ease .7s both}
+    .s3{animation:fadeIn .4s ease 1.2s both}
+  </style>
+  <g class="s1">
+    <rect x="10" y="10" width="140" height="50" rx="6" fill="#6366f1"/>
+    <text x="80" y="30" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">memoizeWithTTL</text>
+    <text x="80" y="47" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#c7d2fe">同步 + TTL 过期</text>
+  </g>
+  <g class="s2">
+    <rect x="170" y="10" width="150" height="50" rx="6" fill="#0ea5e9"/>
+    <text x="245" y="30" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">memoizeWithTTLAsync</text>
+    <text x="245" y="47" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#bae6fd">异步 + in-flight 去重</text>
+  </g>
+  <g class="s3">
+    <rect x="340" y="10" width="130" height="50" rx="6" fill="#10b981"/>
+    <text x="405" y="30" text-anchor="middle" font-family="sans-serif" font-size="11" fill="white">memoizeWithLRU</text>
+    <text x="405" y="47" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#bbf7d0">LRU 驱逐 (max 100)</text>
+  </g>
+  <text x="10" y="90" font-family="sans-serif" font-size="10" fill="#f59e0b">核心问题:</text>
+  <text x="10" y="110" font-family="sans-serif" font-size="10" fill="#94a3b8">● TTL 过期后第一个调用者触发刷新，其他调用者拿到旧值 (stale-while-revalidate)</text>
+  <text x="10" y="130" font-family="sans-serif" font-size="10" fill="#94a3b8">● Async 版本: 多个 caller 同时 miss → 只触发一次底层调用 (in-flight dedup)</text>
+  <text x="10" y="150" font-family="sans-serif" font-size="10" fill="#94a3b8">● cache.clear() 竞争: .then() 中检查 identity，防止旧 promise 覆盖新值</text>
+</svg>`
+
 const extensionLayersSvg = `
 <svg viewBox="0 0 460 180" xmlns="http://www.w3.org/2000/svg" style="max-width:460px;width:100%">
   <style>
@@ -1187,6 +1300,46 @@ const editPermissions: Record<PermissionMode, Behavior> = {
               analogy: '就像银行：门禁卡 + 密码 + 指纹 + 监控。破解一道容易，同时破解四道几乎不可能。',
             },
             {
+              type: 'code',
+              title: '23 项安全检查 — 你想不到的攻击向量',
+              description: 'bashSecurity.ts 实际包含 23 个检查 ID，覆盖了大量边缘攻击。',
+              language: 'typescript',
+              code: `// bashSecurity.ts 中的检查项（精选）
+const SECURITY_CHECKS = [
+  // 引号剥离攻击
+  'unquoted_content_extraction',
+  // Zsh 专属危险命令（13 个！）
+  'zsh_dangerous_commands',  // zmodload, emulate, sysopen,
+                             // zpty, ztcp...
+  // 命令替换的各种变体
+  'dollar_paren',    // $(...)
+  'dollar_brace',    // \${...}
+  'backtick',        // \`...\`
+  'process_sub',     // <(...) >(...)
+  'zsh_equals_sub',  // =()
+  // 其他攻击向量
+  'ifs_injection',        // IFS 变量注入
+  'proc_environ_access',  // /proc/*/environ 读取
+  'brace_expansion',      // {a,b,c} 展开
+  'control_characters',   // 不可见控制字符
+  'unicode_whitespace',   // Unicode 伪空格
+  'git_commit_sub',       // git commit 消息中的命令替换
+]`,
+            },
+            {
+              type: 'quiz',
+              question: '为什么 Claude Code 要检查 Zsh 专属命令（如 zmodload），明明 CLI 是用 Bash 执行的？',
+              options: [
+                '因为 Zsh 比 Bash 更常用',
+                '因为用户的默认 shell 可能是 Zsh，某些场景下会调用 Zsh',
+                '纯粹是防御性编程，以防未来支持 Zsh',
+                '因为 Zsh 命令可以在 Bash 中通过插件执行',
+              ],
+              correctIndex: 1,
+              explanation:
+                '在 macOS 上，默认 shell 是 Zsh。Claude Code 检测用户 shell 并可能使用它。Zsh 的 zmodload 可以加载内核模块级功能（网络、文件系统），zpty 可以创建伪终端。这些在 Bash 中不存在的能力是全新的攻击面。',
+            },
+            {
               type: 'task',
               title: '阅读源码：权限系统',
               instruction:
@@ -2023,6 +2176,48 @@ if (isFeatureEnabled('new_compact_strategy')) {
               blanks: ['input_tokens', 'output_tokens', 'INPUT_COST_PER_TOKEN'],
               hints: ['API 返回的输入 token 数字段', 'API 返回的输出 token 数字段', '输入的单价常量'],
             },
+            {
+              type: 'code',
+              title: 'Per-Model 定价与 Fast Mode 乘数',
+              description: '不同模型价格差异巨大，Fast Mode 更是 6 倍。',
+              language: 'typescript',
+              code: `// 定价层级
+const PRICING_TIERS = {
+  // Haiku: $1/$5 per 1M tokens
+  COST_TIER_1_5: { input: 1, output: 5 },
+  // Sonnet: $3/$15
+  COST_TIER_3_15: { input: 3, output: 15 },
+  // Opus: $15/$75
+  COST_TIER_15_75: { input: 15, output: 75 },
+  // Opus Fast Mode: 6× normal!
+  COST_TIER_30_150: { input: 30, output: 150 },
+}
+
+// Cache 命中单独计费
+function calculateCost(usage: Usage, tier: PricingTier) {
+  return (
+    usage.inputTokens * tier.input / 1_000_000 +
+    usage.outputTokens * tier.output / 1_000_000 +
+    // Cache 创建 = 25% of input cost
+    usage.cacheCreation * tier.input * 0.25 / 1_000_000 +
+    // Cache 读取 = 10% of input cost
+    usage.cacheRead * tier.input * 0.10 / 1_000_000
+  )
+}`,
+            },
+            {
+              type: 'quiz',
+              question: 'Opus Fast Mode 的成本是普通 Opus 的多少倍？',
+              options: [
+                '2 倍',
+                '3 倍',
+                '6 倍 (input: $30, output: $150 per 1M)',
+                '10 倍',
+              ],
+              correctIndex: 2,
+              explanation:
+                'Fast Mode 使用同一个 Opus 模型但优先处理，输入从 $15 涨到 $30，输出从 $75 涨到 $150，整整 6 倍。这就是为什么 /cost 命令对成本敏感的用户如此重要。',
+            },
           ],
         },
         {
@@ -2031,22 +2226,23 @@ if (isFeatureEnabled('new_compact_strategy')) {
           cards: [
             {
               type: 'explain',
-              title: '你已经学了整个架构，现在来造一个！',
+              title: '学了 12 章架构，现在来造一个！',
               content:
-                '基于前 9 章知识，设计一个简化版 Agent CLI。\n\n**核心需求：**\n1. 流式 LLM 交互（AsyncGenerator）\n2. 3 个工具：ReadFile、WriteFile、RunCommand\n3. 工具编排：只读并行、写操作串行\n4. 基础权限：ask / allow / deny\n5. 简单 Token 计数和超限保护\n\n**不需要：**\n- Ink UI（用简单的 console）\n- MCP 集成\n- 多 Agent\n- 上下文压缩',
+                '基于全部 12 章知识，设计一个简化版 Agent CLI。\n\n**核心需求：**\n1. 流式 LLM 交互（AsyncGenerator）\n2. 3 个工具：ReadFile、WriteFile、RunCommand\n3. 工具编排：只读并行、写操作串行\n4. 基础权限：ask / allow / deny\n5. 简单 Token 计数和超限保护\n6. Memoize + TTL 缓存层 (Ch11)\n7. 简单的 KV 记忆存储 (Ch12)',
             },
             {
               type: 'task',
               title: '架构蓝图设计',
               instruction:
-                '设计你的 Mini Agent CLI 架构。定义以下模块的接口和交互关系：\n\n1. **Tool Interface** — 参考 Ch3\n2. **QueryEngine** — 参考 Ch2\n3. **ToolOrchestrator** — 参考 Ch4\n4. **PermissionChecker** — 参考 Ch5\n5. **TokenCounter** — 参考 Ch7',
+                '设计你的 Mini Agent CLI 架构。定义以下模块的接口和交互关系：\n\n1. **Tool Interface** — 参考 Ch3\n2. **QueryEngine** — 参考 Ch2\n3. **ToolOrchestrator** — 参考 Ch4\n4. **PermissionChecker** — 参考 Ch5\n5. **TokenCounter** — 参考 Ch7\n6. **RetryWithBackoff** — 参考 Ch11\n7. **MemoryStore** — 参考 Ch12',
               checklist: [
                 '定义 Tool 接口（name, inputSchema, isConcurrencySafe, execute）',
                 '设计 QueryEngine 主循环（input → API → tools → results → loop）',
                 '实现 ToolOrchestrator 分区逻辑',
                 '实现 PermissionChecker 的 allow/deny/ask',
                 '实现 TokenCounter 阈值告警',
-                '画出模块间的依赖关系图',
+                '实现 memoizeWithTTLAsync（带 in-flight 去重）',
+                '实现 Memory 读写和相关性筛选',
               ],
               tip: '先定义接口，再实现。TypeScript 的类型系统帮你验证模块间连接是否正确。',
             },
@@ -2055,16 +2251,16 @@ if (isFeatureEnabled('new_compact_strategy')) {
               title: '让 AI 帮你搭建脚手架',
               scenario: '架构设计好了，让 AI 生成初始代码框架。',
               prompt:
-                '基于以下设计，用 TypeScript 生成 Mini Agent CLI 的代码框架：\n\n1. Tool 接口：{ name, inputSchema (Zod), isConcurrencySafe(input), execute(input, context) }\n2. 三个工具：ReadFileTool, WriteFileTool, RunCommandTool\n3. ToolOrchestrator：分区策略（连续只读并行，写操作串行）\n4. QueryEngine：主循环（AsyncGenerator，流式工具执行）\n5. PermissionChecker：简单 allow/deny/ask\n\n要求：只要类型定义和函数签名，实现留空（TODO 注释）。使用 Zod v4。',
+                '基于以下设计，用 TypeScript 生成 Mini Agent CLI 的代码框架：\n\n1. Tool 接口：{ name, inputSchema (Zod), isConcurrencySafe(input), execute(input, context) }\n2. 三个工具：ReadFileTool, WriteFileTool, RunCommandTool\n3. ToolOrchestrator：分区策略（连续只读并行，写操作串行）\n4. QueryEngine：主循环（AsyncGenerator，流式工具执行）\n5. PermissionChecker：简单 allow/deny/ask\n6. RetryWithBackoff：指数退避 + model fallback\n7. MemoryStore：frontmatter 索引 + 相关性筛选\n\n要求：只要类型定义和函数签名，实现留空（TODO 注释）。使用 Zod v4。',
               explanation:
                 '提示词明确了技术栈、架构模式、具体需求、输出要求。AI 生成的代码是可控的、可审查的脚手架。',
             },
             {
               type: 'think-first',
               question: '回顾整个课程：Claude Code 架构中最让你印象深刻的设计决策是什么？如果让你重新设计，你会改什么？',
-              hints: '没有标准答案。想想并行预取、AST 安全检查、Agent Swarm、MCP 标准化、YOLO 分类器……',
+              hints: '没有标准答案。想想并行预取、AST 安全检查、in-flight 去重、记忆 Side Query、Agent Swarm……',
               reveal:
-                '一些值得反思的点：\n\n**最精妙的设计**：\n- `isConcurrencySafe(input)` — 基于输入判断并发安全\n- Tombstone 消息 — 软删除保留因果链\n- 编译时 + 运行时 Feature Flag 互补\n\n**可能的改进**：\n- main.tsx 803KB 太大，可以拆分\n- 6 种权限模式对用户可能太复杂\n- MCP 资源全量预取在 Server 很多时可能拖慢启动\n\n**核心启示**：\n生产级 AI Agent 的复杂性不在 LLM 调用本身，而在于围绕它构建的**安全、性能、可扩展性**基础设施。',
+                '一些值得反思的点：\n\n**最精妙的设计**：\n- `isConcurrencySafe(input)` — 基于输入判断并发安全\n- memoizeWithTTLAsync 的 identity guard — 防止 cache.clear() 竞争\n- Memory Side Query — 用小模型筛选记忆，不污染主上下文\n- 容量感知重试 — 区分前台/后台的 529 处理\n\n**可能的改进**：\n- main.tsx 803KB 太大，可以拆分\n- 6 种权限模式对用户可能太复杂\n- MCP 资源全量预取在 Server 很多时可能拖慢启动\n\n**核心启示**：\n生产级 AI Agent 的复杂性不在 LLM 调用本身，而在于围绕它构建的**缓存、记忆、安全、容错**基础设施。',
             },
           ],
         },
@@ -2074,15 +2270,15 @@ if (isFeatureEnabled('new_compact_strategy')) {
           cards: [
             {
               type: 'explain',
-              title: '十章核心要点回顾',
+              title: '十二章核心要点回顾',
               content:
-                '**Ch1 启动优化**: 并行预取、懒加载、Dead Code Elimination\n**Ch2 Query Engine**: 消息类型、System Prompt 组装、流式交互\n**Ch3 工具系统**: Tool 接口、Zod schema、BashTool AST 安全\n**Ch4 工具编排**: 分区策略、并行/串行、有序输出\n**Ch5 权限系统**: 六种模式、四层防线、YOLO 分类器\n**Ch6 状态管理**: 自实现 Store、70+ Hooks、Ink 终端 UI\n**Ch7 上下文压缩**: 四种策略、自动触发、保留决策删除细节\n**Ch8 多 Agent**: Coordinator/Worker、黑板模式、隔离机制\n**Ch9 扩展系统**: Plugin/Skill/MCP 三层架构\n**Ch10 可观测性**: OpenTelemetry、Feature Flags、成本追踪',
+                '**Ch1 启动优化**: 并行预取、懒加载、Dead Code Elimination\n**Ch2 Query Engine**: 消息类型、System Prompt 组装、流式交互\n**Ch3 工具系统**: Tool 接口、Zod schema、BashTool AST 安全\n**Ch4 工具编排**: 分区策略、并行/串行、有序输出\n**Ch5 权限系统**: 六种模式、四层防线、YOLO 分类器\n**Ch6 状态管理**: 自实现 Store、70+ Hooks、Ink 终端 UI\n**Ch7 上下文压缩**: 四种策略、自动触发、保留决策删除细节\n**Ch8 多 Agent**: Coordinator/Worker、黑板模式、隔离机制\n**Ch9 扩展系统**: Plugin/Skill/MCP 三层架构\n**Ch10 可观测性**: OpenTelemetry、Feature Flags、成本追踪\n**Ch11 缓存与重试**: TTL 缓存、in-flight 去重、容量感知退避\n**Ch12 记忆系统**: 持久化记忆、Side Query 筛选、跨会话上下文',
             },
             {
               type: 'task',
               title: '进阶学习路线',
               instruction:
-                '完成本课程后的进阶方向：\n\n**方向 1: 源码贡献**\n找到 Claude Code 的一个小 bug 或改进点，提交 PR。\n\n**方向 2: 构建自己的 Agent**\n用学到的架构模式，构建一个面向特定领域的 Agent CLI。\n\n**方向 3: MCP 生态**\n为你的常用工具/服务创建 MCP Server，扩展 Claude Code 能力。',
+                '完成本课程后的进阶方向：\n\n**方向 1: 源码运行**\n克隆可编译版仓库 (claude-code-best/claude-code)，本地 `bun run dev` 运行，边改边学。\n\n**方向 2: 构建自己的 Agent**\n用学到的架构模式，构建一个面向特定领域的 Agent CLI。\n\n**方向 3: MCP 生态**\n为你的常用工具/服务创建 MCP Server，扩展 Claude Code 能力。',
               checklist: [
                 '选择一个进阶方向',
                 '制定 2 周的学习计划',
@@ -2090,6 +2286,487 @@ if (isFeatureEnabled('new_compact_strategy')) {
                 '分享你的学习成果',
               ],
               tip: '最好的学习方式是造东西。选一个你真正会用到的场景来实践。',
+            },
+          ],
+        },
+      ],
+    },
+
+    // =============================================
+    // 第十一章：缓存与重试
+    // =============================================
+    {
+      id: 'ch11-cache-retry',
+      title: '第十一章：缓存与重试 — 生产级容错',
+      lessons: [
+        {
+          id: 'memoize-patterns',
+          title: '三种 Memoize 模式',
+          cards: [
+            {
+              type: 'explain',
+              title: '上章回顾',
+              content: '第十章学了可观测性：OpenTelemetry 三支柱、编译时+运行时 Feature Flag、成本追踪。现在深入看两个在教科书中很少见但在生产中极其关键的话题：缓存和重试。',
+            },
+            {
+              type: 'diagram',
+              title: '三种 Memoize 策略',
+              description: 'TTL 过期、异步去重、LRU 驱逐 — 不同场景用不同策略',
+              svg: memoizeTTLSvg,
+            },
+            {
+              type: 'code',
+              title: 'memoizeWithTTLAsync — 最精妙的缓存',
+              description: '异步缓存 + TTL + in-flight 去重。注意 identity guard 防止竞争条件。',
+              language: 'typescript',
+              code: `function memoizeWithTTLAsync<T>(
+  fn: () => Promise<T>,
+  ttlMs: number
+) {
+  let cached: { value: T; expiry: number } | null = null
+  let inflight: Promise<T> | null = null  // 去重关键
+
+  return async (): Promise<T> => {
+    // 1. 缓存有效，直接返回
+    if (cached && Date.now() < cached.expiry) {
+      return cached.value
+    }
+
+    // 2. 已有正在进行的请求，复用它
+    if (inflight) return inflight
+
+    // 3. 发起新请求（只有第一个 caller 走到这里）
+    const staleRef = cached  // identity guard
+    inflight = fn().then(value => {
+      // 如果 cache 被 clear 了，staleRef !== cached
+      // 此时不要覆盖！
+      if (cached === staleRef) {
+        cached = { value, expiry: Date.now() + ttlMs }
+      }
+      inflight = null
+      return value
+    })
+    return inflight
+  }
+}`,
+            },
+            {
+              type: 'think-first',
+              question: '为什么 `.then()` 中要检查 `cached === staleRef`？如果不检查会怎样？',
+              hints: '想想这个时序：caller A 触发请求 → cache.clear() 被调用 → caller B 触发新请求 → caller A 的 .then() 回来了',
+              reveal:
+                '不检查的话会发生：\n\n1. Caller A 触发请求（inflight = promiseA）\n2. 某处调用 cache.clear()，cached = null\n3. Caller B 来了，没有缓存也没有 inflight，触发 **新请求**（inflight = promiseB）\n4. PromiseA 完成，写入 cached = { valueA, ... }\n5. PromiseB 完成，写入 cached = { valueB, ... }\n\n如果 valueA 是旧的（clear 之前的），它会**覆盖** valueB！\n\n`staleRef` 检查确保：只有当 cache 状态**没被改过**时，才写入。如果 cache 被 clear 或被其他请求更新了，旧 promise 的结果会被静默丢弃。\n\n这是一个经典的 **Compare-And-Swap (CAS)** 模式在 JavaScript 中的应用。',
+            },
+            {
+              type: 'quiz',
+              question: 'Stale-While-Revalidate 模式的核心思想是什么？',
+              options: [
+                '缓存过期后等新数据再返回',
+                '缓存过期后先返回旧数据，同时后台刷新',
+                '永远不过期，手动清除',
+                '每次都请求新数据，缓存只做备份',
+              ],
+              correctIndex: 1,
+              explanation:
+                'Stale-While-Revalidate: 第一个发现缓存过期的 caller 拿到**旧值**（stale），同时在后台触发刷新（revalidate）。后续 caller 拿到刷新后的新值。牺牲第一个 caller 的新鲜度，换取零延迟返回。HTTP Cache-Control 头也有这个策略。',
+            },
+            {
+              type: 'fill-blank',
+              title: 'LRU 缓存的驱逐逻辑',
+              description: 'LRU（Least Recently Used）缓存只保留最近使用的条目。',
+              language: 'typescript',
+              template: `function memoizeWithLRU<K, V>(
+  fn: (key: K) => V,
+  maxSize: number = ___BLANK___
+) {
+  const cache = new Map<K, V>()
+
+  return (key: K): V => {
+    if (cache.has(key)) {
+      const value = cache.get(key)!
+      // LRU 关键：访问时移到末尾
+      cache.___BLANK___(key)
+      cache.set(key, value)
+      return value
+    }
+    const value = fn(key)
+    cache.set(key, value)
+    // 超过上限时删除最旧的
+    if (cache.size > maxSize) {
+      const oldest = cache.keys().___BLANK___
+      cache.delete(oldest.value)
+    }
+    return value
+  }
+}`,
+              blanks: ['100', 'delete', 'next()'],
+              hints: ['Claude Code 中 LRU 的默认上限', 'Map 中删除一个 key', 'Iterator 获取第一个元素'],
+            },
+          ],
+        },
+        {
+          id: 'retry-with-backoff',
+          title: '容量感知重试',
+          cards: [
+            {
+              type: 'diagram',
+              title: 'API 重试流程',
+              description: '529 容量错误 → 指数退避 → 3 次后 Fallback Model',
+              svg: cacheRetryFlowSvg,
+            },
+            {
+              type: 'explain',
+              title: '不是所有错误都应该重试',
+              content:
+                'Claude Code 的重试策略精细区分错误类型：\n\n**重试**: 529（容量过载）、500（服务器错误）、网络超时\n**不重试**: 400（请求错误）、401（认证失效→刷新凭证）、403（权限不足）\n\n更关键的区分：**前台 vs 后台**\n- 前台（用户在等）: 重试 529，用户看到"等待中"提示\n- 后台（自动摘要）: 不重试 529，静默放弃\n\n因为后台任务不值得让用户多等。',
+            },
+            {
+              type: 'code',
+              title: '指数退避 + Model Fallback',
+              description: '连续 3 次 529 会触发切换到备用模型。',
+              language: 'typescript',
+              code: `async function withRetry<T>(
+  fn: () => Promise<T>,
+  config: RetryConfig
+): Promise<T> {
+  let consecutive529 = 0
+  let delay = 1000  // 起始 1 秒
+
+  for (let attempt = 0; attempt < config.maxAttempts; attempt++) {
+    try {
+      const result = await fn()
+      consecutive529 = 0  // 成功则重置计数
+      return result
+    } catch (error) {
+      if (error.status === 529) {
+        consecutive529++
+
+        // 连续 3 次 529 → 切换模型
+        if (consecutive529 >= 3 && config.fallbackModel) {
+          throw new FallbackTriggeredError(
+            config.fallbackModel
+          )
+        }
+
+        // 只有前台请求才重试
+        if (!config.isForeground) throw error
+
+        // 指数退避: 1s → 2s → 4s → 8s (上限 5min)
+        await sleep(Math.min(delay, 300_000))
+        delay *= 2
+      } else if (error.status === 401) {
+        await refreshCredentials()  // 不算重试
+      } else {
+        throw error  // 不可重试的错误
+      }
+    }
+  }
+}`,
+            },
+            {
+              type: 'think-first',
+              question: '为什么连续 3 次 529 要切换模型而不是继续等待？直接等更长时间不行吗？',
+              hints: '想想 529 的含义 — 服务器容量不足。如果所有人都在等同一个模型呢？',
+              reveal:
+                '529 = 服务器容量不足。如果所有用户都等同一个模型，情况只会更糟（等待的人越多，队列越长，恢复越慢）。\n\n**切换到备用模型是一种"泄压"策略**：\n- 把流量从过载的模型转移走\n- 用户立即得到响应（虽然模型不同）\n- 原模型的负载减轻，更快恢复\n\n这是分布式系统中 **circuit breaker（断路器）** 模式的一个变体。核心思想：**快速失败+降级，比无限等待好**。',
+            },
+            {
+              type: 'quiz',
+              question: 'Claude Code 的 UNATTENDED_RETRY 模式（无人值守）有什么不同？',
+              options: [
+                '不重试任何错误',
+                '对 429/529 无限重试（最大退避 5min，总上限 6hr）',
+                '只重试一次然后放弃',
+                '直接切换到最便宜的模型',
+              ],
+              correctIndex: 1,
+              explanation:
+                '无人值守模式（CI/CD、定时任务等）没有用户在等，所以可以耐心等待。429（速率限制）和 529（容量）都会一直重试，退避上限 5 分钟，总共最多 6 小时。这比交互模式宽容得多。',
+            },
+            {
+              type: 'task',
+              title: '阅读源码：缓存与重试',
+              instruction:
+                '找到缓存和重试的核心实现。\n\n**关键文件**：\n- `src/utils/memoize.ts` — 三种 memoize 实现\n- `src/services/api/withRetry.ts` — 重试逻辑\n- `src/services/api/promptCacheBreakDetection.ts` — Prompt 缓存断裂检测',
+              checklist: [
+                '找到 memoizeWithTTLAsync 中的 identity guard',
+                '找到 in-flight Map 的去重逻辑',
+                '找到 529 重试的前台/后台区分',
+                '找到 FallbackTriggeredError 的处理逻辑',
+                '找到 Prompt Cache Break 的 per-field hash diff',
+              ],
+              tip: '搜索 `consecutive529` 或 `FallbackTriggered` 可以快速定位核心逻辑。',
+            },
+          ],
+        },
+        {
+          id: 'prompt-cache-detection',
+          title: 'Prompt Cache 断裂检测',
+          cards: [
+            {
+              type: 'explain',
+              title: '你知道你的 Prompt 缓存什么时候失效吗？',
+              content:
+                'Claude API 支持 Prompt Caching — 相同的 System Prompt 不需要每次都重新处理。\n\n但缓存会在很多意想不到的情况下**断裂**：\n- 改了 effort 参数\n- 加了一个 beta header\n- 某个工具的 description 变了\n- TTL 自然过期（5min/1hr）\n\n缓存断裂 = 每次请求都重新处理完整 Prompt = **成本翻倍**。\n\nClaude Code 有一个专门的检测系统来发现这些问题。',
+            },
+            {
+              type: 'code',
+              title: 'Per-Field Hash Diffing',
+              description: '缓存断裂时，生成 diff 文件精确定位哪个字段变了。',
+              language: 'typescript',
+              code: `// 追踪的字段
+type CacheState = {
+  systemPromptHash: string
+  toolSchemasHash: string      // 所有工具 schema 的聚合 hash
+  perToolHashes: Map<string, string>  // 每个工具单独 hash
+  cacheControlHash: string
+  betasHash: string
+  effortHash: string
+  extraBodyHash: string
+}
+
+function detectCacheBreak(
+  prev: CacheState,
+  curr: CacheState,
+  cacheReadTokensDrop: number
+): string | null {
+  // Token 下降不超过 2000 → 不算断裂
+  if (cacheReadTokensDrop < 2000) return null
+
+  // 逐字段对比，找到变化的字段
+  const changes: string[] = []
+  if (prev.systemPromptHash !== curr.systemPromptHash)
+    changes.push('system_prompt')
+  if (prev.toolSchemasHash !== curr.toolSchemasHash) {
+    // 进一步定位是哪个工具变了
+    for (const [name, hash] of curr.perToolHashes) {
+      if (prev.perToolHashes.get(name) !== hash)
+        changes.push(\`tool:\${name}\`)
+    }
+  }
+  if (prev.effortHash !== curr.effortHash)
+    changes.push('effort')
+
+  // 写入 .diff 文件供调试
+  return changes.length > 0
+    ? writeDiffFile(changes, prev, curr)
+    : null
+}`,
+            },
+            {
+              type: 'fill-blank',
+              title: 'Cache 命中的成本差异',
+              description: '理解 Prompt Cache 的经济价值。',
+              language: 'typescript',
+              template: `// Prompt Cache 的三种计费
+const CACHE_COSTS = {
+  // 首次写入缓存（创建缓存条目）
+  cacheCreation: inputCost * ___BLANK___,  // 25% of input
+  // 后续缓存命中（读取缓存）
+  cacheRead:     inputCost * ___BLANK___,  // 10% of input
+  // 缓存未命中（完整处理）
+  cacheMiss:     inputCost * ___BLANK___,  // 100% of input
+}
+// 缓存命中时，成本只有未命中的 ___BLANK___`,
+              blanks: ['0.25', '0.1', '1.0', '10%'],
+              hints: ['缓存创建的折扣', '缓存读取的折扣', '未命中时的完整价格', '10% vs 100%'],
+            },
+          ],
+        },
+      ],
+    },
+
+    // =============================================
+    // 第十二章：记忆系统
+    // =============================================
+    {
+      id: 'ch12-memory',
+      title: '第十二章：记忆系统 — 跨会话的智能上下文',
+      lessons: [
+        {
+          id: 'memory-architecture',
+          title: '记忆架构',
+          cards: [
+            {
+              type: 'explain',
+              title: '上章回顾',
+              content: '第十一章学了三种缓存模式（TTL/Async/LRU）、容量感知重试（前台/后台区分、model fallback）、Prompt Cache 断裂检测。最后一章看 Claude Code 如何"记住"你。',
+            },
+            {
+              type: 'diagram',
+              title: '记忆系统架构',
+              description: 'Side Query 用小模型筛选相关记忆，只注入最相关的 ≤5 条',
+              svg: memorySideQuerySvg,
+            },
+            {
+              type: 'explain',
+              title: '为什么不把所有记忆都注入 System Prompt？',
+              content:
+                '如果你用了 Claude Code 一个月，可能积累了 50+ 条记忆。\n\n全部注入的问题：\n1. **Token 浪费** — 大部分记忆和当前问题无关\n2. **注意力稀释** — LLM 在噪音中找有用信息更难\n3. **上下文挤占** — 留给实际工作的 token 更少\n\nClaude Code 的方案：**Side Query** — 用一个轻量模型（Sonnet）先筛选，只注入最相关的 ≤5 条。',
+              analogy: '就像你不会每天早上把所有笔记本都翻一遍。你会根据今天要做的事，只拿出相关的那几本。',
+            },
+            {
+              type: 'quiz',
+              question: 'Side Query 为什么用 Sonnet 而不是 Opus？',
+              options: [
+                'Sonnet 更准确',
+                'Sonnet 更快更便宜，筛选任务不需要最强模型',
+                'Opus 不支持这个功能',
+                '随机选择的',
+              ],
+              correctIndex: 1,
+              explanation:
+                '记忆筛选是一个"轻量级"任务 — 只需要理解问题和记忆描述的语义相关性。Sonnet 完全够用，而且更快（不阻塞用户）更便宜（每次会话都要执行）。用 Opus 做筛选是过度设计。',
+            },
+          ],
+        },
+        {
+          id: 'memory-storage',
+          title: '记忆存储与索引',
+          cards: [
+            {
+              type: 'code',
+              title: '记忆文件结构 — Frontmatter 索引',
+              description: '每条记忆是一个独立的 Markdown 文件，带 frontmatter 元数据。',
+              language: 'markdown',
+              code: `---
+name: evm-gateway 项目进度
+description: EVM Gateway 的开发状态、架构决策、部署信息
+type: project
+---
+
+Phase 0-4 done, auth uses SdkAuthMiddleware.
+
+**Why:** 法律合规要求重写 auth middleware。
+**How to apply:** 范围决策应优先合规而非人体工程学。`,
+            },
+            {
+              type: 'explain',
+              title: 'MEMORY.md — 索引而不是数据库',
+              content:
+                'MEMORY.md 是一个**索引文件**（≤200 行），不是记忆本身。它只包含指向具体记忆文件的链接和简短描述。\n\n为什么这样设计？\n\n1. **常驻上下文** — MEMORY.md 始终加载到会话中，必须小\n2. **快速扫描** — Side Query 只需要读索引就知道有哪些记忆\n3. **独立更新** — 修改一条记忆不影响其他记忆\n4. **防止膨胀** — 200 行硬限制，超出会被截断',
+            },
+            {
+              type: 'code',
+              title: '记忆类型系统',
+              description: '四种记忆类型，各有不同的保存时机和使用场景。',
+              language: 'typescript',
+              code: `type MemoryType =
+  | 'user'      // 用户角色、偏好、知识背景
+  | 'feedback'  // 用户对 AI 行为的修正/确认
+  | 'project'   // 项目状态、截止日期、决策
+  | 'reference' // 外部系统的指针（Linear, Slack 等）
+
+// 记忆文件的 frontmatter schema
+const memorySchema = z.object({
+  name: z.string(),
+  description: z.string(),  // Side Query 筛选的关键！
+  type: z.enum(['user', 'feedback', 'project', 'reference']),
+})
+
+// 筛选逻辑
+async function findRelevantMemories(
+  query: string,
+  allMemories: Memory[],
+  maxCount: number = 5
+): Promise<Memory[]> {
+  // 用 Sonnet 做语义匹配
+  const ranked = await sideQuery(
+    \`Given this user query: "\${query}"
+     Rank these memories by relevance:\`,
+    allMemories.map(m => m.description)
+  )
+  return ranked.slice(0, maxCount)
+}`,
+            },
+            {
+              type: 'fill-blank',
+              title: '记忆保存的两步流程',
+              description: '保存一条记忆需要写两个文件。',
+              language: 'typescript',
+              template: `async function saveMemory(memory: Memory) {
+  // Step 1: 写记忆文件（带 frontmatter）
+  const content = \`---
+name: \${memory.name}
+description: \${memory.description}
+type: \${memory.type}
+---
+
+\${memory.content}\`
+
+  await writeFile(
+    \`~/.claude/projects/\${projectId}/memory/___BLANK___\`,
+    content
+  )
+
+  // Step 2: 更新索引
+  await appendToFile(
+    \`~/.claude/projects/\${projectId}/memory/___BLANK___\`,
+    \`- [\${memory.description}](\${memory.filename})\`
+  )
+}`,
+              blanks: ['${memory.filename}', 'MEMORY.md'],
+              hints: ['记忆文件的路径', '索引文件的名称'],
+            },
+          ],
+        },
+        {
+          id: 'memory-advanced',
+          title: '高级记忆模式',
+          cards: [
+            {
+              type: 'explain',
+              title: 'Feedback 记忆 — 从错误中学习',
+              content:
+                '最有价值的记忆类型是 **feedback** — 它记录用户对 AI 行为的修正：\n\n- 用户说"别这样做" → 保存为要避免的行为\n- 用户说"就这样，很好" → 保存为应该继续的做法\n\n结构化存储：\n```\n规则本身\nWhy: 用户给出的原因\nHow to apply: 什么场景下这条规则生效\n```\n\n知道 **why** 很关键 — 它让 AI 能在边界情况下做出正确判断，而不是盲目遵守规则。',
+            },
+            {
+              type: 'think-first',
+              question: '记忆系统有一个重要原则："记忆可能过时"。Claude Code 如何处理过时的记忆？',
+              hints: '想想记忆说"文件 X 中有函数 Y"，但文件可能已经被重命名了。',
+              reveal:
+                'Claude Code 的策略是 **信任但验证**：\n\n1. 记忆提供**历史上下文**（"上次我们做了 X"）\n2. 但在**执行操作前**，必须检查当前状态：\n   - 记忆说文件在 X 路径 → 先检查文件是否存在\n   - 记忆说函数叫 Y → 先 grep 确认\n   - 当前状态和记忆冲突 → **信任当前状态，更新或删除记忆**\n\n这是一个 **"缓存验证"** 模式 — 记忆本质上是一种带有过期风险的缓存。',
+            },
+            {
+              type: 'code',
+              title: '团队记忆同步（Swarm 模式）',
+              description: '在多 Agent 协作时，Coordinator 和 Worker 共享记忆。',
+              language: 'typescript',
+              code: `// Coordinator 创建 Worker 时注入记忆
+async function spawnWorker(task: Task): Promise<Agent> {
+  // 加载与任务相关的记忆
+  const relevantMemories = await findRelevantMemories(
+    task.description,
+    await loadAllMemories()
+  )
+
+  return spawnAgent({
+    systemPrompt: task.prompt,
+    // 把相关记忆作为初始上下文传给 Worker
+    initialContext: relevantMemories.map(m =>
+      \`[Memory: \${m.name}] \${m.content}\`
+    ).join('\\n'),
+    tools: ASYNC_AGENT_ALLOWED_TOOLS,
+  })
+}
+
+// Worker 也可以创建新记忆
+// → 回传给 Coordinator
+// → Coordinator 决定是否持久化`,
+            },
+            {
+              type: 'task',
+              title: '阅读源码：记忆系统',
+              instruction:
+                '探索记忆系统的完整实现。\n\n**关键文件**：\n- `src/memdir/memdir.ts` — 记忆目录管理\n- `src/memdir/findRelevantMemories.ts` — Side Query 筛选\n- `src/memdir/memoryScan.ts` — 记忆扫描\n- `src/memdir/memoryTypes.ts` — 记忆类型定义\n- `src/services/extractMemories/` — 自动提取记忆',
+              checklist: [
+                '找到 MEMORY.md 的 200 行截断逻辑',
+                '找到 Side Query 调用 Sonnet 的代码',
+                '找到记忆类型的完整枚举（user/feedback/project/reference）',
+                '找到记忆过时检测的逻辑',
+                '找到自动提取记忆的触发条件',
+              ],
+              tip: '搜索 `findRelevantMemories` 或 `memoryScan` 作为入口。',
             },
           ],
         },
