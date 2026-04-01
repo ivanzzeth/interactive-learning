@@ -423,199 +423,211 @@ export const claudeCodeBook: Book = {
       id: 'ch1-startup',
       title: '第一章：启动与入口 — 极致的性能优化',
       lessons: [
+        // --- 1.1 ---
         {
-          id: 'startup-overview',
-          title: '启动链路概览',
+          id: 'startup-race',
+          title: '与 import 赛跑：子进程预取',
           cards: [
             {
               type: 'explain',
-              title: 'Claude Code 是什么？',
+              title: '问题：启动太慢',
               content:
-                'Claude Code 是 Anthropic 官方的 CLI 工具，让 Claude 能直接在终端中帮你写代码。\n\n它的技术栈：\n- **运行时**: Bun（比 Node.js 更快的 JS 运行时）\n- **UI**: React + Ink（在终端中渲染 React 组件）\n- **语言**: TypeScript（严格模式）\n- **规模**: ~20 万行代码，40+ 工具，50+ 命令\n\n这不是一个玩具项目，而是一个生产级的 AI Agent 系统。',
+                'Claude Code 有 20 万行 TypeScript。即使用 Bun，光解析 import 树就要 **~135ms**。\n\n在这 135ms 里 CPU 忙着解析模块，但 **I/O 通道完全空闲**。\n\n如果等 import 结束再去读 Keychain、读 MDM 配置，又要多等 50-65ms。总共 200ms 用户什么都看不到。\n\nClaude Code 的做法：**在 import 之前就发起 I/O**，让子进程在 import 期间跑完。',
             },
             {
               type: 'code',
-              title: '启动序列 — 每一毫秒都在算计',
-              description:
-                '看 `main.tsx` 最开头的代码。注意：**在任何 import 之前**就开始了 I/O 操作。',
+              title: 'main.tsx 前 20 行 — 一切从这里开始',
+              description: '这不是伪代码，这是 main.tsx 的真实开头。注意三行代码的顺序和它们各自做了什么。',
               language: 'typescript',
-              code: `// main.tsx — 文件最顶部
-profileCheckpoint('main_tsx_entry')
+              code: `// main.tsx — 第 12-20 行（真实代码）
+profileCheckpoint('main_tsx_entry')    // 打性能标记
 
-// 这两行在 import 之前执行！
-startMdmRawRead()        // 并行读取 MDM 配置
-startKeychainPrefetch()  // 并行预取 Keychain
+startMdmRawRead()        // 启动 plutil 子进程读 MDM 配置
+startKeychainPrefetch()  // 启动两个 security 子进程读 Keychain
 
-// 然后才开始 import
-import { Command } from 'commander'
+// 这三行执行完大约 5ms
+// 然后才开始 ~135ms 的 import 解析
+// 当 import 结束时，子进程已经跑完了
+
+import { Command } from '@commander-js/extra-typings'
 import { render } from 'ink'
-// ...`,
+// ... 更多 import`,
+            },
+            {
+              type: 'explain',
+              title: '深入：Keychain 预取到底做了什么',
+              content:
+                '`startKeychainPrefetch()` 做的事情很具体：\n\n1. 调用 `spawnSecurity(oauthService)` — 启动 macOS `security find-generic-password` 命令\n2. 调用 `spawnSecurity(legacyService)` — 同时启动第二个 security 命令\n3. 用 `Promise.all` 等两个都完成\n4. 把结果写入模块级变量（`prefetchPromise`）\n\n关键细节：**如果超时了怎么办？**\n\n```typescript\nresolve({\n  stdout: err ? null : stdout?.trim() || null,\n  timedOut: Boolean(err && \'killed\' in err && err.killed),\n})\n```\n\n超时不等于"密钥不存在"。所以 `timedOut: true` 时**不缓存结果**，让后续的同步路径自己重试。这是一个重要的防御性决策：**不要把"没取到"和"不存在"搞混**。',
             },
             {
               type: 'think-first',
-              question: '为什么要在 import 之前就开始读取配置和 Keychain？这违反了常规的模块加载顺序，好处是什么？',
-              hints: '想想 import 语句会做什么——它会加载并执行整个模块树。',
+              question: 'MDM 预取中有一行 `existsSync(path)` — 这是一个同步调用。为什么在追求异步性能的代码中要用同步 I/O？',
+              hints: '想想如果文件不存在，execFilePromise 会做什么。启动 plutil 子进程需要多长时间？',
               reveal:
-                'import 会递归加载整个依赖树，这可能需要几百毫秒。如果等 import 完成后再开始 I/O，这些 I/O 时间就是纯浪费。\n\n通过在 import 前启动 I/O，配置读取和 Keychain 预取可以与模块加载**并行进行**。当 import 完成时，I/O 可能已经结束了。\n\n这是一种 **"赛跑"优化** — 让 CPU 密集（模块解析）和 I/O 密集（磁盘/网络读取）同时进行。',
+                '`existsSync` 只需要 ~0.1ms（stat 系统调用），而启动 plutil 子进程需要 ~5ms。\n\n如果文件不存在（比如非企业用户没有 MDM 配置），跳过 spawn 直接省 5ms。而 existsSync 的 0.1ms 成本可以忽略。\n\n更深层的原因：**这段代码在 import 之前运行，此时 event loop 还没开始 poll**。同步调用在这里不会阻塞任何东西，因为压根没有其他异步任务在等。\n\n这是一个"在正确的位置做正确的事"的例子：同步 I/O 不是永远的坏主意，关键看上下文。',
             },
             {
               type: 'quiz',
-              question: 'Claude Code 的启动优化核心策略是什么？',
+              question: '如果 Keychain 预取超时了，Claude Code 会怎么处理？',
               options: [
-                '使用更快的编程语言',
-                '减少代码量',
-                '让 CPU 密集和 I/O 密集操作并行执行',
-                '缓存所有数据到内存',
+                '报错并退出',
+                '使用空字符串作为 API Key',
+                '不缓存超时结果，让后续同步路径重试',
+                '无限重试直到成功',
               ],
               correctIndex: 2,
               explanation:
-                '核心是并行化：在模块加载（CPU 密集）的同时进行配置读取和 Keychain 预取（I/O 密集），最大化利用等待时间。',
-            },
-            {
-              type: 'task',
-              title: '阅读源码：启动入口',
-              instruction:
-                '打开 Claude Code 源码，找到启动入口并追踪启动链路。\n\n**关键文件**：\n- `src/main.tsx` — CLI 入口，Commander.js + Ink 渲染\n- `src/entrypoints/` — 初始化入口\n- `src/bootstrap/` — 全局状态 + 启动逻辑',
-              checklist: [
-                '找到 profileCheckpoint 的所有调用点',
-                '找到 startMdmRawRead 和 startKeychainPrefetch 的定义',
-                '追踪 Commander.js 是如何注册子命令的',
-                '找到 Ink render() 的调用位置',
-              ],
-              tip: '用 grep 搜索 `profileCheckpoint` 可以快速找到所有性能打点。',
+                '超时 ≠ 密钥不存在。可能只是系统忙。所以超时时设置 timedOut: true，不写入缓存。后面的正常流程会用自己的超时时间再试一次。这叫"防御性不缓存" — 只缓存确定的结果。',
             },
           ],
         },
+        // --- 1.2 ---
         {
-          id: 'lazy-loading',
-          title: '懒加载与 Dead Code Elimination',
+          id: 'profiler-architecture',
+          title: 'profileCheckpoint：零成本性能度量',
           cards: [
             {
               type: 'explain',
-              title: '不是所有代码都需要立即加载',
+              title: '你无法优化你无法度量的东西',
               content:
-                'Claude Code 有一些很重的依赖：\n- **OpenTelemetry**: ~400KB（可观测性）\n- **gRPC**: ~700KB（通信协议）\n\n如果启动时就加载这些，用户会等很久。\n\n解决方案：**动态 import** — 只在真正需要时才加载。',
-              analogy: '就像餐厅不会一次性把所有菜都做好放桌上，而是客人点了才做。',
+                'Claude Code 的启动链路上散布着 `profileCheckpoint()` 调用。但性能度量本身也有成本 — 如果度量代码拖慢了启动，就本末倒置了。\n\n来看看它是怎么做到"零成本"的。',
             },
             {
               type: 'code',
-              title: 'Bun 的 feature() API — 编译时消除',
-              description:
-                '`feature()` 在**编译时**决定代码去留，不是运行时。未使用的代码直接从最终产物中消失。',
+              title: 'profileCheckpoint 的真实实现',
+              description: '来自 startupProfiler.ts。注意它做的事情有多少。',
               language: 'typescript',
-              code: `import { feature } from 'bun:bundle'
+              code: `// startupProfiler.ts — 第 65-75 行
+export function profileCheckpoint(name: string): void {
+  if (!SHOULD_PROFILE) return     // 大多数用户直接 return
 
-// 编译时求值 — 如果 KAIROS 为 false，
-// 整个 require 和相关代码会被完全删除
-const assistantModule = feature('KAIROS')
-  ? require('./assistant/index.js')
-  : null
+  const perf = getPerformance()
+  perf.mark(name)                 // Node 内置，~0.1ms
 
-// 运行时懒加载 — 只在需要时加载
-async function initTelemetry() {
-  const { initializeTelemetry } =
-    await import('./services/telemetry.js')
-  await initializeTelemetry()
+  if (DETAILED_PROFILING) {       // 仅 env var 开启
+    memorySnapshots.push(process.memoryUsage())
+  }
 }`,
+            },
+            {
+              type: 'explain',
+              title: '采样策略：不是所有人都被度量',
+              content:
+                '`SHOULD_PROFILE` 在模块加载时就确定了：\n\n- **Anthropic 员工**: 100% 采样（内部持续优化）\n- **外部用户**: 0.5% 采样（不影响绝大多数人）\n\n0.5% 意味着如果 Claude Code 有 100 万用户，每天有 5000 人的启动数据被上报。足够发现性能回退，又不影响 99.5% 的用户。\n\n阶段定义也很有设计感：\n\n```typescript\nconst PHASE_DEFINITIONS = {\n  import_time: [\'cli_entry\', \'main_tsx_imports_loaded\'],\n  init_time:   [\'init_function_start\', \'init_function_end\'],\n  settings_time: [\'eagerLoadSettings_start\', \'eagerLoadSettings_end\'],\n  total_time:  [\'cli_entry\', \'main_after_run\'],\n}\n```\n\n每个阶段由两个 checkpoint 的**差值**算出。不是记绝对时间，而是记相对时间。这样不同机器的时钟差异不影响分析。',
             },
             {
               type: 'quiz',
-              question: 'Bun 的 feature() 和动态 import() 的区别是什么？',
+              question: '性能采样率为什么是 0.5% 而不是 100%？',
               options: [
-                '没有区别，都是运行时加载',
-                'feature() 是编译时消除代码，import() 是运行时延迟加载',
-                'feature() 更快，import() 更慢',
-                'feature() 用于测试，import() 用于生产',
+                '技术限制，不能全量采集',
+                '全量采集会产生大量网络上报流量，拖慢启动并增加成本',
+                '0.5% 的样本量对统计分析已经足够，而且对用户几乎零影响',
+                '隐私法规限制',
               ],
-              correctIndex: 1,
+              correctIndex: 2,
               explanation:
-                'feature() 在编译时求值，false 分支的代码会从打包产物中完全删除（Dead Code Elimination）。import() 是运行时延迟加载，代码仍在产物中，只是推迟执行时机。两者互补。',
-            },
-            {
-              type: 'fill-blank',
-              title: '配置加载管道',
-              description: 'Claude Code 从多个来源加载配置，按优先级合并。补全加载顺序。',
-              language: 'typescript',
-              template: `// 配置来源优先级（从低到高）
-const configSources = [
-  '___BLANK___',     // 用户全局设置
-  '___BLANK___',     // 项目级设置
-  'localSettings',   // 本地覆盖
-  'cliArgs',         // 命令行参数
-  '___BLANK___',     // 组织策略（最高优先级）
-]`,
-              blanks: ['userSettings', 'projectSettings', 'policy'],
-              hints: ['用户主目录下的设置', '项目 .claude/ 目录下的设置', '组织级别的强制策略'],
+                '这是一个成本-收益权衡。100% 采样会让每个用户的启动都多一次网络上报。0.5% 的采样率：对 99.5% 的用户完全透明（SHOULD_PROFILE=false, 函数直接 return），但样本量足以做统计分析（每天数千条数据点）。',
             },
           ],
         },
+        // --- 1.3 ---
         {
-          id: 'config-pipeline',
-          title: '多源配置管道',
+          id: 'init-memoize',
+          title: 'init() 的 12 步启动与 memoize 守卫',
           cards: [
             {
               type: 'explain',
-              title: '上章回顾',
-              content: '前面学了启动时的并行预取和懒加载优化。现在深入看配置系统 — 它决定了 Claude Code 的所有行为参数。',
+              title: 'init() — 整个系统的启动编排器',
+              content:
+                '`entrypoints/init.ts` 中的 `init()` 函数是 Claude Code 的"总指挥"。它按精确顺序完成 12 步初始化。\n\n但首先注意一个关键细节 — 它被 **memoize** 包裹了：\n\n```typescript\nexport const init = memoize(async (): Promise<void> => {\n  // ... 338 行初始化代码\n})\n```\n\n这意味着：\n- 第一次 `await init()` → 执行全部初始化\n- 第二次 `await init()` → 直接返回同一个 Promise\n- 并发调用 `init()` → 所有 caller 共享同一个 Promise\n\n为什么需要这个？因为 init() 可能从多个入口被调用（CLI 直接启动、IDE Bridge 启动、SDK 启动），memoize 确保**只跑一次**。',
             },
             {
               type: 'code',
-              title: 'Zod Schema — 配置的守门人',
-              description: '所有配置在加载后都会经过 Zod Schema 校验，确保类型安全。',
+              title: 'init() 的 12 步（真实顺序）',
+              description: '每一步的顺序都有讲究。注意哪些是 await 的，哪些是 fire-and-forget。',
               language: 'typescript',
-              code: `import { z } from 'zod'
+              code: `export const init = memoize(async () => {
+  // 第一阶段：配置（同步，必须最先完成）
+  enableConfigs()                             // 1. 加载 config.json
+  applySafeConfigEnvironmentVariables()       // 2. 只应用安全的 env
+  applyExtraCACertsFromConfig()               // 3. TLS 证书（要早）
+  setupGracefulShutdown()                     // 4. 注册清理函数
 
-const settingsSchema = z.object({
-  // 权限模式
-  defaultMode: z.enum([
-    'default', 'plan', 'acceptEdits',
-    'auto', 'bypassPermissions'
-  ]).default('default'),
-  // 模型选择
-  model: z.string().default('claude-sonnet-4-6'),
-  // 自定义快捷键
-  keybindings: z.record(z.string()).optional(),
-  // MCP 服务器配置
-  mcpServers: z.array(mcpServerSchema).optional(),
-})
+  // 第二阶段：异步启动（全部 fire-and-forget）
+  Promise.all([initEventLogger(), initGrowthBook()])  // 5. 不 await!
+  populateOAuthAccountInfoIfNeeded()          // 6. 不 await!
+  initJetBrainsDetection()                    // 7. 不 await!
+  detectCurrentRepository()                   // 8. 不 await!
+  initializeRemoteManagedSettingsLoading()    // 9. 创建 Promise 不 await
+  initializePolicyLimitsLoading()             // 10. 创建 Promise 不 await
 
-// 加载 + 校验 + 合并
-function loadSettings(): Settings {
-  const raw = readSettingsFiles()    // 读取多个文件
-  const merged = mergeByPriority(raw) // 按优先级合并
-  return settingsSchema.parse(merged) // Zod 校验
-  // 校验失败会抛出详细错误信息
+  // 第三阶段：网络准备
+  configureGlobalMTLS()                       // 11. TLS 双向认证
+  configureGlobalAgents()                     // 12. HTTP 代理
+  preconnectAnthropicApi()                    // 13. TCP 预连接（不 await!）
+
+  // 第四阶段：清理注册
+  registerCleanup(shutdownLspServerManager)
+  registerCleanup(cleanupSessionTeams)
+})`,
+            },
+            {
+              type: 'think-first',
+              question: '注意第二阶段的 5 个调用全部没有 await。这意味着它们在后台运行，init() 不等它们完成就继续了。这安全吗？如果某个还没完成，用户就开始打字了呢？',
+              hints: '想想这些操作是做什么的：检测 JetBrains IDE、检测 git 仓库、加载 Feature Flags。它们的结果什么时候才真正被需要？',
+              reveal:
+                '**安全，因为这些结果在启动时不是必需的。**\n\n- `initGrowthBook()` — Feature Flags。还没加载完？用默认值。\n- `detectCurrentRepository()` — git 仓库信息。还没完成？等第一次需要时再 await。\n- `initJetBrainsDetection()` — IDE 检测。慢一点没关系，UI 已经可以响应了。\n\n核心原则：**只 await 阻塞性依赖**。用户看到 prompt 不需要知道 git 仓库在哪。但用户看到 prompt **必须** 知道配置（enableConfigs）和 TLS 证书（applyExtraCACerts）。\n\n所以第一阶段是同步/必须的，第二阶段是异步/尽力的。这种分层让启动时间 = 第一阶段时间，而不是所有阶段之和。',
+            },
+            {
+              type: 'code',
+              title: 'enableConfigs() — 带幂等守卫的配置加载',
+              description: '这是第 1 步的真实实现。注意幂等性检查和诊断日志。',
+              language: 'typescript',
+              code: `// utils/config.ts — 真实代码
+export function enableConfigs(): void {
+  if (configReadingAllowed) {
+    return  // 幂等：已经加载过了，直接返回
+  }
+
+  const startTime = Date.now()
+  logForDiagnosticsNoPII('info', 'enable_configs_started')
+
+  configReadingAllowed = true  // 翻转全局 flag
+
+  getConfig(
+    getGlobalClaudeFile(),       // ~/.claude/config.json
+    createDefaultGlobalConfig,   // 如果不存在就创建默认的
+    true                         // throw on invalid JSON
+  )
+
+  logForDiagnosticsNoPII('info', 'enable_configs_completed', {
+    duration_ms: Date.now() - startTime,
+  })
 }`,
+            },
+            {
+              type: 'explain',
+              title: 'configReadingAllowed 的深层含义',
+              content:
+                '`configReadingAllowed` 不只是幂等守卫。在 `enableConfigs()` 被调用之前，如果任何代码尝试读取配置，会得到一个 **警告**。\n\n为什么？因为在模块求值阶段（import 期间），代码不应该依赖配置。配置文件可能还没准备好，或者用户环境有问题。如果模块加载时就读配置，一个坏的 config.json 能让整个应用无法启动。\n\n`enableConfigs()` 标记了一个清晰的界限：**在这之前，你不知道配置是什么。在这之后，配置已校验完毕可以安全使用。**\n\n这是一种**显式生命周期管理** — 不是"配置随时可用"，而是"配置在特定时间点之后才可用"。',
             },
             {
               type: 'fill-blank',
-              title: '配置的安全分阶段加载',
-              description: 'Claude Code 把配置分为"安全"和"不安全"两类，分阶段加载。',
+              title: 'preconnectAnthropicApi() — TCP 预热',
+              description: 'init() 的最后一步是预连接 API。这不发送任何请求，只是建立 TCP 连接。',
               language: 'typescript',
-              template: `// 启动时的配置加载顺序
-async function initConfig() {
-  // 阶段 1: 在信任建立之前
-  enableConfigs()
-  ___BLANK___()    // 只应用安全的环境变量
-  setupGracefulShutdown()
-
-  // 阶段 2: 信任建立之后
-  ___BLANK___()    // 应用所有环境变量
-  await detectCurrentRepository()
+              template: `// 预连接：只建立 TCP + TLS，不发请求
+function preconnectAnthropicApi() {
+  const url = getApiBaseUrl()
+  // 创建一个到 API 服务器的 ___BLANK___ 连接
+  // TLS 握手需要 1-2 个 RTT（~50-100ms）
+  // 提前做了，第一个 API 调用就能省掉这些
+  https.request(url, { method: '___BLANK___' }).end()
+  // 不 await，不关心结果
+  // 如果失败了，第一次 API 调用会自己建连
 }`,
-              blanks: ['applySafeConfigEnvironmentVariables', 'applyConfigEnvironmentVariables'],
-              hints: ['只应用不涉及敏感操作的配置', '所有配置，包括可能影响安全的'],
-            },
-            {
-              type: 'task',
-              title: '阅读源码：配置系统',
-              instruction:
-                '找到 Claude Code 的配置 Schema 和加载逻辑。\n\n**关键文件**：\n- `src/schemas/` — Zod Schema 定义\n- `src/bootstrap/` — 配置加载启动逻辑\n- `src/utils/config.ts` 或类似文件 — 配置合并逻辑',
-              checklist: [
-                '找到 settingsSchema 的完整定义',
-                '理解 Safe vs Unsafe 配置的区分逻辑',
-                '追踪 enableConfigs() 的完整实现',
-              ],
+              blanks: ['TCP + TLS', 'HEAD'],
+              hints: ['建立什么类型的连接？', '最轻量的 HTTP 方法，不传输 body'],
             },
           ],
         },
