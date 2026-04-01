@@ -379,6 +379,109 @@ const memoizeTTLSvg = `
   <text x="10" y="150" font-family="sans-serif" font-size="10" fill="#94a3b8">● cache.clear() 竞争: .then() 中检查 identity，防止旧 promise 覆盖新值</text>
 </svg>`
 
+const architectureOverviewSvg = `
+<svg viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg" style="max-width:540px;width:100%">
+  <style>
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .s1{animation:fadeIn .5s ease .2s both}
+    .s2{animation:fadeIn .5s ease .7s both}
+    .s3{animation:fadeIn .5s ease 1.2s both}
+    .s4{animation:fadeIn .5s ease 1.7s both}
+    .s5{animation:fadeIn .5s ease 2.2s both}
+    .s6{animation:fadeIn .5s ease 2.7s both}
+  </style>
+  <g class="s1">
+    <rect x="10" y="10" width="520" height="45" rx="8" fill="#6366f1"/>
+    <text x="270" y="28" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white">UI 层: Ink/React 终端渲染</text>
+    <text x="270" y="44" text-anchor="middle" font-family="monospace" font-size="9" fill="#c7d2fe">REPL.tsx → PromptInput → StreamingResponse → ToolProgress</text>
+  </g>
+  <g class="s2">
+    <line x1="270" y1="55" x2="270" y2="70" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="10" y="70" width="520" height="50" rx="8" fill="#0ea5e9"/>
+    <text x="270" y="90" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white">Query 层: 核心循环引擎</text>
+    <text x="270" y="108" text-anchor="middle" font-family="monospace" font-size="9" fill="#bae6fd">query() → while(true) { API调用 → 提取工具 → 执行 → 结果回传 }</text>
+  </g>
+  <g class="s3">
+    <line x1="140" y1="120" x2="140" y2="140" stroke="#94a3b8" stroke-width="2"/>
+    <line x1="400" y1="120" x2="400" y2="140" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="10" y="140" width="250" height="45" rx="8" fill="#10b981"/>
+    <text x="135" y="158" text-anchor="middle" font-family="sans-serif" font-size="12" fill="white">工具层: 40+ 工具</text>
+    <text x="135" y="174" text-anchor="middle" font-family="monospace" font-size="9" fill="#bbf7d0">Bash | FileEdit | Grep | Agent | MCP...</text>
+    <rect x="280" y="140" width="250" height="45" rx="8" fill="#f59e0b"/>
+    <text x="405" y="158" text-anchor="middle" font-family="sans-serif" font-size="12" fill="white">安全层: 权限 + 沙箱</text>
+    <text x="405" y="174" text-anchor="middle" font-family="monospace" font-size="9" fill="#fef3c7">AST解析 | 分类 | YOLO | 用户确认</text>
+  </g>
+  <g class="s4">
+    <line x1="270" y1="185" x2="270" y2="200" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="10" y="200" width="520" height="45" rx="8" fill="#8b5cf6"/>
+    <text x="270" y="218" text-anchor="middle" font-family="sans-serif" font-size="13" fill="white">服务层: API / MCP / Compact / Memory</text>
+    <text x="270" y="236" text-anchor="middle" font-family="monospace" font-size="9" fill="#ddd6fe">withRetry | memoize | tokenEstimation | promptCache</text>
+  </g>
+  <g class="s5">
+    <line x1="270" y1="245" x2="270" y2="260" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="10" y="260" width="520" height="45" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <text x="270" y="278" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#94a3b8">状态层: AppStateStore</text>
+    <text x="270" y="294" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">100+ fields | setState(prev => ...) | subscribe() | Hooks</text>
+  </g>
+  <g class="s6">
+    <text x="270" y="330" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#f59e0b">数据流: 用户输入 → UI层 → Query层 → 工具+安全 → 服务层 → API</text>
+    <text x="270" y="350" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#f59e0b">结果回传: API响应 → Query层(循环) → UI层(流式渲染)</text>
+    <text x="270" y="370" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#64748b">状态层贯穿所有层 — 任何层都可以读写 AppState</text>
+  </g>
+</svg>`
+
+const dataFlowSvg = `
+<svg viewBox="0 0 540 200" xmlns="http://www.w3.org/2000/svg" style="max-width:540px;width:100%">
+  <style>
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .s1{animation:fadeIn .4s ease .2s both}
+    .s2{animation:fadeIn .4s ease .6s both}
+    .s3{animation:fadeIn .4s ease 1s both}
+    .s4{animation:fadeIn .4s ease 1.4s both}
+    .s5{animation:fadeIn .4s ease 1.8s both}
+    .s6{animation:fadeIn .4s ease 2.2s both}
+    .s7{animation:fadeIn .4s ease 2.6s both}
+  </style>
+  <g class="s1">
+    <rect x="5" y="30" width="70" height="35" rx="6" fill="#6366f1"/>
+    <text x="40" y="52" text-anchor="middle" font-family="sans-serif" font-size="10" fill="white">用户输入</text>
+  </g>
+  <g class="s2">
+    <line x1="75" y1="47" x2="90" y2="47" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowD)"/>
+    <rect x="90" y="30" width="75" height="35" rx="6" fill="#6366f1"/>
+    <text x="127" y="45" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">onSubmit</text>
+    <text x="127" y="57" text-anchor="middle" font-family="monospace" font-size="8" fill="#c7d2fe">REPL.tsx</text>
+  </g>
+  <g class="s3">
+    <line x1="165" y1="47" x2="180" y2="47" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowD)"/>
+    <rect x="180" y="25" width="100" height="45" rx="6" fill="#0ea5e9"/>
+    <text x="230" y="43" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">query()</text>
+    <text x="230" y="57" text-anchor="middle" font-family="monospace" font-size="8" fill="#bae6fd">while(true) loop</text>
+  </g>
+  <g class="s4">
+    <line x1="280" y1="47" x2="295" y2="47" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowD)"/>
+    <rect x="295" y="30" width="75" height="35" rx="6" fill="#8b5cf6"/>
+    <text x="332" y="45" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">Claude API</text>
+    <text x="332" y="57" text-anchor="middle" font-family="monospace" font-size="8" fill="#ddd6fe">streaming</text>
+  </g>
+  <g class="s5">
+    <line x1="332" y1="65" x2="332" y2="100" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowD)"/>
+    <rect x="270" y="100" width="130" height="35" rx="6" fill="#10b981"/>
+    <text x="335" y="118" text-anchor="middle" font-family="sans-serif" font-size="9" fill="white">工具执行 (并行/串行)</text>
+    <text x="335" y="130" text-anchor="middle" font-family="monospace" font-size="8" fill="#bbf7d0">→ 权限检查 → execute()</text>
+  </g>
+  <g class="s6">
+    <line x1="270" y1="117" x2="230" y2="70" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowD)"/>
+    <text x="220" y="100" font-family="sans-serif" font-size="8" fill="#f59e0b">结果回传</text>
+    <text x="220" y="112" font-family="sans-serif" font-size="8" fill="#f59e0b">继续循环</text>
+  </g>
+  <g class="s7">
+    <rect x="90" y="155" width="370" height="30" rx="6" fill="none" stroke="#475569" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="275" y="174" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#94a3b8">直到 Claude 回复中没有工具调用（stop_reason = end_turn）→ 循环终止 → 等待下一次用户输入</text>
+  </g>
+  <defs><marker id="arrowD" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker></defs>
+</svg>`
+
 const extensionLayersSvg = `
 <svg viewBox="0 0 460 180" xmlns="http://www.w3.org/2000/svg" style="max-width:460px;width:100%">
   <style>
@@ -417,217 +520,210 @@ export const claudeCodeBook: Book = {
   color: '#6366f1',
   chapters: [
     // =============================================
-    // 第一章：启动与入口
+    // 第一章：全局架构与启动
     // =============================================
     {
-      id: 'ch1-startup',
-      title: '第一章：启动与入口 — 极致的性能优化',
+      id: 'ch1-architecture',
+      title: '第一章：全局架构 — 先看地图再上路',
       lessons: [
-        // --- 1.1 ---
+        // --- 1.1 全景图 ---
         {
-          id: 'startup-race',
-          title: '与 import 赛跑：子进程预取',
+          id: 'architecture-overview',
+          title: '五层架构：从用户输入到最终响应',
           cards: [
             {
               type: 'explain',
-              title: '问题：启动太慢',
+              title: 'Claude Code 不是一个脚本，它是一个有状态的循环系统',
               content:
-                'Claude Code 有 20 万行 TypeScript。即使用 Bun，光解析 import 树就要 **~135ms**。\n\n在这 135ms 里 CPU 忙着解析模块，但 **I/O 通道完全空闲**。\n\n如果等 import 结束再去读 Keychain、读 MDM 配置，又要多等 50-65ms。总共 200ms 用户什么都看不到。\n\nClaude Code 的做法：**在 import 之前就发起 I/O**，让子进程在 import 期间跑完。',
+                '很多人以为 Claude Code 是"把用户输入发给 API，把回复打出来"。\n\n不是。它是一个**循环系统**：\n\n1. 用户输入一条消息\n2. 组装 System Prompt（从多个来源）\n3. 调用 Claude API（流式）\n4. Claude 的回复中可能包含**工具调用**\n5. 执行工具，把结果发回给 Claude\n6. Claude 看到结果，可能再调用工具\n7. **重复 3-6，直到 Claude 不再调用工具**\n8. 最终回复展示给用户\n9. 等待下一次输入\n\n一次用户提问可能触发 10+ 轮 API 调用。这个循环是整个系统的心脏。',
             },
             {
-              type: 'code',
-              title: 'main.tsx 前 20 行 — 一切从这里开始',
-              description: '这不是伪代码，这是 main.tsx 的真实开头。注意三行代码的顺序和它们各自做了什么。',
-              language: 'typescript',
-              code: `// main.tsx — 第 12-20 行（真实代码）
-profileCheckpoint('main_tsx_entry')    // 打性能标记
-
-startMdmRawRead()        // 启动 plutil 子进程读 MDM 配置
-startKeychainPrefetch()  // 启动两个 security 子进程读 Keychain
-
-// 这三行执行完大约 5ms
-// 然后才开始 ~135ms 的 import 解析
-// 当 import 结束时，子进程已经跑完了
-
-import { Command } from '@commander-js/extra-typings'
-import { render } from 'ink'
-// ... 更多 import`,
+              type: 'diagram',
+              title: '五层架构',
+              description: 'Claude Code 的模块分为五层，数据从上到下流动，状态层贯穿所有层',
+              svg: architectureOverviewSvg,
             },
             {
               type: 'explain',
-              title: '深入：Keychain 预取到底做了什么',
+              title: '每层的职责边界',
               content:
-                '`startKeychainPrefetch()` 做的事情很具体：\n\n1. 调用 `spawnSecurity(oauthService)` — 启动 macOS `security find-generic-password` 命令\n2. 调用 `spawnSecurity(legacyService)` — 同时启动第二个 security 命令\n3. 用 `Promise.all` 等两个都完成\n4. 把结果写入模块级变量（`prefetchPromise`）\n\n关键细节：**如果超时了怎么办？**\n\n```typescript\nresolve({\n  stdout: err ? null : stdout?.trim() || null,\n  timedOut: Boolean(err && \'killed\' in err && err.killed),\n})\n```\n\n超时不等于"密钥不存在"。所以 `timedOut: true` 时**不缓存结果**，让后续的同步路径自己重试。这是一个重要的防御性决策：**不要把"没取到"和"不存在"搞混**。',
+                '**UI 层** (`screens/REPL.tsx`, `components/`)\n用户看到的一切。接收键盘输入，渲染 Claude 的流式回复，显示工具执行进度。用 React + Ink，但渲染目标是终端而非浏览器。\n\n**Query 层** (`query.ts`, `QueryEngine.ts`)\n核心循环引擎。`query()` 是一个 `AsyncGenerator`，内含 `while(true)` 循环。每一轮：组装消息 → 调用 API → 提取工具调用 → 执行工具 → 把结果追加到消息 → 继续循环。**Claude 不再调用工具时循环终止。**\n\n**工具层** (`tools.ts`, `tools/`)\n40+ 个工具的注册表和实现。每个工具有 Zod schema 做输入校验、并发安全标记、React 进度组件。工具编排器决定哪些并行哪些串行。\n\n**安全层** (`utils/permissions/`)\n在工具执行前拦截。四层检查（AST→分类→路径→ML），六种权限模式。每次工具调用都经过这里。\n\n**服务层** (`services/`)\nAPI 调用（带重试）、MCP 连接、上下文压缩、记忆系统、成本追踪。这些是"幕后工人"。\n\n**状态层** (`state/AppStateStore.ts`)\n贯穿所有层。100+ 字段的全局状态，任何层都可以读写。自实现的 Zustand-like Store。',
+            },
+            {
+              type: 'diagram',
+              title: '一次请求的完整数据流',
+              description: '从用户输入到 Claude 回复，经过的每一个模块',
+              svg: dataFlowSvg,
             },
             {
               type: 'think-first',
-              question: 'MDM 预取中有一行 `existsSync(path)` — 这是一个同步调用。为什么在追求异步性能的代码中要用同步 I/O？',
-              hints: '想想如果文件不存在，execFilePromise 会做什么。启动 plutil 子进程需要多长时间？',
+              question: '`query()` 函数是一个 `AsyncGenerator`（用 `for await...of` 消费）。为什么不用普通的 `async function` 返回最终结果？',
+              hints: '想想 Claude 的回复是流式的。如果用普通函数，用户什么时候能看到第一个字？',
               reveal:
-                '`existsSync` 只需要 ~0.1ms（stat 系统调用），而启动 plutil 子进程需要 ~5ms。\n\n如果文件不存在（比如非企业用户没有 MDM 配置），跳过 spawn 直接省 5ms。而 existsSync 的 0.1ms 成本可以忽略。\n\n更深层的原因：**这段代码在 import 之前运行，此时 event loop 还没开始 poll**。同步调用在这里不会阻塞任何东西，因为压根没有其他异步任务在等。\n\n这是一个"在正确的位置做正确的事"的例子：同步 I/O 不是永远的坏主意，关键看上下文。',
+                '如果 `query()` 是普通 async 函数，它必须等整个循环跑完（可能 10+ 轮 API 调用）才能返回。用户会**几十秒什么都看不到**。\n\n用 AsyncGenerator，每收到一个 streaming event 就立即 `yield` 给 UI 层。UI 层可以**实时渲染**每一个 token、每一个工具调用的进度。\n\n真实代码（REPL.tsx 第 2793 行）：\n```typescript\nfor await (const event of query({...})) {\n  onQueryEvent(event)  // 每个 event 立即处理\n}\n```\n\n这也天然支持**取消**：用户按 Ctrl+C 时，generator 的 `.return()` 方法被调用，循环立即终止，不需要额外的 abort 逻辑。',
             },
             {
               type: 'quiz',
-              question: '如果 Keychain 预取超时了，Claude Code 会怎么处理？',
+              question: 'query() 内部的 while(true) 循环什么时候终止？',
               options: [
-                '报错并退出',
-                '使用空字符串作为 API Key',
-                '不缓存超时结果，让后续同步路径重试',
-                '无限重试直到成功',
+                '固定跑 10 轮后终止',
+                '用户手动按 Ctrl+C',
+                'Claude 的回复中没有工具调用（stop_reason = end_turn）',
+                'Token 预算用完时',
               ],
               correctIndex: 2,
               explanation:
-                '超时 ≠ 密钥不存在。可能只是系统忙。所以超时时设置 timedOut: true，不写入缓存。后面的正常流程会用自己的超时时间再试一次。这叫"防御性不缓存" — 只缓存确定的结果。',
+                '循环的核心条件是：**Claude 还想调用工具吗？** 如果 Claude 的回复只有文本没有 tool_use block，说明它认为任务完成了，循环自然终止。当然，超出 maxTurns 或 token 预算也会强制终止，但正常情况下是 Claude 自己决定何时停下。',
             },
           ],
         },
         // --- 1.2 ---
         {
-          id: 'profiler-architecture',
-          title: 'profileCheckpoint：零成本性能度量',
+          id: 'startup-entry-flow',
+          title: '启动链路：从命令行到第一个 Prompt',
           cards: [
             {
               type: 'explain',
-              title: '你无法优化你无法度量的东西',
+              title: '理解了架构，现在看系统如何启动',
               content:
-                'Claude Code 的启动链路上散布着 `profileCheckpoint()` 调用。但性能度量本身也有成本 — 如果度量代码拖慢了启动，就本末倒置了。\n\n来看看它是怎么做到"零成本"的。',
+                '用户在终端输入 `claude` 后，到看到输入框，经过了 5 个阶段：\n\n```\n① main.tsx 模块求值\n   ↓ 预取子进程在此启动（与 import 并行）\n② Commander.js 解析命令行参数\n   ↓ 决定进入 REPL 还是单次执行\n③ init() 12 步初始化\n   ↓ 配置、TLS、Feature Flags、TCP 预连接\n④ Ink 渲染 React 组件树\n   ↓ REPL.tsx 挂载，显示输入框\n⑤ 用户看到 prompt，可以开始输入\n```\n\n整个过程追求的目标：**让 ⑤ 尽快到来**。所有不阻塞 ⑤ 的事情都推到后台。',
             },
             {
               type: 'code',
-              title: 'profileCheckpoint 的真实实现',
-              description: '来自 startupProfiler.ts。注意它做的事情有多少。',
+              title: 'main.tsx 的真实开头 — 与 import 赛跑',
+              description: '这是 main.tsx 第 1-22 行。注意：副作用代码穿插在 import 之间。',
               language: 'typescript',
-              code: `// startupProfiler.ts — 第 65-75 行
-export function profileCheckpoint(name: string): void {
-  if (!SHOULD_PROFILE) return     // 大多数用户直接 return
+              code: `// main.tsx 第 1-22 行 — 真实代码
+// ① 先 import 性能打点器（轻量，只有这一个先加载）
+import { profileCheckpoint } from './utils/startupProfiler.js'
+profileCheckpoint('main_tsx_entry')  // 标记入口时间
 
-  const perf = getPerformance()
-  perf.mark(name)                 // Node 内置，~0.1ms
+// ② 导入 MDM 读取器并立即执行（启动 plutil 子进程）
+import { startMdmRawRead } from './utils/settings/mdm/rawRead.js'
+startMdmRawRead()  // fire-and-forget: ~5ms 启动，~50ms 完成
 
-  if (DETAILED_PROFILING) {       // 仅 env var 开启
-    memorySnapshots.push(process.memoryUsage())
-  }
-}`,
+// ③ 导入 Keychain 预取器并立即执行（启动两个 security 子进程）
+import { startKeychainPrefetch } from './utils/secureStorage/keychainPrefetch.js'
+startKeychainPrefetch()  // fire-and-forget: 两个子进程并行
+
+// ④ 现在才开始加载重量级依赖（~135ms）
+// 在这 135ms 里，上面三个子进程在后台跑
+import { Command } from '@commander-js/extra-typings'
+import chalk from 'chalk'
+import React from 'react'
+// ... 还有 40+ 行 import`,
             },
             {
-              type: 'explain',
-              title: '采样策略：不是所有人都被度量',
-              content:
-                '`SHOULD_PROFILE` 在模块加载时就确定了：\n\n- **Anthropic 员工**: 100% 采样（内部持续优化）\n- **外部用户**: 0.5% 采样（不影响绝大多数人）\n\n0.5% 意味着如果 Claude Code 有 100 万用户，每天有 5000 人的启动数据被上报。足够发现性能回退，又不影响 99.5% 的用户。\n\n阶段定义也很有设计感：\n\n```typescript\nconst PHASE_DEFINITIONS = {\n  import_time: [\'cli_entry\', \'main_tsx_imports_loaded\'],\n  init_time:   [\'init_function_start\', \'init_function_end\'],\n  settings_time: [\'eagerLoadSettings_start\', \'eagerLoadSettings_end\'],\n  total_time:  [\'cli_entry\', \'main_after_run\'],\n}\n```\n\n每个阶段由两个 checkpoint 的**差值**算出。不是记绝对时间，而是记相对时间。这样不同机器的时钟差异不影响分析。',
+              type: 'think-first',
+              question: '为什么把副作用代码（startMdmRawRead）穿插在 import 之间，而不是集中放在文件顶部或底部？',
+              hints: 'JavaScript 的 import 是按顺序求值的。想想 `import { startMdmRawRead } from ...` 这一行做了什么。',
+              reveal:
+                'ES Module 的 import 是**声明式但按顺序求值**的。当 JS 引擎遇到 `import { startMdmRawRead } from \'./rawRead.js\'`，它会：\n\n1. 加载 rawRead.js 模块（如果还没加载的话）\n2. 执行模块的顶层代码\n3. 绑定 startMdmRawRead 到当前作用域\n\n紧接着下一行 `startMdmRawRead()` 就能调用了。\n\n如果把 `startMdmRawRead()` 放在所有 import 之后，就得等 Commander.js、chalk、React 等全部加载完才开始。子进程启动晚了 135ms。\n\n穿插写法确保：**一导入就立即调用，不等其他模块**。每个预取操作尽可能早地启动，最大化与后续 import 的重叠时间。',
+            },
+            {
+              type: 'code',
+              title: 'init() — memoize 守卫的 12 步初始化',
+              description: 'Commander 解析完参数后调用 init()。它被 memoize 包裹，保证只执行一次。',
+              language: 'typescript',
+              code: `// entrypoints/init.ts — 第 57 行
+export const init = memoize(async () => {
+  // 第一阶段：必须同步完成（后续代码依赖它们）
+  enableConfigs()                          // 加载 config.json
+  applySafeConfigEnvironmentVariables()    // 安全的 env vars
+  setupGracefulShutdown()                  // Ctrl+C 清理
+
+  // 第二阶段：全部 fire-and-forget（不 await!）
+  Promise.all([initEventLogger(), initGrowthBook()])
+  populateOAuthAccountInfoIfNeeded()
+  detectCurrentRepository()     // git 仓库检测
+
+  // 第三阶段：网络基础设施
+  configureGlobalMTLS()         // 双向 TLS
+  configureGlobalAgents()       // HTTP 代理
+  preconnectAnthropicApi()      // TCP 预热（不 await!）
+})
+// 第二次调用 init() → 返回第一次的 Promise，不重复执行`,
             },
             {
               type: 'quiz',
-              question: '性能采样率为什么是 0.5% 而不是 100%？',
+              question: 'init() 第二阶段的 5 个操作都没有 await，为什么？',
               options: [
-                '技术限制，不能全量采集',
-                '全量采集会产生大量网络上报流量，拖慢启动并增加成本',
-                '0.5% 的样本量对统计分析已经足够，而且对用户几乎零影响',
-                '隐私法规限制',
+                '忘了写 await',
+                '这些操作不会失败',
+                '它们的结果在启动时不是必需的，等到真正需要时再 await',
+                '为了减少代码行数',
               ],
               correctIndex: 2,
               explanation:
-                '这是一个成本-收益权衡。100% 采样会让每个用户的启动都多一次网络上报。0.5% 的采样率：对 99.5% 的用户完全透明（SHOULD_PROFILE=false, 函数直接 return），但样本量足以做统计分析（每天数千条数据点）。',
+                '比如 detectCurrentRepository() 检测 git 仓库。用户看到 prompt 不需要知道 git 信息。等到 Claude 第一次需要 git 状态时，这个 Promise 早就 resolve 了。\n\n原则：**只 await 阻塞性依赖**。enableConfigs() 必须 await（后续代码读配置）。但 GrowthBook 初始化失败？用默认 Feature Flags 就行。',
+            },
+            {
+              type: 'fill-blank',
+              title: 'Ink 渲染与等待退出',
+              description: 'init() 完成后，进入 REPL 界面。',
+              language: 'typescript',
+              template: `// interactiveHelpers.tsx — 渲染并等待
+async function renderAndRun(root, element) {
+  root.___BLANK___(element)     // 挂载 React 树（同步）
+  startDeferredPrefetches()      // 启动延迟的后台任务
+  await root.___BLANK___()      // 阻塞直到用户退出
+  await gracefulShutdown(0)      // 冲刷日志，关闭连接
+}
+
+// REPL.tsx 作为根组件，包含：
+// - PromptInput: 用户输入框
+// - StreamingResponse: Claude 回复的流式渲染
+// - ToolProgress: 工具执行进度
+// - PermissionDialog: 权限确认弹窗`,
+              blanks: ['render', 'waitUntilExit'],
+              hints: ['React 挂载组件的方法', 'Ink 等待应用退出的方法'],
             },
           ],
         },
         // --- 1.3 ---
         {
-          id: 'init-memoize',
-          title: 'init() 的 12 步启动与 memoize 守卫',
+          id: 'architecture-decisions',
+          title: '三个关键架构决策',
           cards: [
             {
               type: 'explain',
-              title: 'init() — 整个系统的启动编排器',
+              title: '回顾本章学到的架构',
               content:
-                '`entrypoints/init.ts` 中的 `init()` 函数是 Claude Code 的"总指挥"。它按精确顺序完成 12 步初始化。\n\n但首先注意一个关键细节 — 它被 **memoize** 包裹了：\n\n```typescript\nexport const init = memoize(async (): Promise<void> => {\n  // ... 338 行初始化代码\n})\n```\n\n这意味着：\n- 第一次 `await init()` → 执行全部初始化\n- 第二次 `await init()` → 直接返回同一个 Promise\n- 并发调用 `init()` → 所有 caller 共享同一个 Promise\n\n为什么需要这个？因为 init() 可能从多个入口被调用（CLI 直接启动、IDE Bridge 启动、SDK 启动），memoize 确保**只跑一次**。',
-            },
-            {
-              type: 'code',
-              title: 'init() 的 12 步（真实顺序）',
-              description: '每一步的顺序都有讲究。注意哪些是 await 的，哪些是 fire-and-forget。',
-              language: 'typescript',
-              code: `export const init = memoize(async () => {
-  // 第一阶段：配置（同步，必须最先完成）
-  enableConfigs()                             // 1. 加载 config.json
-  applySafeConfigEnvironmentVariables()       // 2. 只应用安全的 env
-  applyExtraCACertsFromConfig()               // 3. TLS 证书（要早）
-  setupGracefulShutdown()                     // 4. 注册清理函数
-
-  // 第二阶段：异步启动（全部 fire-and-forget）
-  Promise.all([initEventLogger(), initGrowthBook()])  // 5. 不 await!
-  populateOAuthAccountInfoIfNeeded()          // 6. 不 await!
-  initJetBrainsDetection()                    // 7. 不 await!
-  detectCurrentRepository()                   // 8. 不 await!
-  initializeRemoteManagedSettingsLoading()    // 9. 创建 Promise 不 await
-  initializePolicyLimitsLoading()             // 10. 创建 Promise 不 await
-
-  // 第三阶段：网络准备
-  configureGlobalMTLS()                       // 11. TLS 双向认证
-  configureGlobalAgents()                     // 12. HTTP 代理
-  preconnectAnthropicApi()                    // 13. TCP 预连接（不 await!）
-
-  // 第四阶段：清理注册
-  registerCleanup(shutdownLspServerManager)
-  registerCleanup(cleanupSessionTeams)
-})`,
+                '现在你已经知道了：\n- 五层架构（UI → Query → 工具+安全 → 服务 → 状态）\n- 核心循环（`while(true)` + AsyncGenerator）\n- 启动链路（预取 → Commander → init() → Ink 渲染）\n\n最后用三个架构决策来巩固理解。每个决策背后都有不显然的权衡。',
             },
             {
               type: 'think-first',
-              question: '注意第二阶段的 5 个调用全部没有 await。这意味着它们在后台运行，init() 不等它们完成就继续了。这安全吗？如果某个还没完成，用户就开始打字了呢？',
-              hints: '想想这些操作是做什么的：检测 JetBrains IDE、检测 git 仓库、加载 Feature Flags。它们的结果什么时候才真正被需要？',
+              question: '决策一：为什么 Claude Code 用 React + Ink 做终端 UI，而不是直接用 console.log？毕竟只是一个 CLI 工具。',
+              hints: '想想 Claude 一边流式回复、一边执行工具、一边显示权限确认弹窗的场景。console.log 能处理吗？',
               reveal:
-                '**安全，因为这些结果在启动时不是必需的。**\n\n- `initGrowthBook()` — Feature Flags。还没加载完？用默认值。\n- `detectCurrentRepository()` — git 仓库信息。还没完成？等第一次需要时再 await。\n- `initJetBrainsDetection()` — IDE 检测。慢一点没关系，UI 已经可以响应了。\n\n核心原则：**只 await 阻塞性依赖**。用户看到 prompt 不需要知道 git 仓库在哪。但用户看到 prompt **必须** 知道配置（enableConfigs）和 TLS 证书（applyExtraCACerts）。\n\n所以第一阶段是同步/必须的，第二阶段是异步/尽力的。这种分层让启动时间 = 第一阶段时间，而不是所有阶段之和。',
+                'Claude Code 的 UI 需要**同时更新多个区域**：\n\n- 顶部：Claude 的流式回复（每个 token 都追加）\n- 中间：工具执行进度条（并行执行多个工具）\n- 底部：权限确认弹窗（等待用户按 Y/N）\n\nconsole.log 是**追加式**的 — 它只能在底部加一行，不能更新已输出的内容。\n\nReact + Ink 把终端当作一个**画布**：声明式描述 UI 状态，Ink 负责计算差异并高效重绘。这和 Web React 更新 DOM 是同一个模型。\n\n代价是引入了 React 运行时（~30KB），但换来的是：声明式 UI、组件复用、状态驱动更新。对于一个有 140+ 组件的 CLI 应用，这个代价非常值得。',
             },
             {
-              type: 'code',
-              title: 'enableConfigs() — 带幂等守卫的配置加载',
-              description: '这是第 1 步的真实实现。注意幂等性检查和诊断日志。',
-              language: 'typescript',
-              code: `// utils/config.ts — 真实代码
-export function enableConfigs(): void {
-  if (configReadingAllowed) {
-    return  // 幂等：已经加载过了，直接返回
-  }
-
-  const startTime = Date.now()
-  logForDiagnosticsNoPII('info', 'enable_configs_started')
-
-  configReadingAllowed = true  // 翻转全局 flag
-
-  getConfig(
-    getGlobalClaudeFile(),       // ~/.claude/config.json
-    createDefaultGlobalConfig,   // 如果不存在就创建默认的
-    true                         // throw on invalid JSON
-  )
-
-  logForDiagnosticsNoPII('info', 'enable_configs_completed', {
-    duration_ms: Date.now() - startTime,
-  })
-}`,
+              type: 'think-first',
+              question: '决策二：为什么状态层用自己写的 20 行 Store，而不是 Redux/Zustand？',
+              hints: '想想启动性能、Ink 兼容性、和实际的状态管理需求。',
+              reveal:
+                '三个原因：\n\n1. **启动性能**：每个额外的 npm 包增加模块加载时间。自己写只有 20 行代码，零依赖。\n\n2. **Ink 兼容性**：Ink 使用自己的 React 实例。第三方状态库可能依赖 React 全局变量，和 Ink 的 React 冲突。自己实现没有这个问题。\n\n3. **不需要复杂功能**：Redux 的 middleware、devtools、action creators 在 CLI 场景下都用不上。Claude Code 的状态更新模式很简单 — `setState(prev => ({...prev, field: newValue}))` 就够了。\n\n核心原则：**最小化方案**。20 行能解决的问题，不引入 30KB 的框架。',
             },
             {
-              type: 'explain',
-              title: 'configReadingAllowed 的深层含义',
-              content:
-                '`configReadingAllowed` 不只是幂等守卫。在 `enableConfigs()` 被调用之前，如果任何代码尝试读取配置，会得到一个 **警告**。\n\n为什么？因为在模块求值阶段（import 期间），代码不应该依赖配置。配置文件可能还没准备好，或者用户环境有问题。如果模块加载时就读配置，一个坏的 config.json 能让整个应用无法启动。\n\n`enableConfigs()` 标记了一个清晰的界限：**在这之前，你不知道配置是什么。在这之后，配置已校验完毕可以安全使用。**\n\n这是一种**显式生命周期管理** — 不是"配置随时可用"，而是"配置在特定时间点之后才可用"。',
+              type: 'think-first',
+              question: '决策三：query() 是一个 `while(true)` 循环。如果 Claude 陷入死循环（不断调用工具但永远不停），怎么办？',
+              hints: '看看 queryLoop 的 state 里有什么字段。',
+              reveal:
+                'Claude Code 有三道防线防止死循环：\n\n1. **maxTurns** — 循环次数上限。默认是一个合理的值，超过后强制终止。\n\n2. **Token 预算** — `budgetTracker` 追踪每轮消耗的 token。超过 `maxBudgetUsd` 后停止。\n\n3. **用户中断** — Ctrl+C 触发 AbortController，AsyncGenerator 的 `.return()` 立即终止循环。\n\n```typescript\n// query.ts 中的真实状态\nlet state: State = {\n  turnCount: 1,          // 当前轮数\n  // ...\n}\nconst budgetTracker = createBudgetTracker()\n```\n\n这也是为什么 Agent 模式（多 Agent）给每个 Worker 设置 `maxTurns: 50` 和 `maxBudgetUsd: 0.2×parent` — 子 Agent 不能无限消耗资源。',
             },
             {
-              type: 'fill-blank',
-              title: 'preconnectAnthropicApi() — TCP 预热',
-              description: 'init() 的最后一步是预连接 API。这不发送任何请求，只是建立 TCP 连接。',
-              language: 'typescript',
-              template: `// 预连接：只建立 TCP + TLS，不发请求
-function preconnectAnthropicApi() {
-  const url = getApiBaseUrl()
-  // 创建一个到 API 服务器的 ___BLANK___ 连接
-  // TLS 握手需要 1-2 个 RTT（~50-100ms）
-  // 提前做了，第一个 API 调用就能省掉这些
-  https.request(url, { method: '___BLANK___' }).end()
-  // 不 await，不关心结果
-  // 如果失败了，第一次 API 调用会自己建连
-}`,
-              blanks: ['TCP + TLS', 'HEAD'],
-              hints: ['建立什么类型的连接？', '最轻量的 HTTP 方法，不传输 body'],
+              type: 'quiz',
+              question: '这三个架构决策（React UI、自实现 Store、循环防护）体现了什么共同的设计理念？',
+              options: [
+                '尽量使用第三方库',
+                '在正确的地方做正确的权衡 — 该重的地方重（React UI），该轻的地方轻（Store），该防御的地方防御（循环上限）',
+                '性能优先于一切',
+                '安全优先于一切',
+              ],
+              correctIndex: 1,
+              explanation:
+                '不是一刀切的"用最新技术"或"一切从零实现"。而是每个决策点独立权衡：UI 复杂度高 → 用 React；状态管理简单 → 自己写；循环可能失控 → 加多重防护。好的架构不是统一的风格，是**每处都做了合理的权衡**。',
             },
           ],
         },
